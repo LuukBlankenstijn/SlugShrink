@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package api.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/empty.proto";
+
+message RedirectRequest {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+message Redirect {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+  string domain_id = 2 [(buf.validate.field).string.uuid = true];
+  string path = 3 [(buf.validate.field).string.uri_ref = true];
+  string target_url = 4 [(buf.validate.field).string.uri = true];
+  bool active = 5;
+}
+
+message CreateRedirectRequest {
+  string domain_id = 1 [(buf.validate.field).string.uuid = true];
+  string path = 2 [(buf.validate.field).string.uri_ref = true];
+  string target_url = 3 [(buf.validate.field).string.uri = true];
+  bool active = 4;
+}
+
+message DomainRequest {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+message Domain {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+  string name = 2;
+  string domain = 3;
+}
+
+message CreateDomainRequest {
+  string name = 2;
+  string domain = 3;
+}
+
+service ApiService {
+  rpc GetRedirect(RedirectRequest) returns (Redirect) {}
+  rpc DeleteRedirect(RedirectRequest) returns (google.protobuf.Empty) {}
+  rpc PutRedirect(Redirect) returns (Redirect) {}
+  rpc CreateRedirect(CreateRedirectRequest) returns (Redirect) {}
+  rpc GetDomain(DomainRequest) returns (Domain) {}
+  rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {}
+  rpc PutDomain(Domain) returns (Domain) {}
+  rpc CreateDomain(CreateDomainRequest) returns (Domain) {}
+}
