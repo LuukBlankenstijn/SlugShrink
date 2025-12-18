@@ -33,6 +33,33 @@ func (a *Redirects) Get(ctx context.Context, id uuid.UUID) (*apiv1.Redirect, err
 	}, nil
 }
 
+func (a *Redirects) GetMany(ctx context.Context, pageData *apiv1.RedirectsRequest) (*apiv1.RedirectsResponse, error) {
+	if pageData.Page == 0 {
+		pageData.Page = 1
+	}
+	if pageData.Pagesize == 0 {
+		pageData.Pagesize = 10
+	}
+
+	redirects, totalRecords, err := a.repo.GetMany(ctx, int(pageData.Page), int(pageData.Pagesize))
+	data := []*apiv1.Redirect{}
+
+	for _, redirect := range redirects {
+		data = append(data, &apiv1.Redirect{
+			Id:        redirect.ID.String(),
+			DomainId:  redirect.DomainId.String(),
+			Path:      redirect.Path,
+			TargetUrl: redirect.TargetUrl,
+			Active:    redirect.Active,
+		})
+	}
+
+	return &apiv1.RedirectsResponse{
+		Data:  data,
+		Total: totalRecords,
+	}, err
+}
+
 func (a *Redirects) Delete(ctx context.Context, id uuid.UUID) error {
 	return a.repo.Delete(ctx, id)
 }
@@ -81,4 +108,9 @@ func (a *Redirects) Put(ctx context.Context, redirect *apiv1.Redirect) (*apiv1.R
 		TargetUrl: updatedModel.TargetUrl,
 		Active:    updatedModel.Active,
 	}, err
+}
+
+func (a *Redirects) FindLocationByHostAndPath(ctx context.Context, host, path string) (string, error) {
+	redirect, err := a.repo.FindRedirectForHostAndPath(ctx, host, path)
+	return redirect.TargetUrl, err
 }

@@ -1,4 +1,4 @@
-package api
+package dashboard
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (s *ApiServer) GetRedirect(
+func (s *DashboardApi) GetRedirect(
 	ctx context.Context,
 	req *apiv1.RedirectRequest,
 ) (*apiv1.Redirect, error) {
@@ -19,7 +19,14 @@ func (s *ApiServer) GetRedirect(
 	return s.redirects.Get(ctx, id)
 }
 
-func (s *ApiServer) DeleteRedirect(
+func (s *DashboardApi) GetRedirects(
+	ctx context.Context,
+	req *apiv1.RedirectsRequest,
+) (*apiv1.RedirectsResponse, error) {
+	return s.redirects.GetMany(ctx, req)
+}
+
+func (s *DashboardApi) DeleteRedirect(
 	ctx context.Context,
 	req *apiv1.RedirectRequest,
 ) (*emptypb.Empty, error) {
@@ -30,14 +37,14 @@ func (s *ApiServer) DeleteRedirect(
 	return new(emptypb.Empty), s.redirects.Delete(ctx, id)
 }
 
-func (s *ApiServer) PutRedirect(
+func (s *DashboardApi) PutRedirect(
 	ctx context.Context,
 	req *apiv1.Redirect,
 ) (*apiv1.Redirect, error) {
 	return s.redirects.Put(ctx, req)
 }
 
-func (s *ApiServer) CreateRedirect(
+func (s *DashboardApi) CreateRedirect(
 	ctx context.Context,
 	req *apiv1.CreateRedirectRequest,
 ) (*apiv1.Redirect, error) {

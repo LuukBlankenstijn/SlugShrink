@@ -32,6 +32,29 @@ func (a *Domains) Get(ctx context.Context, id uuid.UUID) (*apiv1.Domain, error) 
 	}, nil
 }
 
+func (a *Domains) GetMany(ctx context.Context, pageData *apiv1.DomainsRequest) (*apiv1.DomainsResponse, error) {
+	if pageData.Page == 0 {
+		pageData.Page = 1
+	}
+	if pageData.Pagesize == 0 {
+		pageData.Pagesize = 10
+	}
+	domains, totalRecords, err := a.repo.GetMany(ctx, int(pageData.Page), int(pageData.Pagesize))
+	data := []*apiv1.Domain{}
+	for _, domain := range domains {
+		data = append(data, &apiv1.Domain{
+			Id:     domain.ID.String(),
+			Name:   domain.Name,
+			Domain: domain.Domain,
+		})
+	}
+
+	return &apiv1.DomainsResponse{
+		Data:  data,
+		Total: totalRecords,
+	}, err
+}
+
 func (a *Domains) Delete(ctx context.Context, id uuid.UUID) error {
 	return a.repo.Delete(ctx, id)
 }

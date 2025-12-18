@@ -36,6 +36,8 @@ const (
 const (
 	// ApiServiceGetRedirectProcedure is the fully-qualified name of the ApiService's GetRedirect RPC.
 	ApiServiceGetRedirectProcedure = "/api.v1.ApiService/GetRedirect"
+	// ApiServiceGetRedirectsProcedure is the fully-qualified name of the ApiService's GetRedirects RPC.
+	ApiServiceGetRedirectsProcedure = "/api.v1.ApiService/GetRedirects"
 	// ApiServiceDeleteRedirectProcedure is the fully-qualified name of the ApiService's DeleteRedirect
 	// RPC.
 	ApiServiceDeleteRedirectProcedure = "/api.v1.ApiService/DeleteRedirect"
@@ -46,6 +48,8 @@ const (
 	ApiServiceCreateRedirectProcedure = "/api.v1.ApiService/CreateRedirect"
 	// ApiServiceGetDomainProcedure is the fully-qualified name of the ApiService's GetDomain RPC.
 	ApiServiceGetDomainProcedure = "/api.v1.ApiService/GetDomain"
+	// ApiServiceGetDomainsProcedure is the fully-qualified name of the ApiService's GetDomains RPC.
+	ApiServiceGetDomainsProcedure = "/api.v1.ApiService/GetDomains"
 	// ApiServiceDeleteDomainProcedure is the fully-qualified name of the ApiService's DeleteDomain RPC.
 	ApiServiceDeleteDomainProcedure = "/api.v1.ApiService/DeleteDomain"
 	// ApiServicePutDomainProcedure is the fully-qualified name of the ApiService's PutDomain RPC.
@@ -57,10 +61,12 @@ const (
 // ApiServiceClient is a client for the api.v1.ApiService service.
 type ApiServiceClient interface {
 	GetRedirect(context.Context, *v1.RedirectRequest) (*v1.Redirect, error)
+	GetRedirects(context.Context, *v1.RedirectsRequest) (*v1.RedirectsResponse, error)
 	DeleteRedirect(context.Context, *v1.RedirectRequest) (*emptypb.Empty, error)
 	PutRedirect(context.Context, *v1.Redirect) (*v1.Redirect, error)
 	CreateRedirect(context.Context, *v1.CreateRedirectRequest) (*v1.Redirect, error)
 	GetDomain(context.Context, *v1.DomainRequest) (*v1.Domain, error)
+	GetDomains(context.Context, *v1.DomainsRequest) (*v1.DomainsResponse, error)
 	DeleteDomain(context.Context, *v1.DomainRequest) (*emptypb.Empty, error)
 	PutDomain(context.Context, *v1.Domain) (*v1.Domain, error)
 	CreateDomain(context.Context, *v1.CreateDomainRequest) (*v1.Domain, error)
@@ -81,6 +87,12 @@ func NewApiServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 			httpClient,
 			baseURL+ApiServiceGetRedirectProcedure,
 			connect.WithSchema(apiServiceMethods.ByName("GetRedirect")),
+			connect.WithClientOptions(opts...),
+		),
+		getRedirects: connect.NewClient[v1.RedirectsRequest, v1.RedirectsResponse](
+			httpClient,
+			baseURL+ApiServiceGetRedirectsProcedure,
+			connect.WithSchema(apiServiceMethods.ByName("GetRedirects")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteRedirect: connect.NewClient[v1.RedirectRequest, emptypb.Empty](
@@ -107,6 +119,12 @@ func NewApiServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 			connect.WithSchema(apiServiceMethods.ByName("GetDomain")),
 			connect.WithClientOptions(opts...),
 		),
+		getDomains: connect.NewClient[v1.DomainsRequest, v1.DomainsResponse](
+			httpClient,
+			baseURL+ApiServiceGetDomainsProcedure,
+			connect.WithSchema(apiServiceMethods.ByName("GetDomains")),
+			connect.WithClientOptions(opts...),
+		),
 		deleteDomain: connect.NewClient[v1.DomainRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ApiServiceDeleteDomainProcedure,
@@ -131,10 +149,12 @@ func NewApiServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 // apiServiceClient implements ApiServiceClient.
 type apiServiceClient struct {
 	getRedirect    *connect.Client[v1.RedirectRequest, v1.Redirect]
+	getRedirects   *connect.Client[v1.RedirectsRequest, v1.RedirectsResponse]
 	deleteRedirect *connect.Client[v1.RedirectRequest, emptypb.Empty]
 	putRedirect    *connect.Client[v1.Redirect, v1.Redirect]
 	createRedirect *connect.Client[v1.CreateRedirectRequest, v1.Redirect]
 	getDomain      *connect.Client[v1.DomainRequest, v1.Domain]
+	getDomains     *connect.Client[v1.DomainsRequest, v1.DomainsResponse]
 	deleteDomain   *connect.Client[v1.DomainRequest, emptypb.Empty]
 	putDomain      *connect.Client[v1.Domain, v1.Domain]
 	createDomain   *connect.Client[v1.CreateDomainRequest, v1.Domain]
@@ -143,6 +163,15 @@ type apiServiceClient struct {
 // GetRedirect calls api.v1.ApiService.GetRedirect.
 func (c *apiServiceClient) GetRedirect(ctx context.Context, req *v1.RedirectRequest) (*v1.Redirect, error) {
 	response, err := c.getRedirect.CallUnary(ctx, connect.NewRequest(req))
+	if response != nil {
+		return response.Msg, err
+	}
+	return nil, err
+}
+
+// GetRedirects calls api.v1.ApiService.GetRedirects.
+func (c *apiServiceClient) GetRedirects(ctx context.Context, req *v1.RedirectsRequest) (*v1.RedirectsResponse, error) {
+	response, err := c.getRedirects.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
 	}
@@ -185,6 +214,15 @@ func (c *apiServiceClient) GetDomain(ctx context.Context, req *v1.DomainRequest)
 	return nil, err
 }
 
+// GetDomains calls api.v1.ApiService.GetDomains.
+func (c *apiServiceClient) GetDomains(ctx context.Context, req *v1.DomainsRequest) (*v1.DomainsResponse, error) {
+	response, err := c.getDomains.CallUnary(ctx, connect.NewRequest(req))
+	if response != nil {
+		return response.Msg, err
+	}
+	return nil, err
+}
+
 // DeleteDomain calls api.v1.ApiService.DeleteDomain.
 func (c *apiServiceClient) DeleteDomain(ctx context.Context, req *v1.DomainRequest) (*emptypb.Empty, error) {
 	response, err := c.deleteDomain.CallUnary(ctx, connect.NewRequest(req))
@@ -215,10 +253,12 @@ func (c *apiServiceClient) CreateDomain(ctx context.Context, req *v1.CreateDomai
 // ApiServiceHandler is an implementation of the api.v1.ApiService service.
 type ApiServiceHandler interface {
 	GetRedirect(context.Context, *v1.RedirectRequest) (*v1.Redirect, error)
+	GetRedirects(context.Context, *v1.RedirectsRequest) (*v1.RedirectsResponse, error)
 	DeleteRedirect(context.Context, *v1.RedirectRequest) (*emptypb.Empty, error)
 	PutRedirect(context.Context, *v1.Redirect) (*v1.Redirect, error)
 	CreateRedirect(context.Context, *v1.CreateRedirectRequest) (*v1.Redirect, error)
 	GetDomain(context.Context, *v1.DomainRequest) (*v1.Domain, error)
+	GetDomains(context.Context, *v1.DomainsRequest) (*v1.DomainsResponse, error)
 	DeleteDomain(context.Context, *v1.DomainRequest) (*emptypb.Empty, error)
 	PutDomain(context.Context, *v1.Domain) (*v1.Domain, error)
 	CreateDomain(context.Context, *v1.CreateDomainRequest) (*v1.Domain, error)
@@ -235,6 +275,12 @@ func NewApiServiceHandler(svc ApiServiceHandler, opts ...connect.HandlerOption) 
 		ApiServiceGetRedirectProcedure,
 		svc.GetRedirect,
 		connect.WithSchema(apiServiceMethods.ByName("GetRedirect")),
+		connect.WithHandlerOptions(opts...),
+	)
+	apiServiceGetRedirectsHandler := connect.NewUnaryHandlerSimple(
+		ApiServiceGetRedirectsProcedure,
+		svc.GetRedirects,
+		connect.WithSchema(apiServiceMethods.ByName("GetRedirects")),
 		connect.WithHandlerOptions(opts...),
 	)
 	apiServiceDeleteRedirectHandler := connect.NewUnaryHandlerSimple(
@@ -261,6 +307,12 @@ func NewApiServiceHandler(svc ApiServiceHandler, opts ...connect.HandlerOption) 
 		connect.WithSchema(apiServiceMethods.ByName("GetDomain")),
 		connect.WithHandlerOptions(opts...),
 	)
+	apiServiceGetDomainsHandler := connect.NewUnaryHandlerSimple(
+		ApiServiceGetDomainsProcedure,
+		svc.GetDomains,
+		connect.WithSchema(apiServiceMethods.ByName("GetDomains")),
+		connect.WithHandlerOptions(opts...),
+	)
 	apiServiceDeleteDomainHandler := connect.NewUnaryHandlerSimple(
 		ApiServiceDeleteDomainProcedure,
 		svc.DeleteDomain,
@@ -283,6 +335,8 @@ func NewApiServiceHandler(svc ApiServiceHandler, opts ...connect.HandlerOption) 
 		switch r.URL.Path {
 		case ApiServiceGetRedirectProcedure:
 			apiServiceGetRedirectHandler.ServeHTTP(w, r)
+		case ApiServiceGetRedirectsProcedure:
+			apiServiceGetRedirectsHandler.ServeHTTP(w, r)
 		case ApiServiceDeleteRedirectProcedure:
 			apiServiceDeleteRedirectHandler.ServeHTTP(w, r)
 		case ApiServicePutRedirectProcedure:
@@ -291,6 +345,8 @@ func NewApiServiceHandler(svc ApiServiceHandler, opts ...connect.HandlerOption) 
 			apiServiceCreateRedirectHandler.ServeHTTP(w, r)
 		case ApiServiceGetDomainProcedure:
 			apiServiceGetDomainHandler.ServeHTTP(w, r)
+		case ApiServiceGetDomainsProcedure:
+			apiServiceGetDomainsHandler.ServeHTTP(w, r)
 		case ApiServiceDeleteDomainProcedure:
 			apiServiceDeleteDomainHandler.ServeHTTP(w, r)
 		case ApiServicePutDomainProcedure:
@@ -310,6 +366,10 @@ func (UnimplementedApiServiceHandler) GetRedirect(context.Context, *v1.RedirectR
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.GetRedirect is not implemented"))
 }
 
+func (UnimplementedApiServiceHandler) GetRedirects(context.Context, *v1.RedirectsRequest) (*v1.RedirectsResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.GetRedirects is not implemented"))
+}
+
 func (UnimplementedApiServiceHandler) DeleteRedirect(context.Context, *v1.RedirectRequest) (*emptypb.Empty, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.DeleteRedirect is not implemented"))
 }
@@ -324,6 +384,10 @@ func (UnimplementedApiServiceHandler) CreateRedirect(context.Context, *v1.Create
 
 func (UnimplementedApiServiceHandler) GetDomain(context.Context, *v1.DomainRequest) (*v1.Domain, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.GetDomain is not implemented"))
+}
+
+func (UnimplementedApiServiceHandler) GetDomains(context.Context, *v1.DomainsRequest) (*v1.DomainsResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.GetDomains is not implemented"))
 }
 
 func (UnimplementedApiServiceHandler) DeleteDomain(context.Context, *v1.DomainRequest) (*emptypb.Empty, error) {

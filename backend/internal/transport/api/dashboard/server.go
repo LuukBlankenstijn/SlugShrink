@@ -1,4 +1,4 @@
-package api
+package dashboard
 
 import (
 	"net/http"
@@ -10,19 +10,19 @@ import (
 	"github.com/LuukBlankenstijn/gewish/internal/app"
 )
 
-type ApiServer struct {
+type DashboardApi struct {
 	redirects app.Redirects
 	domains   app.Domains
 }
 
-func NewApiServer(redirects app.Redirects, domains app.Domains) ApiServer {
-	return ApiServer{
+func NewDashboardApi(redirects app.Redirects, domains app.Domains) DashboardApi {
+	return DashboardApi{
 		redirects: redirects,
 		domains:   domains,
 	}
 }
 
-func (a *ApiServer) Run() error {
+func (a *DashboardApi) Run() error {
 	mux := http.NewServeMux()
 	path, handler := apiv1connect.NewApiServiceHandler(
 		a,

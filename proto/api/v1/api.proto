@@ -9,6 +9,16 @@ message RedirectRequest {
   string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
+message RedirectsRequest {
+  int64 page = 1 [(buf.validate.field).int64.gte = 0];
+  int64 pagesize = 2 [(buf.validate.field).int64.gte = 0];
+}
+
+message RedirectsResponse {
+  repeated Redirect data = 1;
+  int64 total = 2 [(buf.validate.field).int64.gte = 0];
+}
+
 message Redirect {
   string id = 1 [(buf.validate.field).string.uuid = true];
   string domain_id = 2 [(buf.validate.field).string.uuid = true];
@@ -28,6 +38,16 @@ message DomainRequest {
   string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
+message DomainsRequest {
+  int64 page = 1 [(buf.validate.field).int64.gte = 0];
+  int64 pagesize = 2 [(buf.validate.field).int64.gte = 0];
+}
+
+message DomainsResponse {
+  repeated Domain data = 1;
+  int64 total = 2 [(buf.validate.field).int64.gte = 0];
+}
+
 message Domain {
   string id = 1 [(buf.validate.field).string.uuid = true];
   string name = 2;
@@ -41,10 +61,12 @@ message CreateDomainRequest {
 
 service ApiService {
   rpc GetRedirect(RedirectRequest) returns (Redirect) {}
+  rpc GetRedirects(RedirectsRequest) returns (RedirectsResponse) {}
   rpc DeleteRedirect(RedirectRequest) returns (google.protobuf.Empty) {}
   rpc PutRedirect(Redirect) returns (Redirect) {}
   rpc CreateRedirect(CreateRedirectRequest) returns (Redirect) {}
   rpc GetDomain(DomainRequest) returns (Domain) {}
+  rpc GetDomains(DomainsRequest) returns (DomainsResponse) {}
   rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {}
   rpc PutDomain(Domain) returns (Domain) {}
   rpc CreateDomain(CreateDomainRequest) returns (Domain) {}

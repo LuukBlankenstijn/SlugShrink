@@ -1,4 +1,4 @@
-package api
+package dashboard
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (s *ApiServer) GetDomain(
+func (s *DashboardApi) GetDomain(
 	ctx context.Context,
 	req *apiv1.DomainRequest,
 ) (*apiv1.Domain, error) {
@@ -20,7 +20,14 @@ func (s *ApiServer) GetDomain(
 	return s.domains.Get(ctx, id)
 }
 
-func (s *ApiServer) DeleteDomain(
+func (s *DashboardApi) GetDomains(
+	ctx context.Context,
+	req *apiv1.DomainsRequest,
+) (*apiv1.DomainsResponse, error) {
+	return s.domains.GetMany(ctx, req)
+}
+
+func (s *DashboardApi) DeleteDomain(
 	ctx context.Context,
 	req *apiv1.DomainRequest,
 ) (*emptypb.Empty, error) {
@@ -32,14 +39,14 @@ func (s *ApiServer) DeleteDomain(
 	return new(emptypb.Empty), s.domains.Delete(ctx, id)
 }
 
-func (s *ApiServer) PutDomain(
+func (s *DashboardApi) PutDomain(
 	ctx context.Context,
 	req *apiv1.Domain,
 ) (*apiv1.Domain, error) {
 	return s.domains.Put(ctx, req)
 }
 
-func (s *ApiServer) CreateDomain(
+func (s *DashboardApi) CreateDomain(
 	ctx context.Context,
 	req *apiv1.CreateDomainRequest,
 ) (*apiv1.Domain, error) {
