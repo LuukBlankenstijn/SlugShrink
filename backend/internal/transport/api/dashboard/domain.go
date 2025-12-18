@@ -22,9 +22,9 @@ func (s *DashboardApi) GetDomain(
 
 func (s *DashboardApi) GetDomains(
 	ctx context.Context,
-	req *apiv1.DomainsRequest,
+	req *emptypb.Empty,
 ) (*apiv1.DomainsResponse, error) {
-	return s.domains.GetMany(ctx, req)
+	return s.domains.GetAll(ctx)
 }
 
 func (s *DashboardApi) DeleteDomain(

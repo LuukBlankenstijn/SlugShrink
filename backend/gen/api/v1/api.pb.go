@@ -69,8 +69,8 @@ func (x *RedirectRequest) GetId() string {
 
 type RedirectsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Pagesize      int64                  `protobuf:"varint,2,opt,name=pagesize,proto3" json:"pagesize,omitempty"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Pagesize      int32                  `protobuf:"varint,2,opt,name=pagesize,proto3" json:"pagesize,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -105,14 +105,14 @@ func (*RedirectsRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_api_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RedirectsRequest) GetPage() int64 {
+func (x *RedirectsRequest) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *RedirectsRequest) GetPagesize() int64 {
+func (x *RedirectsRequest) GetPagesize() int32 {
 	if x != nil {
 		return x.Pagesize
 	}
@@ -121,8 +121,8 @@ func (x *RedirectsRequest) GetPagesize() int64 {
 
 type RedirectsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Redirect            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Data          []*FullRedirect        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -157,14 +157,14 @@ func (*RedirectsResponse) Descriptor() ([]byte, []int) {
 	return file_api_v1_api_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RedirectsResponse) GetData() []*Redirect {
+func (x *RedirectsResponse) GetData() []*FullRedirect {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *RedirectsResponse) GetTotal() int64 {
+func (x *RedirectsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
@@ -247,6 +247,90 @@ func (x *Redirect) GetActive() bool {
 	return false
 }
 
+type FullRedirect struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	DomainId      string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
+	Domain        string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
+	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
+	TargetUrl     string                 `protobuf:"bytes,5,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
+	Active        bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FullRedirect) Reset() {
+	*x = FullRedirect{}
+	mi := &file_api_v1_api_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FullRedirect) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FullRedirect) ProtoMessage() {}
+
+func (x *FullRedirect) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_api_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FullRedirect.ProtoReflect.Descriptor instead.
+func (*FullRedirect) Descriptor() ([]byte, []int) {
+	return file_api_v1_api_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *FullRedirect) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *FullRedirect) GetDomainId() string {
+	if x != nil {
+		return x.DomainId
+	}
+	return ""
+}
+
+func (x *FullRedirect) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *FullRedirect) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *FullRedirect) GetTargetUrl() string {
+	if x != nil {
+		return x.TargetUrl
+	}
+	return ""
+}
+
+func (x *FullRedirect) GetActive() bool {
+	if x != nil {
+		return x.Active
+	}
+	return false
+}
+
 type CreateRedirectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DomainId      string                 `protobuf:"bytes,1,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
@@ -259,7 +343,7 @@ type CreateRedirectRequest struct {
 
 func (x *CreateRedirectRequest) Reset() {
 	*x = CreateRedirectRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[4]
+	mi := &file_api_v1_api_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -271,7 +355,7 @@ func (x *CreateRedirectRequest) String() string {
 func (*CreateRedirectRequest) ProtoMessage() {}
 
 func (x *CreateRedirectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[4]
+	mi := &file_api_v1_api_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -284,7 +368,7 @@ func (x *CreateRedirectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRedirectRequest.ProtoReflect.Descriptor instead.
 func (*CreateRedirectRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{4}
+	return file_api_v1_api_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateRedirectRequest) GetDomainId() string {
@@ -324,7 +408,7 @@ type DomainRequest struct {
 
 func (x *DomainRequest) Reset() {
 	*x = DomainRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[5]
+	mi := &file_api_v1_api_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -336,7 +420,7 @@ func (x *DomainRequest) String() string {
 func (*DomainRequest) ProtoMessage() {}
 
 func (x *DomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[5]
+	mi := &file_api_v1_api_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +433,7 @@ func (x *DomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DomainRequest.ProtoReflect.Descriptor instead.
 func (*DomainRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{5}
+	return file_api_v1_api_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DomainRequest) GetId() string {
@@ -359,62 +443,9 @@ func (x *DomainRequest) GetId() string {
 	return ""
 }
 
-type DomainsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Pagesize      int64                  `protobuf:"varint,2,opt,name=pagesize,proto3" json:"pagesize,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DomainsRequest) Reset() {
-	*x = DomainsRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DomainsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DomainsRequest) ProtoMessage() {}
-
-func (x *DomainsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DomainsRequest.ProtoReflect.Descriptor instead.
-func (*DomainsRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *DomainsRequest) GetPage() int64 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *DomainsRequest) GetPagesize() int64 {
-	if x != nil {
-		return x.Pagesize
-	}
-	return 0
-}
-
 type DomainsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []*Domain              `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -454,13 +485,6 @@ func (x *DomainsResponse) GetData() []*Domain {
 		return x.Data
 	}
 	return nil
-}
-
-func (x *DomainsResponse) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
 }
 
 type Domain struct {
@@ -583,18 +607,26 @@ const file_api_v1_api_proto_rawDesc = "" +
 	"\x0fRedirectRequest\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"T\n" +
 	"\x10RedirectsRequest\x12\x1b\n" +
-	"\x04page\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x04page\x12#\n" +
-	"\bpagesize\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\bpagesize\"X\n" +
-	"\x11RedirectsResponse\x12$\n" +
-	"\x04data\x18\x01 \x03(\v2\x10.api.v1.RedirectR\x04data\x12\x1d\n" +
-	"\x05total\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x05total\"\xaa\x01\n" +
+	"\x04page\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x04page\x12#\n" +
+	"\bpagesize\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\bpagesize\"\\\n" +
+	"\x11RedirectsResponse\x12(\n" +
+	"\x04data\x18\x01 \x03(\v2\x14.api.v1.FullRedirectR\x04data\x12\x1d\n" +
+	"\x05total\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x05total\"\xaa\x01\n" +
 	"\bRedirect\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12%\n" +
 	"\tdomain_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12\x1c\n" +
 	"\x04path\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x90\x01\x01R\x04path\x12'\n" +
 	"\n" +
 	"target_url\x18\x04 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x05 \x01(\bR\x06active\"\x9d\x01\n" +
+	"\x06active\x18\x05 \x01(\bR\x06active\"\xed\x01\n" +
+	"\fFullRedirect\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12%\n" +
+	"\tdomain_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12=\n" +
+	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain\x12\x1c\n" +
+	"\x04path\x18\x04 \x01(\tB\b\xbaH\x05r\x03\x90\x01\x01R\x04path\x12'\n" +
+	"\n" +
+	"target_url\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
+	"\x06active\x18\x06 \x01(\bR\x06active\"\x9d\x01\n" +
 	"\x15CreateRedirectRequest\x12%\n" +
 	"\tdomain_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12\x1c\n" +
 	"\x04path\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x90\x01\x01R\x04path\x12'\n" +
@@ -602,20 +634,16 @@ const file_api_v1_api_proto_rawDesc = "" +
 	"target_url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
 	"\x06active\x18\x04 \x01(\bR\x06active\")\n" +
 	"\rDomainRequest\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"R\n" +
-	"\x0eDomainsRequest\x12\x1b\n" +
-	"\x04page\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x04page\x12#\n" +
-	"\bpagesize\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\bpagesize\"T\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"5\n" +
 	"\x0fDomainsResponse\x12\"\n" +
-	"\x04data\x18\x01 \x03(\v2\x0e.api.v1.DomainR\x04data\x12\x1d\n" +
-	"\x05total\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x05total\"N\n" +
+	"\x04data\x18\x01 \x03(\v2\x0e.api.v1.DomainR\x04data\"u\n" +
 	"\x06Domain\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06domain\x18\x03 \x01(\tR\x06domain\"A\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
+	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain\"h\n" +
 	"\x13CreateDomainRequest\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06domain\x18\x03 \x01(\tR\x06domain2\xf4\x04\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
+	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain2\xf4\x04\n" +
 	"\n" +
 	"ApiService\x12:\n" +
 	"\vGetRedirect\x12\x17.api.v1.RedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12E\n" +
@@ -625,7 +653,7 @@ const file_api_v1_api_proto_rawDesc = "" +
 	"\x0eCreateRedirect\x12\x1d.api.v1.CreateRedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x124\n" +
 	"\tGetDomain\x12\x15.api.v1.DomainRequest\x1a\x0e.api.v1.Domain\"\x00\x12?\n" +
 	"\n" +
-	"GetDomains\x12\x16.api.v1.DomainsRequest\x1a\x17.api.v1.DomainsResponse\"\x00\x12?\n" +
+	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12?\n" +
 	"\fDeleteDomain\x12\x15.api.v1.DomainRequest\x1a\x16.google.protobuf.Empty\"\x00\x12-\n" +
 	"\tPutDomain\x12\x0e.api.v1.Domain\x1a\x0e.api.v1.Domain\"\x00\x12=\n" +
 	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x00B\x84\x01\n" +
@@ -650,25 +678,25 @@ var file_api_v1_api_proto_goTypes = []any{
 	(*RedirectsRequest)(nil),      // 1: api.v1.RedirectsRequest
 	(*RedirectsResponse)(nil),     // 2: api.v1.RedirectsResponse
 	(*Redirect)(nil),              // 3: api.v1.Redirect
-	(*CreateRedirectRequest)(nil), // 4: api.v1.CreateRedirectRequest
-	(*DomainRequest)(nil),         // 5: api.v1.DomainRequest
-	(*DomainsRequest)(nil),        // 6: api.v1.DomainsRequest
+	(*FullRedirect)(nil),          // 4: api.v1.FullRedirect
+	(*CreateRedirectRequest)(nil), // 5: api.v1.CreateRedirectRequest
+	(*DomainRequest)(nil),         // 6: api.v1.DomainRequest
 	(*DomainsResponse)(nil),       // 7: api.v1.DomainsResponse
 	(*Domain)(nil),                // 8: api.v1.Domain
 	(*CreateDomainRequest)(nil),   // 9: api.v1.CreateDomainRequest
 	(*emptypb.Empty)(nil),         // 10: google.protobuf.Empty
 }
 var file_api_v1_api_proto_depIdxs = []int32{
-	3,  // 0: api.v1.RedirectsResponse.data:type_name -> api.v1.Redirect
+	4,  // 0: api.v1.RedirectsResponse.data:type_name -> api.v1.FullRedirect
 	8,  // 1: api.v1.DomainsResponse.data:type_name -> api.v1.Domain
 	0,  // 2: api.v1.ApiService.GetRedirect:input_type -> api.v1.RedirectRequest
 	1,  // 3: api.v1.ApiService.GetRedirects:input_type -> api.v1.RedirectsRequest
 	0,  // 4: api.v1.ApiService.DeleteRedirect:input_type -> api.v1.RedirectRequest
 	3,  // 5: api.v1.ApiService.PutRedirect:input_type -> api.v1.Redirect
-	4,  // 6: api.v1.ApiService.CreateRedirect:input_type -> api.v1.CreateRedirectRequest
-	5,  // 7: api.v1.ApiService.GetDomain:input_type -> api.v1.DomainRequest
-	6,  // 8: api.v1.ApiService.GetDomains:input_type -> api.v1.DomainsRequest
-	5,  // 9: api.v1.ApiService.DeleteDomain:input_type -> api.v1.DomainRequest
+	5,  // 6: api.v1.ApiService.CreateRedirect:input_type -> api.v1.CreateRedirectRequest
+	6,  // 7: api.v1.ApiService.GetDomain:input_type -> api.v1.DomainRequest
+	10, // 8: api.v1.ApiService.GetDomains:input_type -> google.protobuf.Empty
+	6,  // 9: api.v1.ApiService.DeleteDomain:input_type -> api.v1.DomainRequest
 	8,  // 10: api.v1.ApiService.PutDomain:input_type -> api.v1.Domain
 	9,  // 11: api.v1.ApiService.CreateDomain:input_type -> api.v1.CreateDomainRequest
 	3,  // 12: api.v1.ApiService.GetRedirect:output_type -> api.v1.Redirect

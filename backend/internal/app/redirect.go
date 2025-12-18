@@ -40,14 +40,14 @@ func (a *Redirects) GetMany(ctx context.Context, pageData *apiv1.RedirectsReques
 	if pageData.Pagesize == 0 {
 		pageData.Pagesize = 10
 	}
-
-	redirects, totalRecords, err := a.repo.GetMany(ctx, int(pageData.Page), int(pageData.Pagesize))
-	data := []*apiv1.Redirect{}
+	redirects, total, err := a.repo.GetFullRedirects(ctx, int(pageData.Page), int(pageData.Pagesize))
+	data := []*apiv1.FullRedirect{}
 
 	for _, redirect := range redirects {
-		data = append(data, &apiv1.Redirect{
+		data = append(data, &apiv1.FullRedirect{
 			Id:        redirect.ID.String(),
 			DomainId:  redirect.DomainId.String(),
+			Domain:    redirect.Domain.Domain,
 			Path:      redirect.Path,
 			TargetUrl: redirect.TargetUrl,
 			Active:    redirect.Active,
@@ -56,7 +56,7 @@ func (a *Redirects) GetMany(ctx context.Context, pageData *apiv1.RedirectsReques
 
 	return &apiv1.RedirectsResponse{
 		Data:  data,
-		Total: totalRecords,
+		Total: int32(total),
 	}, err
 }
 

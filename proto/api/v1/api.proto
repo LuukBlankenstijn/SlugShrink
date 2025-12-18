@@ -10,13 +10,13 @@ message RedirectRequest {
 }
 
 message RedirectsRequest {
-  int64 page = 1 [(buf.validate.field).int64.gte = 0];
-  int64 pagesize = 2 [(buf.validate.field).int64.gte = 0];
+  int32 page = 1 [(buf.validate.field).int32.gte = 0];
+  int32 pagesize = 2 [(buf.validate.field).int32.gte = 0];
 }
 
 message RedirectsResponse {
-  repeated Redirect data = 1;
-  int64 total = 2 [(buf.validate.field).int64.gte = 0];
+  repeated FullRedirect data = 1;
+  int32 total = 2 [(buf.validate.field).int32.gte = 0];
 }
 
 message Redirect {
@@ -25,6 +25,15 @@ message Redirect {
   string path = 3 [(buf.validate.field).string.uri_ref = true];
   string target_url = 4 [(buf.validate.field).string.uri = true];
   bool active = 5;
+}
+
+message FullRedirect {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+  string domain_id = 2 [(buf.validate.field).string.uuid = true];
+  string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
+  string path = 4 [(buf.validate.field).string.uri_ref = true];
+  string target_url = 5 [(buf.validate.field).string.uri = true];
+  bool active = 6;
 }
 
 message CreateRedirectRequest {
@@ -38,25 +47,19 @@ message DomainRequest {
   string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
-message DomainsRequest {
-  int64 page = 1 [(buf.validate.field).int64.gte = 0];
-  int64 pagesize = 2 [(buf.validate.field).int64.gte = 0];
-}
-
 message DomainsResponse {
   repeated Domain data = 1;
-  int64 total = 2 [(buf.validate.field).int64.gte = 0];
 }
 
 message Domain {
   string id = 1 [(buf.validate.field).string.uuid = true];
   string name = 2;
-  string domain = 3;
+  string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
 }
 
 message CreateDomainRequest {
   string name = 2;
-  string domain = 3;
+  string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
 }
 
 service ApiService {
@@ -66,7 +69,7 @@ service ApiService {
   rpc PutRedirect(Redirect) returns (Redirect) {}
   rpc CreateRedirect(CreateRedirectRequest) returns (Redirect) {}
   rpc GetDomain(DomainRequest) returns (Domain) {}
-  rpc GetDomains(DomainsRequest) returns (DomainsResponse) {}
+  rpc GetDomains(google.protobuf.Empty) returns (DomainsResponse) {}
   rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {}
   rpc PutDomain(Domain) returns (Domain) {}
   rpc CreateDomain(CreateDomainRequest) returns (Domain) {}

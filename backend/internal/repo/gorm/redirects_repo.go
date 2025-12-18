@@ -35,3 +35,13 @@ func (r *RedirectRepo) FindRedirectForHostAndPath(context context.Context, host,
 
 	return redirect, err
 }
+
+func (r RedirectRepo) GetFullRedirects(context context.Context, page, pagesize int) ([]models.RedirectModel, int64, error) {
+	found, err := r.repo.Preload("Domain", nil).Limit(pagesize).Offset((page - 1) * pagesize).Find(context)
+	if err != nil {
+		return []models.RedirectModel{}, 0, err
+	}
+	count, err := r.repo.Count(context, "id")
+
+	return found, count, err
+}

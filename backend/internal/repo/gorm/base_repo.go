@@ -22,14 +22,8 @@ func (r *BaseRepo[T]) Get(context context.Context, id uuid.UUID) (*T, error) {
 	return &m, err
 }
 
-func (r *BaseRepo[T]) GetMany(context context.Context, page, pagesize int) ([]T, int64, error) {
-	models, err := r.repo.Limit(pagesize).Offset((page - 1) * pagesize).Find(context)
-	if err != nil {
-		return []T{}, 0, err
-	}
-	count, err := r.repo.Count(context, "id")
-
-	return models, count, err
+func (r *BaseRepo[T]) GetAll(context context.Context) ([]T, error) {
+	return r.repo.Find(context)
 }
 
 func (r *BaseRepo[T]) Create(context context.Context, newModel *T) (*T, error) {

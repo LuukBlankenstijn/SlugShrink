@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/api.proto.
  */
 export const file_api_v1_api: GenFile = /*@__PURE__*/
-  fileDesc("ChBhcGkvdjEvYXBpLnByb3RvEgZhcGkudjEiJwoPUmVkaXJlY3RSZXF1ZXN0EhQKAmlkGAEgASgJQgi6SAVyA7ABASJEChBSZWRpcmVjdHNSZXF1ZXN0EhUKBHBhZ2UYASABKANCB7pIBCICKAASGQoIcGFnZXNpemUYAiABKANCB7pIBCICKAAiSwoRUmVkaXJlY3RzUmVzcG9uc2USHgoEZGF0YRgBIAMoCzIQLmFwaS52MS5SZWRpcmVjdBIWCgV0b3RhbBgCIAEoA0IHukgEIgIoACKDAQoIUmVkaXJlY3QSFAoCaWQYASABKAlCCLpIBXIDsAEBEhsKCWRvbWFpbl9pZBgCIAEoCUIIukgFcgOwAQESFgoEcGF0aBgDIAEoCUIIukgFcgOQAQESHAoKdGFyZ2V0X3VybBgEIAEoCUIIukgFcgOIAQESDgoGYWN0aXZlGAUgASgIInoKFUNyZWF0ZVJlZGlyZWN0UmVxdWVzdBIbCglkb21haW5faWQYASABKAlCCLpIBXIDsAEBEhYKBHBhdGgYAiABKAlCCLpIBXIDkAEBEhwKCnRhcmdldF91cmwYAyABKAlCCLpIBXIDiAEBEg4KBmFjdGl2ZRgEIAEoCCIlCg1Eb21haW5SZXF1ZXN0EhQKAmlkGAEgASgJQgi6SAVyA7ABASJCCg5Eb21haW5zUmVxdWVzdBIVCgRwYWdlGAEgASgDQge6SAQiAigAEhkKCHBhZ2VzaXplGAIgASgDQge6SAQiAigAIkcKD0RvbWFpbnNSZXNwb25zZRIcCgRkYXRhGAEgAygLMg4uYXBpLnYxLkRvbWFpbhIWCgV0b3RhbBgCIAEoA0IHukgEIgIoACI8CgZEb21haW4SFAoCaWQYASABKAlCCLpIBXIDsAEBEgwKBG5hbWUYAiABKAkSDgoGZG9tYWluGAMgASgJIjMKE0NyZWF0ZURvbWFpblJlcXVlc3QSDAoEbmFtZRgCIAEoCRIOCgZkb21haW4YAyABKAky9AQKCkFwaVNlcnZpY2USOgoLR2V0UmVkaXJlY3QSFy5hcGkudjEuUmVkaXJlY3RSZXF1ZXN0GhAuYXBpLnYxLlJlZGlyZWN0IgASRQoMR2V0UmVkaXJlY3RzEhguYXBpLnYxLlJlZGlyZWN0c1JlcXVlc3QaGS5hcGkudjEuUmVkaXJlY3RzUmVzcG9uc2UiABJDCg5EZWxldGVSZWRpcmVjdBIXLmFwaS52MS5SZWRpcmVjdFJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABIzCgtQdXRSZWRpcmVjdBIQLmFwaS52MS5SZWRpcmVjdBoQLmFwaS52MS5SZWRpcmVjdCIAEkMKDkNyZWF0ZVJlZGlyZWN0Eh0uYXBpLnYxLkNyZWF0ZVJlZGlyZWN0UmVxdWVzdBoQLmFwaS52MS5SZWRpcmVjdCIAEjQKCUdldERvbWFpbhIVLmFwaS52MS5Eb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAEj8KCkdldERvbWFpbnMSFi5hcGkudjEuRG9tYWluc1JlcXVlc3QaFy5hcGkudjEuRG9tYWluc1Jlc3BvbnNlIgASPwoMRGVsZXRlRG9tYWluEhUuYXBpLnYxLkRvbWFpblJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABItCglQdXREb21haW4SDi5hcGkudjEuRG9tYWluGg4uYXBpLnYxLkRvbWFpbiIAEj0KDENyZWF0ZURvbWFpbhIbLmFwaS52MS5DcmVhdGVEb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAQoQBCgpjb20uYXBpLnYxQghBcGlQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_protobuf_empty]);
+  fileDesc("ChBhcGkvdjEvYXBpLnByb3RvEgZhcGkudjEiJwoPUmVkaXJlY3RSZXF1ZXN0EhQKAmlkGAEgASgJQgi6SAVyA7ABASJEChBSZWRpcmVjdHNSZXF1ZXN0EhUKBHBhZ2UYASABKAVCB7pIBBoCKAASGQoIcGFnZXNpemUYAiABKAVCB7pIBBoCKAAiTwoRUmVkaXJlY3RzUmVzcG9uc2USIgoEZGF0YRgBIAMoCzIULmFwaS52MS5GdWxsUmVkaXJlY3QSFgoFdG90YWwYAiABKAVCB7pIBBoCKAAigwEKCFJlZGlyZWN0EhQKAmlkGAEgASgJQgi6SAVyA7ABARIbCglkb21haW5faWQYAiABKAlCCLpIBXIDsAEBEhYKBHBhdGgYAyABKAlCCLpIBXIDkAEBEhwKCnRhcmdldF91cmwYBCABKAlCCLpIBXIDiAEBEg4KBmFjdGl2ZRgFIAEoCCK+AQoMRnVsbFJlZGlyZWN0EhQKAmlkGAEgASgJQgi6SAVyA7ABARIbCglkb21haW5faWQYAiABKAlCCLpIBXIDsAEBEjUKBmRvbWFpbhgDIAEoCUIlukgiciAyHl5bYS16QS1aMC05Li1dKyg6WzAtOV17MSw1fSk/JBIWCgRwYXRoGAQgASgJQgi6SAVyA5ABARIcCgp0YXJnZXRfdXJsGAUgASgJQgi6SAVyA4gBARIOCgZhY3RpdmUYBiABKAgiegoVQ3JlYXRlUmVkaXJlY3RSZXF1ZXN0EhsKCWRvbWFpbl9pZBgBIAEoCUIIukgFcgOwAQESFgoEcGF0aBgCIAEoCUIIukgFcgOQAQESHAoKdGFyZ2V0X3VybBgDIAEoCUIIukgFcgOIAQESDgoGYWN0aXZlGAQgASgIIiUKDURvbWFpblJlcXVlc3QSFAoCaWQYASABKAlCCLpIBXIDsAEBIi8KD0RvbWFpbnNSZXNwb25zZRIcCgRkYXRhGAEgAygLMg4uYXBpLnYxLkRvbWFpbiJjCgZEb21haW4SFAoCaWQYASABKAlCCLpIBXIDsAEBEgwKBG5hbWUYAiABKAkSNQoGZG9tYWluGAMgASgJQiW6SCJyIDIeXlthLXpBLVowLTkuLV0rKDpbMC05XXsxLDV9KT8kIloKE0NyZWF0ZURvbWFpblJlcXVlc3QSDAoEbmFtZRgCIAEoCRI1CgZkb21haW4YAyABKAlCJbpIInIgMh5eW2EtekEtWjAtOS4tXSsoOlswLTldezEsNX0pPyQy9AQKCkFwaVNlcnZpY2USOgoLR2V0UmVkaXJlY3QSFy5hcGkudjEuUmVkaXJlY3RSZXF1ZXN0GhAuYXBpLnYxLlJlZGlyZWN0IgASRQoMR2V0UmVkaXJlY3RzEhguYXBpLnYxLlJlZGlyZWN0c1JlcXVlc3QaGS5hcGkudjEuUmVkaXJlY3RzUmVzcG9uc2UiABJDCg5EZWxldGVSZWRpcmVjdBIXLmFwaS52MS5SZWRpcmVjdFJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABIzCgtQdXRSZWRpcmVjdBIQLmFwaS52MS5SZWRpcmVjdBoQLmFwaS52MS5SZWRpcmVjdCIAEkMKDkNyZWF0ZVJlZGlyZWN0Eh0uYXBpLnYxLkNyZWF0ZVJlZGlyZWN0UmVxdWVzdBoQLmFwaS52MS5SZWRpcmVjdCIAEjQKCUdldERvbWFpbhIVLmFwaS52MS5Eb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAEj8KCkdldERvbWFpbnMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaFy5hcGkudjEuRG9tYWluc1Jlc3BvbnNlIgASPwoMRGVsZXRlRG9tYWluEhUuYXBpLnYxLkRvbWFpblJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABItCglQdXREb21haW4SDi5hcGkudjEuRG9tYWluGg4uYXBpLnYxLkRvbWFpbiIAEj0KDENyZWF0ZURvbWFpbhIbLmFwaS52MS5DcmVhdGVEb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAQoQBCgpjb20uYXBpLnYxQghBcGlQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_protobuf_empty]);
 
 /**
  * @generated from message api.v1.RedirectRequest
@@ -37,14 +37,14 @@ export const RedirectRequestSchema: GenMessage<RedirectRequest> = /*@__PURE__*/
  */
 export type RedirectsRequest = Message<"api.v1.RedirectsRequest"> & {
   /**
-   * @generated from field: int64 page = 1;
+   * @generated from field: int32 page = 1;
    */
-  page: bigint;
+  page: number;
 
   /**
-   * @generated from field: int64 pagesize = 2;
+   * @generated from field: int32 pagesize = 2;
    */
-  pagesize: bigint;
+  pagesize: number;
 };
 
 /**
@@ -59,14 +59,14 @@ export const RedirectsRequestSchema: GenMessage<RedirectsRequest> = /*@__PURE__*
  */
 export type RedirectsResponse = Message<"api.v1.RedirectsResponse"> & {
   /**
-   * @generated from field: repeated api.v1.Redirect data = 1;
+   * @generated from field: repeated api.v1.FullRedirect data = 1;
    */
-  data: Redirect[];
+  data: FullRedirect[];
 
   /**
-   * @generated from field: int64 total = 2;
+   * @generated from field: int32 total = 2;
    */
-  total: bigint;
+  total: number;
 };
 
 /**
@@ -114,6 +114,48 @@ export const RedirectSchema: GenMessage<Redirect> = /*@__PURE__*/
   messageDesc(file_api_v1_api, 3);
 
 /**
+ * @generated from message api.v1.FullRedirect
+ */
+export type FullRedirect = Message<"api.v1.FullRedirect"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string domain_id = 2;
+   */
+  domainId: string;
+
+  /**
+   * @generated from field: string domain = 3;
+   */
+  domain: string;
+
+  /**
+   * @generated from field: string path = 4;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string target_url = 5;
+   */
+  targetUrl: string;
+
+  /**
+   * @generated from field: bool active = 6;
+   */
+  active: boolean;
+};
+
+/**
+ * Describes the message api.v1.FullRedirect.
+ * Use `create(FullRedirectSchema)` to create a new message.
+ */
+export const FullRedirectSchema: GenMessage<FullRedirect> = /*@__PURE__*/
+  messageDesc(file_api_v1_api, 4);
+
+/**
  * @generated from message api.v1.CreateRedirectRequest
  */
 export type CreateRedirectRequest = Message<"api.v1.CreateRedirectRequest"> & {
@@ -143,7 +185,7 @@ export type CreateRedirectRequest = Message<"api.v1.CreateRedirectRequest"> & {
  * Use `create(CreateRedirectRequestSchema)` to create a new message.
  */
 export const CreateRedirectRequestSchema: GenMessage<CreateRedirectRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 4);
+  messageDesc(file_api_v1_api, 5);
 
 /**
  * @generated from message api.v1.DomainRequest
@@ -160,28 +202,6 @@ export type DomainRequest = Message<"api.v1.DomainRequest"> & {
  * Use `create(DomainRequestSchema)` to create a new message.
  */
 export const DomainRequestSchema: GenMessage<DomainRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 5);
-
-/**
- * @generated from message api.v1.DomainsRequest
- */
-export type DomainsRequest = Message<"api.v1.DomainsRequest"> & {
-  /**
-   * @generated from field: int64 page = 1;
-   */
-  page: bigint;
-
-  /**
-   * @generated from field: int64 pagesize = 2;
-   */
-  pagesize: bigint;
-};
-
-/**
- * Describes the message api.v1.DomainsRequest.
- * Use `create(DomainsRequestSchema)` to create a new message.
- */
-export const DomainsRequestSchema: GenMessage<DomainsRequest> = /*@__PURE__*/
   messageDesc(file_api_v1_api, 6);
 
 /**
@@ -192,11 +212,6 @@ export type DomainsResponse = Message<"api.v1.DomainsResponse"> & {
    * @generated from field: repeated api.v1.Domain data = 1;
    */
   data: Domain[];
-
-  /**
-   * @generated from field: int64 total = 2;
-   */
-  total: bigint;
 };
 
 /**
@@ -312,7 +327,7 @@ export const ApiService: GenService<{
    */
   getDomains: {
     methodKind: "unary";
-    input: typeof DomainsRequestSchema;
+    input: typeof EmptySchema;
     output: typeof DomainsResponseSchema;
   },
   /**
