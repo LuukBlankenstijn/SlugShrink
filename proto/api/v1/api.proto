@@ -22,7 +22,10 @@ message RedirectsResponse {
 message Redirect {
   string id = 1 [(buf.validate.field).string.uuid = true];
   string domain_id = 2 [(buf.validate.field).string.uuid = true];
-  string path = 3 [(buf.validate.field).string.uri_ref = true];
+  string path = 3 [
+    (buf.validate.field).string.uri_ref = true,
+    (buf.validate.field).string.prefix = "/"
+  ];
   string target_url = 4 [(buf.validate.field).string.uri = true];
   bool active = 5;
 }
@@ -31,14 +34,20 @@ message FullRedirect {
   string id = 1 [(buf.validate.field).string.uuid = true];
   string domain_id = 2 [(buf.validate.field).string.uuid = true];
   string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
-  string path = 4 [(buf.validate.field).string.uri_ref = true];
+  string path = 4 [
+    (buf.validate.field).string.uri_ref = true,
+    (buf.validate.field).string.prefix = "/"
+  ];
   string target_url = 5 [(buf.validate.field).string.uri = true];
   bool active = 6;
 }
 
 message CreateRedirectRequest {
   string domain_id = 1 [(buf.validate.field).string.uuid = true];
-  string path = 2 [(buf.validate.field).string.uri_ref = true];
+  string path = 2 [
+    (buf.validate.field).string.uri_ref = true,
+    (buf.validate.field).string.prefix = "/"
+  ];
   string target_url = 3 [(buf.validate.field).string.uri = true];
   bool active = 4;
 }

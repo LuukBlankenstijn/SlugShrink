@@ -33,7 +33,7 @@ func (r *BaseRepo[T]) Create(context context.Context, newModel *T) (*T, error) {
 }
 
 func (r *BaseRepo[T]) Save(context context.Context, model T) (*T, error) {
-	_, err := r.repo.Updates(context, model)
+	_, err := r.repo.Select("*").Updates(context, model)
 	return &model, err
 }
 
