@@ -2,273 +2,23 @@
 // @generated from file api/v1/api.proto (package api.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
+import type { GenFile, GenService } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { AuthStatusSchema, BasicAuthLoginSchema, GetAuthSchema, SetAuthSchema } from "./auth_pb";
+import { file_api_v1_auth } from "./auth_pb";
+import type { CreateDomainRequestSchema, DomainRequestSchema, DomainSchema, DomainsResponseSchema } from "./domain_pb";
+import { file_api_v1_domain } from "./domain_pb";
+import { file_api_v1_options } from "./options_pb";
+import type { CreateRedirectRequestSchema, RedirectRequestSchema, RedirectSchema, RedirectsRequestSchema, RedirectsResponseSchema } from "./redirect_pb";
+import { file_api_v1_redirect } from "./redirect_pb";
 import type { EmptySchema } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_empty } from "@bufbuild/protobuf/wkt";
-import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file api/v1/api.proto.
  */
 export const file_api_v1_api: GenFile = /*@__PURE__*/
-  fileDesc("ChBhcGkvdjEvYXBpLnByb3RvEgZhcGkudjEiJwoPUmVkaXJlY3RSZXF1ZXN0EhQKAmlkGAEgASgJQgi6SAVyA7ABASJEChBSZWRpcmVjdHNSZXF1ZXN0EhUKBHBhZ2UYASABKAVCB7pIBBoCKAASGQoIcGFnZXNpemUYAiABKAVCB7pIBBoCKAAiTwoRUmVkaXJlY3RzUmVzcG9uc2USIgoEZGF0YRgBIAMoCzIULmFwaS52MS5GdWxsUmVkaXJlY3QSFgoFdG90YWwYAiABKAVCB7pIBBoCKAAihgEKCFJlZGlyZWN0EhQKAmlkGAEgASgJQgi6SAVyA7ABARIbCglkb21haW5faWQYAiABKAlCCLpIBXIDsAEBEhkKBHBhdGgYAyABKAlCC7pICHIGOgEvkAEBEhwKCnRhcmdldF91cmwYBCABKAlCCLpIBXIDiAEBEg4KBmFjdGl2ZRgFIAEoCCLBAQoMRnVsbFJlZGlyZWN0EhQKAmlkGAEgASgJQgi6SAVyA7ABARIbCglkb21haW5faWQYAiABKAlCCLpIBXIDsAEBEjUKBmRvbWFpbhgDIAEoCUIlukgiciAyHl5bYS16QS1aMC05Li1dKyg6WzAtOV17MSw1fSk/JBIZCgRwYXRoGAQgASgJQgu6SAhyBjoBL5ABARIcCgp0YXJnZXRfdXJsGAUgASgJQgi6SAVyA4gBARIOCgZhY3RpdmUYBiABKAgifQoVQ3JlYXRlUmVkaXJlY3RSZXF1ZXN0EhsKCWRvbWFpbl9pZBgBIAEoCUIIukgFcgOwAQESGQoEcGF0aBgCIAEoCUILukgIcgY6AS+QAQESHAoKdGFyZ2V0X3VybBgDIAEoCUIIukgFcgOIAQESDgoGYWN0aXZlGAQgASgIIiUKDURvbWFpblJlcXVlc3QSFAoCaWQYASABKAlCCLpIBXIDsAEBIi8KD0RvbWFpbnNSZXNwb25zZRIcCgRkYXRhGAEgAygLMg4uYXBpLnYxLkRvbWFpbiJjCgZEb21haW4SFAoCaWQYASABKAlCCLpIBXIDsAEBEgwKBG5hbWUYAiABKAkSNQoGZG9tYWluGAMgASgJQiW6SCJyIDIeXlthLXpBLVowLTkuLV0rKDpbMC05XXsxLDV9KT8kIloKE0NyZWF0ZURvbWFpblJlcXVlc3QSDAoEbmFtZRgCIAEoCRI1CgZkb21haW4YAyABKAlCJbpIInIgMh5eW2EtekEtWjAtOS4tXSsoOlswLTldezEsNX0pPyQy9AQKCkFwaVNlcnZpY2USOgoLR2V0UmVkaXJlY3QSFy5hcGkudjEuUmVkaXJlY3RSZXF1ZXN0GhAuYXBpLnYxLlJlZGlyZWN0IgASRQoMR2V0UmVkaXJlY3RzEhguYXBpLnYxLlJlZGlyZWN0c1JlcXVlc3QaGS5hcGkudjEuUmVkaXJlY3RzUmVzcG9uc2UiABJDCg5EZWxldGVSZWRpcmVjdBIXLmFwaS52MS5SZWRpcmVjdFJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABIzCgtQdXRSZWRpcmVjdBIQLmFwaS52MS5SZWRpcmVjdBoQLmFwaS52MS5SZWRpcmVjdCIAEkMKDkNyZWF0ZVJlZGlyZWN0Eh0uYXBpLnYxLkNyZWF0ZVJlZGlyZWN0UmVxdWVzdBoQLmFwaS52MS5SZWRpcmVjdCIAEjQKCUdldERvbWFpbhIVLmFwaS52MS5Eb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAEj8KCkdldERvbWFpbnMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaFy5hcGkudjEuRG9tYWluc1Jlc3BvbnNlIgASPwoMRGVsZXRlRG9tYWluEhUuYXBpLnYxLkRvbWFpblJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABItCglQdXREb21haW4SDi5hcGkudjEuRG9tYWluGg4uYXBpLnYxLkRvbWFpbiIAEj0KDENyZWF0ZURvbWFpbhIbLmFwaS52MS5DcmVhdGVEb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAQoQBCgpjb20uYXBpLnYxQghBcGlQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_protobuf_empty]);
-
-/**
- * @generated from message api.v1.RedirectRequest
- */
-export type RedirectRequest = Message<"api.v1.RedirectRequest"> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-};
-
-/**
- * Describes the message api.v1.RedirectRequest.
- * Use `create(RedirectRequestSchema)` to create a new message.
- */
-export const RedirectRequestSchema: GenMessage<RedirectRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 0);
-
-/**
- * @generated from message api.v1.RedirectsRequest
- */
-export type RedirectsRequest = Message<"api.v1.RedirectsRequest"> & {
-  /**
-   * @generated from field: int32 page = 1;
-   */
-  page: number;
-
-  /**
-   * @generated from field: int32 pagesize = 2;
-   */
-  pagesize: number;
-};
-
-/**
- * Describes the message api.v1.RedirectsRequest.
- * Use `create(RedirectsRequestSchema)` to create a new message.
- */
-export const RedirectsRequestSchema: GenMessage<RedirectsRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 1);
-
-/**
- * @generated from message api.v1.RedirectsResponse
- */
-export type RedirectsResponse = Message<"api.v1.RedirectsResponse"> & {
-  /**
-   * @generated from field: repeated api.v1.FullRedirect data = 1;
-   */
-  data: FullRedirect[];
-
-  /**
-   * @generated from field: int32 total = 2;
-   */
-  total: number;
-};
-
-/**
- * Describes the message api.v1.RedirectsResponse.
- * Use `create(RedirectsResponseSchema)` to create a new message.
- */
-export const RedirectsResponseSchema: GenMessage<RedirectsResponse> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 2);
-
-/**
- * @generated from message api.v1.Redirect
- */
-export type Redirect = Message<"api.v1.Redirect"> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * @generated from field: string domain_id = 2;
-   */
-  domainId: string;
-
-  /**
-   * @generated from field: string path = 3;
-   */
-  path: string;
-
-  /**
-   * @generated from field: string target_url = 4;
-   */
-  targetUrl: string;
-
-  /**
-   * @generated from field: bool active = 5;
-   */
-  active: boolean;
-};
-
-/**
- * Describes the message api.v1.Redirect.
- * Use `create(RedirectSchema)` to create a new message.
- */
-export const RedirectSchema: GenMessage<Redirect> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 3);
-
-/**
- * @generated from message api.v1.FullRedirect
- */
-export type FullRedirect = Message<"api.v1.FullRedirect"> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * @generated from field: string domain_id = 2;
-   */
-  domainId: string;
-
-  /**
-   * @generated from field: string domain = 3;
-   */
-  domain: string;
-
-  /**
-   * @generated from field: string path = 4;
-   */
-  path: string;
-
-  /**
-   * @generated from field: string target_url = 5;
-   */
-  targetUrl: string;
-
-  /**
-   * @generated from field: bool active = 6;
-   */
-  active: boolean;
-};
-
-/**
- * Describes the message api.v1.FullRedirect.
- * Use `create(FullRedirectSchema)` to create a new message.
- */
-export const FullRedirectSchema: GenMessage<FullRedirect> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 4);
-
-/**
- * @generated from message api.v1.CreateRedirectRequest
- */
-export type CreateRedirectRequest = Message<"api.v1.CreateRedirectRequest"> & {
-  /**
-   * @generated from field: string domain_id = 1;
-   */
-  domainId: string;
-
-  /**
-   * @generated from field: string path = 2;
-   */
-  path: string;
-
-  /**
-   * @generated from field: string target_url = 3;
-   */
-  targetUrl: string;
-
-  /**
-   * @generated from field: bool active = 4;
-   */
-  active: boolean;
-};
-
-/**
- * Describes the message api.v1.CreateRedirectRequest.
- * Use `create(CreateRedirectRequestSchema)` to create a new message.
- */
-export const CreateRedirectRequestSchema: GenMessage<CreateRedirectRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 5);
-
-/**
- * @generated from message api.v1.DomainRequest
- */
-export type DomainRequest = Message<"api.v1.DomainRequest"> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-};
-
-/**
- * Describes the message api.v1.DomainRequest.
- * Use `create(DomainRequestSchema)` to create a new message.
- */
-export const DomainRequestSchema: GenMessage<DomainRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 6);
-
-/**
- * @generated from message api.v1.DomainsResponse
- */
-export type DomainsResponse = Message<"api.v1.DomainsResponse"> & {
-  /**
-   * @generated from field: repeated api.v1.Domain data = 1;
-   */
-  data: Domain[];
-};
-
-/**
- * Describes the message api.v1.DomainsResponse.
- * Use `create(DomainsResponseSchema)` to create a new message.
- */
-export const DomainsResponseSchema: GenMessage<DomainsResponse> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 7);
-
-/**
- * @generated from message api.v1.Domain
- */
-export type Domain = Message<"api.v1.Domain"> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * @generated from field: string domain = 3;
-   */
-  domain: string;
-};
-
-/**
- * Describes the message api.v1.Domain.
- * Use `create(DomainSchema)` to create a new message.
- */
-export const DomainSchema: GenMessage<Domain> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 8);
-
-/**
- * @generated from message api.v1.CreateDomainRequest
- */
-export type CreateDomainRequest = Message<"api.v1.CreateDomainRequest"> & {
-  /**
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * @generated from field: string domain = 3;
-   */
-  domain: string;
-};
-
-/**
- * Describes the message api.v1.CreateDomainRequest.
- * Use `create(CreateDomainRequestSchema)` to create a new message.
- */
-export const CreateDomainRequestSchema: GenMessage<CreateDomainRequest> = /*@__PURE__*/
-  messageDesc(file_api_v1_api, 9);
+  fileDesc("ChBhcGkvdjEvYXBpLnByb3RvEgZhcGkudjEy7gYKCkFwaVNlcnZpY2USOgoLR2V0UmVkaXJlY3QSFy5hcGkudjEuUmVkaXJlY3RSZXF1ZXN0GhAuYXBpLnYxLlJlZGlyZWN0IgASRQoMR2V0UmVkaXJlY3RzEhguYXBpLnYxLlJlZGlyZWN0c1JlcXVlc3QaGS5hcGkudjEuUmVkaXJlY3RzUmVzcG9uc2UiABJDCg5EZWxldGVSZWRpcmVjdBIXLmFwaS52MS5SZWRpcmVjdFJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABIzCgtQdXRSZWRpcmVjdBIQLmFwaS52MS5SZWRpcmVjdBoQLmFwaS52MS5SZWRpcmVjdCIAEkMKDkNyZWF0ZVJlZGlyZWN0Eh0uYXBpLnYxLkNyZWF0ZVJlZGlyZWN0UmVxdWVzdBoQLmFwaS52MS5SZWRpcmVjdCIAEjQKCUdldERvbWFpbhIVLmFwaS52MS5Eb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAEj8KCkdldERvbWFpbnMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaFy5hcGkudjEuRG9tYWluc1Jlc3BvbnNlIgASPwoMRGVsZXRlRG9tYWluEhUuYXBpLnYxLkRvbWFpblJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABItCglQdXREb21haW4SDi5hcGkudjEuRG9tYWluGg4uYXBpLnYxLkRvbWFpbiIAEj0KDENyZWF0ZURvbWFpbhIbLmFwaS52MS5DcmVhdGVEb21haW5SZXF1ZXN0Gg4uYXBpLnYxLkRvbWFpbiIAEkEKDUdldEF1dGhTdGF0dXMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaEi5hcGkudjEuQXV0aFN0YXR1cyIEiLUYARI9CgVMb2dpbhIWLmFwaS52MS5CYXNpY0F1dGhMb2dpbhoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIEiLUYARI6Cg1TZXRBdXRoQ29uZmlnEg8uYXBpLnYxLlNldEF1dGgaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABI6Cg1HZXRBdXRoQ29uZmlnEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gg8uYXBpLnYxLkdldEF1dGgiAEKEAQoKY29tLmFwaS52MUIIQXBpUHJvdG9QAVozZ2l0aHViLmNvbS9MdXVrQmxhbmtlbnN0aWpuL2dld2lzaC9nZW4vYXBpL3YxO2FwaXYxogIDQVhYqgIGQXBpLlYxygIGQXBpXFYx4gISQXBpXFYxXEdQQk1ldGFkYXRh6gIHQXBpOjpWMWIGcHJvdG8z", [file_api_v1_auth, file_api_v1_domain, file_api_v1_options, file_api_v1_redirect, file_google_protobuf_empty]);
 
 /**
  * @generated from service api.v1.ApiService
@@ -353,6 +103,38 @@ export const ApiService: GenService<{
     methodKind: "unary";
     input: typeof CreateDomainRequestSchema;
     output: typeof DomainSchema;
+  },
+  /**
+   * @generated from rpc api.v1.ApiService.GetAuthStatus
+   */
+  getAuthStatus: {
+    methodKind: "unary";
+    input: typeof EmptySchema;
+    output: typeof AuthStatusSchema;
+  },
+  /**
+   * @generated from rpc api.v1.ApiService.Login
+   */
+  login: {
+    methodKind: "unary";
+    input: typeof BasicAuthLoginSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * @generated from rpc api.v1.ApiService.SetAuthConfig
+   */
+  setAuthConfig: {
+    methodKind: "unary";
+    input: typeof SetAuthSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * @generated from rpc api.v1.ApiService.GetAuthConfig
+   */
+  getAuthConfig: {
+    methodKind: "unary";
+    input: typeof EmptySchema;
+    output: typeof GetAuthSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_api_v1_api, 0);

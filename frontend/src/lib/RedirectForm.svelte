@@ -3,6 +3,7 @@
 	import type { FullRedirect } from '../gen/api/v1/api_pb';
 	import { api } from './api.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import { queryKeys } from '$lib/queryKeys';
 
 	interface Props {
 		readonly onClose: () => void;
@@ -13,7 +14,7 @@
 
 	const qc = useQueryClient();
 	const domainsQuery = createQuery(() => ({
-		queryKey: ['domains'],
+		queryKey: queryKeys.domains(),
 		queryFn: () => api.getDomains({})
 	}));
 
@@ -75,7 +76,7 @@
 				? api.putRedirect({ id: current?.id ?? '', domainId, path, targetUrl, active })
 				: api.createRedirect({ domainId, path, targetUrl, active }),
 		onSuccess: async () => {
-			qc.invalidateQueries({ queryKey: ['redirects'] });
+			qc.invalidateQueries({ queryKey: queryKeys.redirects() });
 			close();
 		},
 		onError: (e) => {
@@ -86,7 +87,7 @@
 	const deleteRedirect = createMutation(() => ({
 		mutationFn: ({ id }: { id: string }) => api.deleteRedirect({ id }),
 		onSuccess: async () => {
-			qc.invalidateQueries({ queryKey: ['redirects'] });
+			qc.invalidateQueries({ queryKey: queryKeys.redirects() });
 			close();
 		},
 		onError: (e) => {

@@ -3,6 +3,7 @@
 	import type { Domain } from '../gen/api/v1/api_pb';
 	import { api } from './api.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import { queryKeys } from '$lib/queryKeys';
 
 	interface Props {
 		readonly onClose: () => void;
@@ -32,7 +33,7 @@
 	const deleteDomain = createMutation(() => ({
 		mutationFn: ({ id }: { id: string }) => api.deleteDomain({ id }),
 		onSuccess: async () => {
-			qc.invalidateQueries({ queryKey: ['domains'] });
+			qc.invalidateQueries({ queryKey: queryKeys.domains() });
 			close();
 		},
 		onError: (e) => {
@@ -48,7 +49,7 @@
 			return api.createDomain({ name, domain });
 		},
 		onSuccess: async () => {
-			qc.invalidateQueries({ queryKey: ['domains'] });
+			qc.invalidateQueries({ queryKey: queryKeys.domains() });
 			close();
 		},
 		onError: (e) => {

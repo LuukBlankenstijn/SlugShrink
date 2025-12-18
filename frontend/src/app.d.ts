@@ -6,6 +6,10 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	interface Window {
+		__TANSTACK_QUERY_CLIENT__?: import('@tanstack/query-core').QueryClient;
+	}
 }
 
 export {};

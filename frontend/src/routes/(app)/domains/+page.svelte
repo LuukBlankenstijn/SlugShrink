@@ -3,15 +3,20 @@
 	import { createQuery } from '@tanstack/svelte-query';
 	import { getContext } from 'svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
+	import { queryKeys } from '$lib/queryKeys';
 
 	const query = createQuery(() => ({
-		queryKey: ['domains'],
+		queryKey: queryKeys.domains(),
 		queryFn: () => api.getDomains({})
 	}));
 
 	const domains = $derived(() => query.data?.data ?? []);
 	const { openDomainModal } = getContext<ModalControls>(MODAL_CONTEXT);
 </script>
+
+<svelte:head>
+	<title>Domains · gewi.sh</title>
+</svelte:head>
 
 <section
 	class="overflow-hidden rounded-2xl border border-white/10 bg-white/3"

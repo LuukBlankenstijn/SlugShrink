@@ -8,17 +8,20 @@ import (
 	"connectrpc.com/validate"
 	"github.com/LuukBlankenstijn/gewish/gen/api/v1/apiv1connect"
 	"github.com/LuukBlankenstijn/gewish/internal/app"
+	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/auth"
 )
 
 type DashboardApi struct {
-	redirects app.Redirects
-	domains   app.Domains
+	redirects   app.Redirects
+	domains     app.Domains
+	authConfigs app.AuthConfigs
 }
 
-func NewDashboardApi(redirects app.Redirects, domains app.Domains) DashboardApi {
+func NewDashboardApi(redirects app.Redirects, domains app.Domains, authConfigs app.AuthConfigs) DashboardApi {
 	return DashboardApi{
-		redirects: redirects,
-		domains:   domains,
+		redirects:   redirects,
+		domains:     domains,
+		authConfigs: authConfigs,
 	}
 }
 
@@ -26,7 +29,10 @@ func (a *DashboardApi) Run() error {
 	mux := http.NewServeMux()
 	path, handler := apiv1connect.NewApiServiceHandler(
 		a,
-		connect.WithInterceptors(validate.NewInterceptor()),
+		connect.WithInterceptors(
+			auth.AuthInterceptor(a.authConfigs),
+			validate.NewInterceptor(),
+		),
 	)
 	mux.Handle(path, handler)
 

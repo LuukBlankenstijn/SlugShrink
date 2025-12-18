@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package api.v1;
+
+import "buf/validate/validate.proto";
+
+message AuthStatus {
+  bool authenticated = 1;
+}
+
+message BasicAuthLogin {
+  string password = 1;
+}
+
+message SetBasicAuth {
+  string password = 1 [(buf.validate.field).string = {
+    min_len: 8
+    max_len: 128
+  }];
+
+  string repeated_password = 2 [(buf.validate.field).string = {
+    min_len: 8
+    max_len: 128
+  }];
+
+  option (buf.validate.message).cel = {
+    id: "passwords_match"
+    message: "password and repeated_password must be the same"
+    expression: "this.password == this.repeated_password"
+  };
+
+  option (buf.validate.message).cel = {
+    id: "password_strength"
+    message: "password must contain upper, lower, digit, and special character"
+    expression: "this.password.matches('.*[a-z].*') && this.password.matches('.*[A-Z].*') && this.password.matches('.*[0-9].*') && this.password.matches('.*[^A-Za-z0-9].*')"
+  };
+}
+
+message SetAuthless {}
+
+message SetAuth {
+  oneof config {
+    SetAuthless authless = 1;
+    SetBasicAuth basic_auth = 2;
+  }
+}
+
+message Authless {}
+
+message BasicAuth {}
+
+message GetAuth {
+  oneof config {
+    Authless authless = 1;
+    BasicAuth basic_auth = 2;
+  }
+}

@@ -2,74 +2,11 @@ syntax = "proto3";
 
 package api.v1;
 
-import "buf/validate/validate.proto";
+import "api/v1/auth.proto";
+import "api/v1/domain.proto";
+import "api/v1/options.proto";
+import "api/v1/redirect.proto";
 import "google/protobuf/empty.proto";
-
-message RedirectRequest {
-  string id = 1 [(buf.validate.field).string.uuid = true];
-}
-
-message RedirectsRequest {
-  int32 page = 1 [(buf.validate.field).int32.gte = 0];
-  int32 pagesize = 2 [(buf.validate.field).int32.gte = 0];
-}
-
-message RedirectsResponse {
-  repeated FullRedirect data = 1;
-  int32 total = 2 [(buf.validate.field).int32.gte = 0];
-}
-
-message Redirect {
-  string id = 1 [(buf.validate.field).string.uuid = true];
-  string domain_id = 2 [(buf.validate.field).string.uuid = true];
-  string path = 3 [
-    (buf.validate.field).string.uri_ref = true,
-    (buf.validate.field).string.prefix = "/"
-  ];
-  string target_url = 4 [(buf.validate.field).string.uri = true];
-  bool active = 5;
-}
-
-message FullRedirect {
-  string id = 1 [(buf.validate.field).string.uuid = true];
-  string domain_id = 2 [(buf.validate.field).string.uuid = true];
-  string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
-  string path = 4 [
-    (buf.validate.field).string.uri_ref = true,
-    (buf.validate.field).string.prefix = "/"
-  ];
-  string target_url = 5 [(buf.validate.field).string.uri = true];
-  bool active = 6;
-}
-
-message CreateRedirectRequest {
-  string domain_id = 1 [(buf.validate.field).string.uuid = true];
-  string path = 2 [
-    (buf.validate.field).string.uri_ref = true,
-    (buf.validate.field).string.prefix = "/"
-  ];
-  string target_url = 3 [(buf.validate.field).string.uri = true];
-  bool active = 4;
-}
-
-message DomainRequest {
-  string id = 1 [(buf.validate.field).string.uuid = true];
-}
-
-message DomainsResponse {
-  repeated Domain data = 1;
-}
-
-message Domain {
-  string id = 1 [(buf.validate.field).string.uuid = true];
-  string name = 2;
-  string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
-}
-
-message CreateDomainRequest {
-  string name = 2;
-  string domain = 3 [(buf.validate.field).string.pattern = "^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$"];
-}
 
 service ApiService {
   rpc GetRedirect(RedirectRequest) returns (Redirect) {}
@@ -77,9 +14,19 @@ service ApiService {
   rpc DeleteRedirect(RedirectRequest) returns (google.protobuf.Empty) {}
   rpc PutRedirect(Redirect) returns (Redirect) {}
   rpc CreateRedirect(CreateRedirectRequest) returns (Redirect) {}
+
   rpc GetDomain(DomainRequest) returns (Domain) {}
   rpc GetDomains(google.protobuf.Empty) returns (DomainsResponse) {}
   rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {}
   rpc PutDomain(Domain) returns (Domain) {}
   rpc CreateDomain(CreateDomainRequest) returns (Domain) {}
+
+  rpc GetAuthStatus(google.protobuf.Empty) returns (AuthStatus) {
+    option (api.v1.skip_auth) = true;
+  }
+  rpc Login(BasicAuthLogin) returns (google.protobuf.Empty) {
+    option (api.v1.skip_auth) = true;
+  }
+  rpc SetAuthConfig(SetAuth) returns (google.protobuf.Empty) {}
+  rpc GetAuthConfig(google.protobuf.Empty) returns (GetAuth) {}
 }

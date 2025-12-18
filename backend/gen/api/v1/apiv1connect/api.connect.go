@@ -56,6 +56,17 @@ const (
 	ApiServicePutDomainProcedure = "/api.v1.ApiService/PutDomain"
 	// ApiServiceCreateDomainProcedure is the fully-qualified name of the ApiService's CreateDomain RPC.
 	ApiServiceCreateDomainProcedure = "/api.v1.ApiService/CreateDomain"
+	// ApiServiceGetAuthStatusProcedure is the fully-qualified name of the ApiService's GetAuthStatus
+	// RPC.
+	ApiServiceGetAuthStatusProcedure = "/api.v1.ApiService/GetAuthStatus"
+	// ApiServiceLoginProcedure is the fully-qualified name of the ApiService's Login RPC.
+	ApiServiceLoginProcedure = "/api.v1.ApiService/Login"
+	// ApiServiceSetAuthConfigProcedure is the fully-qualified name of the ApiService's SetAuthConfig
+	// RPC.
+	ApiServiceSetAuthConfigProcedure = "/api.v1.ApiService/SetAuthConfig"
+	// ApiServiceGetAuthConfigProcedure is the fully-qualified name of the ApiService's GetAuthConfig
+	// RPC.
+	ApiServiceGetAuthConfigProcedure = "/api.v1.ApiService/GetAuthConfig"
 )
 
 // ApiServiceClient is a client for the api.v1.ApiService service.
@@ -70,6 +81,10 @@ type ApiServiceClient interface {
 	DeleteDomain(context.Context, *v1.DomainRequest) (*emptypb.Empty, error)
 	PutDomain(context.Context, *v1.Domain) (*v1.Domain, error)
 	CreateDomain(context.Context, *v1.CreateDomainRequest) (*v1.Domain, error)
+	GetAuthStatus(context.Context, *emptypb.Empty) (*v1.AuthStatus, error)
+	Login(context.Context, *v1.BasicAuthLogin) (*emptypb.Empty, error)
+	SetAuthConfig(context.Context, *v1.SetAuth) (*emptypb.Empty, error)
+	GetAuthConfig(context.Context, *emptypb.Empty) (*v1.GetAuth, error)
 }
 
 // NewApiServiceClient constructs a client for the api.v1.ApiService service. By default, it uses
@@ -143,6 +158,30 @@ func NewApiServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 			connect.WithSchema(apiServiceMethods.ByName("CreateDomain")),
 			connect.WithClientOptions(opts...),
 		),
+		getAuthStatus: connect.NewClient[emptypb.Empty, v1.AuthStatus](
+			httpClient,
+			baseURL+ApiServiceGetAuthStatusProcedure,
+			connect.WithSchema(apiServiceMethods.ByName("GetAuthStatus")),
+			connect.WithClientOptions(opts...),
+		),
+		login: connect.NewClient[v1.BasicAuthLogin, emptypb.Empty](
+			httpClient,
+			baseURL+ApiServiceLoginProcedure,
+			connect.WithSchema(apiServiceMethods.ByName("Login")),
+			connect.WithClientOptions(opts...),
+		),
+		setAuthConfig: connect.NewClient[v1.SetAuth, emptypb.Empty](
+			httpClient,
+			baseURL+ApiServiceSetAuthConfigProcedure,
+			connect.WithSchema(apiServiceMethods.ByName("SetAuthConfig")),
+			connect.WithClientOptions(opts...),
+		),
+		getAuthConfig: connect.NewClient[emptypb.Empty, v1.GetAuth](
+			httpClient,
+			baseURL+ApiServiceGetAuthConfigProcedure,
+			connect.WithSchema(apiServiceMethods.ByName("GetAuthConfig")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -158,6 +197,10 @@ type apiServiceClient struct {
 	deleteDomain   *connect.Client[v1.DomainRequest, emptypb.Empty]
 	putDomain      *connect.Client[v1.Domain, v1.Domain]
 	createDomain   *connect.Client[v1.CreateDomainRequest, v1.Domain]
+	getAuthStatus  *connect.Client[emptypb.Empty, v1.AuthStatus]
+	login          *connect.Client[v1.BasicAuthLogin, emptypb.Empty]
+	setAuthConfig  *connect.Client[v1.SetAuth, emptypb.Empty]
+	getAuthConfig  *connect.Client[emptypb.Empty, v1.GetAuth]
 }
 
 // GetRedirect calls api.v1.ApiService.GetRedirect.
@@ -250,6 +293,42 @@ func (c *apiServiceClient) CreateDomain(ctx context.Context, req *v1.CreateDomai
 	return nil, err
 }
 
+// GetAuthStatus calls api.v1.ApiService.GetAuthStatus.
+func (c *apiServiceClient) GetAuthStatus(ctx context.Context, req *emptypb.Empty) (*v1.AuthStatus, error) {
+	response, err := c.getAuthStatus.CallUnary(ctx, connect.NewRequest(req))
+	if response != nil {
+		return response.Msg, err
+	}
+	return nil, err
+}
+
+// Login calls api.v1.ApiService.Login.
+func (c *apiServiceClient) Login(ctx context.Context, req *v1.BasicAuthLogin) (*emptypb.Empty, error) {
+	response, err := c.login.CallUnary(ctx, connect.NewRequest(req))
+	if response != nil {
+		return response.Msg, err
+	}
+	return nil, err
+}
+
+// SetAuthConfig calls api.v1.ApiService.SetAuthConfig.
+func (c *apiServiceClient) SetAuthConfig(ctx context.Context, req *v1.SetAuth) (*emptypb.Empty, error) {
+	response, err := c.setAuthConfig.CallUnary(ctx, connect.NewRequest(req))
+	if response != nil {
+		return response.Msg, err
+	}
+	return nil, err
+}
+
+// GetAuthConfig calls api.v1.ApiService.GetAuthConfig.
+func (c *apiServiceClient) GetAuthConfig(ctx context.Context, req *emptypb.Empty) (*v1.GetAuth, error) {
+	response, err := c.getAuthConfig.CallUnary(ctx, connect.NewRequest(req))
+	if response != nil {
+		return response.Msg, err
+	}
+	return nil, err
+}
+
 // ApiServiceHandler is an implementation of the api.v1.ApiService service.
 type ApiServiceHandler interface {
 	GetRedirect(context.Context, *v1.RedirectRequest) (*v1.Redirect, error)
@@ -262,6 +341,10 @@ type ApiServiceHandler interface {
 	DeleteDomain(context.Context, *v1.DomainRequest) (*emptypb.Empty, error)
 	PutDomain(context.Context, *v1.Domain) (*v1.Domain, error)
 	CreateDomain(context.Context, *v1.CreateDomainRequest) (*v1.Domain, error)
+	GetAuthStatus(context.Context, *emptypb.Empty) (*v1.AuthStatus, error)
+	Login(context.Context, *v1.BasicAuthLogin) (*emptypb.Empty, error)
+	SetAuthConfig(context.Context, *v1.SetAuth) (*emptypb.Empty, error)
+	GetAuthConfig(context.Context, *emptypb.Empty) (*v1.GetAuth, error)
 }
 
 // NewApiServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -331,6 +414,30 @@ func NewApiServiceHandler(svc ApiServiceHandler, opts ...connect.HandlerOption) 
 		connect.WithSchema(apiServiceMethods.ByName("CreateDomain")),
 		connect.WithHandlerOptions(opts...),
 	)
+	apiServiceGetAuthStatusHandler := connect.NewUnaryHandlerSimple(
+		ApiServiceGetAuthStatusProcedure,
+		svc.GetAuthStatus,
+		connect.WithSchema(apiServiceMethods.ByName("GetAuthStatus")),
+		connect.WithHandlerOptions(opts...),
+	)
+	apiServiceLoginHandler := connect.NewUnaryHandlerSimple(
+		ApiServiceLoginProcedure,
+		svc.Login,
+		connect.WithSchema(apiServiceMethods.ByName("Login")),
+		connect.WithHandlerOptions(opts...),
+	)
+	apiServiceSetAuthConfigHandler := connect.NewUnaryHandlerSimple(
+		ApiServiceSetAuthConfigProcedure,
+		svc.SetAuthConfig,
+		connect.WithSchema(apiServiceMethods.ByName("SetAuthConfig")),
+		connect.WithHandlerOptions(opts...),
+	)
+	apiServiceGetAuthConfigHandler := connect.NewUnaryHandlerSimple(
+		ApiServiceGetAuthConfigProcedure,
+		svc.GetAuthConfig,
+		connect.WithSchema(apiServiceMethods.ByName("GetAuthConfig")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/api.v1.ApiService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ApiServiceGetRedirectProcedure:
@@ -353,6 +460,14 @@ func NewApiServiceHandler(svc ApiServiceHandler, opts ...connect.HandlerOption) 
 			apiServicePutDomainHandler.ServeHTTP(w, r)
 		case ApiServiceCreateDomainProcedure:
 			apiServiceCreateDomainHandler.ServeHTTP(w, r)
+		case ApiServiceGetAuthStatusProcedure:
+			apiServiceGetAuthStatusHandler.ServeHTTP(w, r)
+		case ApiServiceLoginProcedure:
+			apiServiceLoginHandler.ServeHTTP(w, r)
+		case ApiServiceSetAuthConfigProcedure:
+			apiServiceSetAuthConfigHandler.ServeHTTP(w, r)
+		case ApiServiceGetAuthConfigProcedure:
+			apiServiceGetAuthConfigHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -400,4 +515,20 @@ func (UnimplementedApiServiceHandler) PutDomain(context.Context, *v1.Domain) (*v
 
 func (UnimplementedApiServiceHandler) CreateDomain(context.Context, *v1.CreateDomainRequest) (*v1.Domain, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.CreateDomain is not implemented"))
+}
+
+func (UnimplementedApiServiceHandler) GetAuthStatus(context.Context, *emptypb.Empty) (*v1.AuthStatus, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.GetAuthStatus is not implemented"))
+}
+
+func (UnimplementedApiServiceHandler) Login(context.Context, *v1.BasicAuthLogin) (*emptypb.Empty, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.Login is not implemented"))
+}
+
+func (UnimplementedApiServiceHandler) SetAuthConfig(context.Context, *v1.SetAuth) (*emptypb.Empty, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.SetAuthConfig is not implemented"))
+}
+
+func (UnimplementedApiServiceHandler) GetAuthConfig(context.Context, *emptypb.Empty) (*v1.GetAuth, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ApiService.GetAuthConfig is not implemented"))
 }

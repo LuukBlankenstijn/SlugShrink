@@ -12,7 +12,7 @@ func Open() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	if err := db.AutoMigrate(&models.RedirectModel{}, models.DomainModel{}); err != nil {
+	if err := db.AutoMigrate(&models.RedirectModel{}, models.DomainModel{}, &models.AuthConfigModel{}); err != nil {
 		return nil, err
 	}
 	return db, nil

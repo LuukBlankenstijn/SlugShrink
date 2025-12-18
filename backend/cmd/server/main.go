@@ -21,11 +21,13 @@ func main() {
 
 	redirectRepo := gormrepo.NewRedirectsRepo(database)
 	domainRepo := gormrepo.NewDomainsRepo(database)
+	authConfigRepo := gormrepo.NewAuthConfigRepo(database)
 
 	redirect := app.NewRedirects(redirectRepo)
 	domains := app.NewDomains(domainRepo)
+	authConfigs := app.NewAuthConfigs(authConfigRepo)
 
-	dashboardApi := dashboard.NewDashboardApi(redirect, domains)
+	dashboardApi := dashboard.NewDashboardApi(redirect, domains, authConfigs)
 	publicApi := public.NewPublicApi(redirect, domains)
 	g, _ := errgroup.WithContext(ctx)
 

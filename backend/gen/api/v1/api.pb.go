@@ -7,12 +7,10 @@
 package apiv1
 
 import (
-	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -23,627 +21,11 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type RedirectRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RedirectRequest) Reset() {
-	*x = RedirectRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RedirectRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RedirectRequest) ProtoMessage() {}
-
-func (x *RedirectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RedirectRequest.ProtoReflect.Descriptor instead.
-func (*RedirectRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *RedirectRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-type RedirectsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Pagesize      int32                  `protobuf:"varint,2,opt,name=pagesize,proto3" json:"pagesize,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RedirectsRequest) Reset() {
-	*x = RedirectsRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RedirectsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RedirectsRequest) ProtoMessage() {}
-
-func (x *RedirectsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RedirectsRequest.ProtoReflect.Descriptor instead.
-func (*RedirectsRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *RedirectsRequest) GetPage() int32 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *RedirectsRequest) GetPagesize() int32 {
-	if x != nil {
-		return x.Pagesize
-	}
-	return 0
-}
-
-type RedirectsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*FullRedirect        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RedirectsResponse) Reset() {
-	*x = RedirectsResponse{}
-	mi := &file_api_v1_api_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RedirectsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RedirectsResponse) ProtoMessage() {}
-
-func (x *RedirectsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RedirectsResponse.ProtoReflect.Descriptor instead.
-func (*RedirectsResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RedirectsResponse) GetData() []*FullRedirect {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-func (x *RedirectsResponse) GetTotal() int32 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-type Redirect struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	DomainId      string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
-	Path          string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
-	TargetUrl     string                 `protobuf:"bytes,4,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
-	Active        bool                   `protobuf:"varint,5,opt,name=active,proto3" json:"active,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Redirect) Reset() {
-	*x = Redirect{}
-	mi := &file_api_v1_api_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Redirect) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Redirect) ProtoMessage() {}
-
-func (x *Redirect) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Redirect.ProtoReflect.Descriptor instead.
-func (*Redirect) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Redirect) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *Redirect) GetDomainId() string {
-	if x != nil {
-		return x.DomainId
-	}
-	return ""
-}
-
-func (x *Redirect) GetPath() string {
-	if x != nil {
-		return x.Path
-	}
-	return ""
-}
-
-func (x *Redirect) GetTargetUrl() string {
-	if x != nil {
-		return x.TargetUrl
-	}
-	return ""
-}
-
-func (x *Redirect) GetActive() bool {
-	if x != nil {
-		return x.Active
-	}
-	return false
-}
-
-type FullRedirect struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	DomainId      string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
-	Domain        string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
-	TargetUrl     string                 `protobuf:"bytes,5,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
-	Active        bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FullRedirect) Reset() {
-	*x = FullRedirect{}
-	mi := &file_api_v1_api_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FullRedirect) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FullRedirect) ProtoMessage() {}
-
-func (x *FullRedirect) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FullRedirect.ProtoReflect.Descriptor instead.
-func (*FullRedirect) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *FullRedirect) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *FullRedirect) GetDomainId() string {
-	if x != nil {
-		return x.DomainId
-	}
-	return ""
-}
-
-func (x *FullRedirect) GetDomain() string {
-	if x != nil {
-		return x.Domain
-	}
-	return ""
-}
-
-func (x *FullRedirect) GetPath() string {
-	if x != nil {
-		return x.Path
-	}
-	return ""
-}
-
-func (x *FullRedirect) GetTargetUrl() string {
-	if x != nil {
-		return x.TargetUrl
-	}
-	return ""
-}
-
-func (x *FullRedirect) GetActive() bool {
-	if x != nil {
-		return x.Active
-	}
-	return false
-}
-
-type CreateRedirectRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DomainId      string                 `protobuf:"bytes,1,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
-	Path          string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	TargetUrl     string                 `protobuf:"bytes,3,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
-	Active        bool                   `protobuf:"varint,4,opt,name=active,proto3" json:"active,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateRedirectRequest) Reset() {
-	*x = CreateRedirectRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateRedirectRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateRedirectRequest) ProtoMessage() {}
-
-func (x *CreateRedirectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateRedirectRequest.ProtoReflect.Descriptor instead.
-func (*CreateRedirectRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *CreateRedirectRequest) GetDomainId() string {
-	if x != nil {
-		return x.DomainId
-	}
-	return ""
-}
-
-func (x *CreateRedirectRequest) GetPath() string {
-	if x != nil {
-		return x.Path
-	}
-	return ""
-}
-
-func (x *CreateRedirectRequest) GetTargetUrl() string {
-	if x != nil {
-		return x.TargetUrl
-	}
-	return ""
-}
-
-func (x *CreateRedirectRequest) GetActive() bool {
-	if x != nil {
-		return x.Active
-	}
-	return false
-}
-
-type DomainRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DomainRequest) Reset() {
-	*x = DomainRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DomainRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DomainRequest) ProtoMessage() {}
-
-func (x *DomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DomainRequest.ProtoReflect.Descriptor instead.
-func (*DomainRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *DomainRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-type DomainsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Domain              `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DomainsResponse) Reset() {
-	*x = DomainsResponse{}
-	mi := &file_api_v1_api_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DomainsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DomainsResponse) ProtoMessage() {}
-
-func (x *DomainsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DomainsResponse.ProtoReflect.Descriptor instead.
-func (*DomainsResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *DomainsResponse) GetData() []*Domain {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type Domain struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Domain        string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Domain) Reset() {
-	*x = Domain{}
-	mi := &file_api_v1_api_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Domain) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Domain) ProtoMessage() {}
-
-func (x *Domain) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Domain.ProtoReflect.Descriptor instead.
-func (*Domain) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *Domain) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *Domain) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *Domain) GetDomain() string {
-	if x != nil {
-		return x.Domain
-	}
-	return ""
-}
-
-type CreateDomainRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Domain        string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateDomainRequest) Reset() {
-	*x = CreateDomainRequest{}
-	mi := &file_api_v1_api_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateDomainRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateDomainRequest) ProtoMessage() {}
-
-func (x *CreateDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_api_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateDomainRequest.ProtoReflect.Descriptor instead.
-func (*CreateDomainRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_api_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *CreateDomainRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CreateDomainRequest) GetDomain() string {
-	if x != nil {
-		return x.Domain
-	}
-	return ""
-}
-
 var File_api_v1_api_proto protoreflect.FileDescriptor
 
 const file_api_v1_api_proto_rawDesc = "" +
 	"\n" +
-	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1bgoogle/protobuf/empty.proto\"+\n" +
-	"\x0fRedirectRequest\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"T\n" +
-	"\x10RedirectsRequest\x12\x1b\n" +
-	"\x04page\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x04page\x12#\n" +
-	"\bpagesize\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\bpagesize\"\\\n" +
-	"\x11RedirectsResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.api.v1.FullRedirectR\x04data\x12\x1d\n" +
-	"\x05total\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x05total\"\xad\x01\n" +
-	"\bRedirect\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12%\n" +
-	"\tdomain_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12\x1f\n" +
-	"\x04path\x18\x03 \x01(\tB\v\xbaH\br\x06:\x01/\x90\x01\x01R\x04path\x12'\n" +
-	"\n" +
-	"target_url\x18\x04 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x05 \x01(\bR\x06active\"\xf0\x01\n" +
-	"\fFullRedirect\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12%\n" +
-	"\tdomain_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12=\n" +
-	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain\x12\x1f\n" +
-	"\x04path\x18\x04 \x01(\tB\v\xbaH\br\x06:\x01/\x90\x01\x01R\x04path\x12'\n" +
-	"\n" +
-	"target_url\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x06 \x01(\bR\x06active\"\xa0\x01\n" +
-	"\x15CreateRedirectRequest\x12%\n" +
-	"\tdomain_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12\x1f\n" +
-	"\x04path\x18\x02 \x01(\tB\v\xbaH\br\x06:\x01/\x90\x01\x01R\x04path\x12'\n" +
-	"\n" +
-	"target_url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x04 \x01(\bR\x06active\")\n" +
-	"\rDomainRequest\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"5\n" +
-	"\x0fDomainsResponse\x12\"\n" +
-	"\x04data\x18\x01 \x03(\v2\x0e.api.v1.DomainR\x04data\"u\n" +
-	"\x06Domain\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
-	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain\"h\n" +
-	"\x13CreateDomainRequest\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
-	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain2\xf4\x04\n" +
+	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\xee\x06\n" +
 	"\n" +
 	"ApiService\x12:\n" +
 	"\vGetRedirect\x12\x17.api.v1.RedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12E\n" +
@@ -656,64 +38,64 @@ const file_api_v1_api_proto_rawDesc = "" +
 	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12?\n" +
 	"\fDeleteDomain\x12\x15.api.v1.DomainRequest\x1a\x16.google.protobuf.Empty\"\x00\x12-\n" +
 	"\tPutDomain\x12\x0e.api.v1.Domain\x1a\x0e.api.v1.Domain\"\x00\x12=\n" +
-	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x00B\x84\x01\n" +
+	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x00\x12A\n" +
+	"\rGetAuthStatus\x12\x16.google.protobuf.Empty\x1a\x12.api.v1.AuthStatus\"\x04\x88\xb5\x18\x01\x12=\n" +
+	"\x05Login\x12\x16.api.v1.BasicAuthLogin\x1a\x16.google.protobuf.Empty\"\x04\x88\xb5\x18\x01\x12:\n" +
+	"\rSetAuthConfig\x12\x0f.api.v1.SetAuth\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
+	"\rGetAuthConfig\x12\x16.google.protobuf.Empty\x1a\x0f.api.v1.GetAuth\"\x00B\x84\x01\n" +
 	"\n" +
 	"com.api.v1B\bApiProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
-var (
-	file_api_v1_api_proto_rawDescOnce sync.Once
-	file_api_v1_api_proto_rawDescData []byte
-)
-
-func file_api_v1_api_proto_rawDescGZIP() []byte {
-	file_api_v1_api_proto_rawDescOnce.Do(func() {
-		file_api_v1_api_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_v1_api_proto_rawDesc), len(file_api_v1_api_proto_rawDesc)))
-	})
-	return file_api_v1_api_proto_rawDescData
-}
-
-var file_api_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_v1_api_proto_goTypes = []any{
 	(*RedirectRequest)(nil),       // 0: api.v1.RedirectRequest
 	(*RedirectsRequest)(nil),      // 1: api.v1.RedirectsRequest
-	(*RedirectsResponse)(nil),     // 2: api.v1.RedirectsResponse
-	(*Redirect)(nil),              // 3: api.v1.Redirect
-	(*FullRedirect)(nil),          // 4: api.v1.FullRedirect
-	(*CreateRedirectRequest)(nil), // 5: api.v1.CreateRedirectRequest
-	(*DomainRequest)(nil),         // 6: api.v1.DomainRequest
-	(*DomainsResponse)(nil),       // 7: api.v1.DomainsResponse
-	(*Domain)(nil),                // 8: api.v1.Domain
-	(*CreateDomainRequest)(nil),   // 9: api.v1.CreateDomainRequest
-	(*emptypb.Empty)(nil),         // 10: google.protobuf.Empty
+	(*Redirect)(nil),              // 2: api.v1.Redirect
+	(*CreateRedirectRequest)(nil), // 3: api.v1.CreateRedirectRequest
+	(*DomainRequest)(nil),         // 4: api.v1.DomainRequest
+	(*emptypb.Empty)(nil),         // 5: google.protobuf.Empty
+	(*Domain)(nil),                // 6: api.v1.Domain
+	(*CreateDomainRequest)(nil),   // 7: api.v1.CreateDomainRequest
+	(*BasicAuthLogin)(nil),        // 8: api.v1.BasicAuthLogin
+	(*SetAuth)(nil),               // 9: api.v1.SetAuth
+	(*RedirectsResponse)(nil),     // 10: api.v1.RedirectsResponse
+	(*DomainsResponse)(nil),       // 11: api.v1.DomainsResponse
+	(*AuthStatus)(nil),            // 12: api.v1.AuthStatus
+	(*GetAuth)(nil),               // 13: api.v1.GetAuth
 }
 var file_api_v1_api_proto_depIdxs = []int32{
-	4,  // 0: api.v1.RedirectsResponse.data:type_name -> api.v1.FullRedirect
-	8,  // 1: api.v1.DomainsResponse.data:type_name -> api.v1.Domain
-	0,  // 2: api.v1.ApiService.GetRedirect:input_type -> api.v1.RedirectRequest
-	1,  // 3: api.v1.ApiService.GetRedirects:input_type -> api.v1.RedirectsRequest
-	0,  // 4: api.v1.ApiService.DeleteRedirect:input_type -> api.v1.RedirectRequest
-	3,  // 5: api.v1.ApiService.PutRedirect:input_type -> api.v1.Redirect
-	5,  // 6: api.v1.ApiService.CreateRedirect:input_type -> api.v1.CreateRedirectRequest
-	6,  // 7: api.v1.ApiService.GetDomain:input_type -> api.v1.DomainRequest
-	10, // 8: api.v1.ApiService.GetDomains:input_type -> google.protobuf.Empty
-	6,  // 9: api.v1.ApiService.DeleteDomain:input_type -> api.v1.DomainRequest
-	8,  // 10: api.v1.ApiService.PutDomain:input_type -> api.v1.Domain
-	9,  // 11: api.v1.ApiService.CreateDomain:input_type -> api.v1.CreateDomainRequest
-	3,  // 12: api.v1.ApiService.GetRedirect:output_type -> api.v1.Redirect
-	2,  // 13: api.v1.ApiService.GetRedirects:output_type -> api.v1.RedirectsResponse
-	10, // 14: api.v1.ApiService.DeleteRedirect:output_type -> google.protobuf.Empty
-	3,  // 15: api.v1.ApiService.PutRedirect:output_type -> api.v1.Redirect
-	3,  // 16: api.v1.ApiService.CreateRedirect:output_type -> api.v1.Redirect
-	8,  // 17: api.v1.ApiService.GetDomain:output_type -> api.v1.Domain
-	7,  // 18: api.v1.ApiService.GetDomains:output_type -> api.v1.DomainsResponse
-	10, // 19: api.v1.ApiService.DeleteDomain:output_type -> google.protobuf.Empty
-	8,  // 20: api.v1.ApiService.PutDomain:output_type -> api.v1.Domain
-	8,  // 21: api.v1.ApiService.CreateDomain:output_type -> api.v1.Domain
-	12, // [12:22] is the sub-list for method output_type
-	2,  // [2:12] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	0,  // 0: api.v1.ApiService.GetRedirect:input_type -> api.v1.RedirectRequest
+	1,  // 1: api.v1.ApiService.GetRedirects:input_type -> api.v1.RedirectsRequest
+	0,  // 2: api.v1.ApiService.DeleteRedirect:input_type -> api.v1.RedirectRequest
+	2,  // 3: api.v1.ApiService.PutRedirect:input_type -> api.v1.Redirect
+	3,  // 4: api.v1.ApiService.CreateRedirect:input_type -> api.v1.CreateRedirectRequest
+	4,  // 5: api.v1.ApiService.GetDomain:input_type -> api.v1.DomainRequest
+	5,  // 6: api.v1.ApiService.GetDomains:input_type -> google.protobuf.Empty
+	4,  // 7: api.v1.ApiService.DeleteDomain:input_type -> api.v1.DomainRequest
+	6,  // 8: api.v1.ApiService.PutDomain:input_type -> api.v1.Domain
+	7,  // 9: api.v1.ApiService.CreateDomain:input_type -> api.v1.CreateDomainRequest
+	5,  // 10: api.v1.ApiService.GetAuthStatus:input_type -> google.protobuf.Empty
+	8,  // 11: api.v1.ApiService.Login:input_type -> api.v1.BasicAuthLogin
+	9,  // 12: api.v1.ApiService.SetAuthConfig:input_type -> api.v1.SetAuth
+	5,  // 13: api.v1.ApiService.GetAuthConfig:input_type -> google.protobuf.Empty
+	2,  // 14: api.v1.ApiService.GetRedirect:output_type -> api.v1.Redirect
+	10, // 15: api.v1.ApiService.GetRedirects:output_type -> api.v1.RedirectsResponse
+	5,  // 16: api.v1.ApiService.DeleteRedirect:output_type -> google.protobuf.Empty
+	2,  // 17: api.v1.ApiService.PutRedirect:output_type -> api.v1.Redirect
+	2,  // 18: api.v1.ApiService.CreateRedirect:output_type -> api.v1.Redirect
+	6,  // 19: api.v1.ApiService.GetDomain:output_type -> api.v1.Domain
+	11, // 20: api.v1.ApiService.GetDomains:output_type -> api.v1.DomainsResponse
+	5,  // 21: api.v1.ApiService.DeleteDomain:output_type -> google.protobuf.Empty
+	6,  // 22: api.v1.ApiService.PutDomain:output_type -> api.v1.Domain
+	6,  // 23: api.v1.ApiService.CreateDomain:output_type -> api.v1.Domain
+	12, // 24: api.v1.ApiService.GetAuthStatus:output_type -> api.v1.AuthStatus
+	5,  // 25: api.v1.ApiService.Login:output_type -> google.protobuf.Empty
+	5,  // 26: api.v1.ApiService.SetAuthConfig:output_type -> google.protobuf.Empty
+	13, // 27: api.v1.ApiService.GetAuthConfig:output_type -> api.v1.GetAuth
+	14, // [14:28] is the sub-list for method output_type
+	0,  // [0:14] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_api_v1_api_proto_init() }
@@ -721,19 +103,22 @@ func file_api_v1_api_proto_init() {
 	if File_api_v1_api_proto != nil {
 		return
 	}
+	file_api_v1_auth_proto_init()
+	file_api_v1_domain_proto_init()
+	file_api_v1_options_proto_init()
+	file_api_v1_redirect_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_v1_api_proto_rawDesc), len(file_api_v1_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_api_v1_api_proto_goTypes,
 		DependencyIndexes: file_api_v1_api_proto_depIdxs,
-		MessageInfos:      file_api_v1_api_proto_msgTypes,
 	}.Build()
 	File_api_v1_api_proto = out.File
 	file_api_v1_api_proto_goTypes = nil
