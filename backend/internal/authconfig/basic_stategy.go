@@ -1,4 +1,4 @@
-package types
+package authconfig
 
 import (
 	"context"
@@ -8,11 +8,14 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
+	"github.com/LuukBlankenstijn/gewish/internal/utils"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
 
-var secretKey = []byte("your-secret-key")
+func getSecretkey() string {
+	return utils.EnvOrPanic("JWT_SECRET")
+}
 
 type JWTClaims struct {
 	LoggedIn         bool  `json:"logged_in"`
@@ -48,7 +51,7 @@ func (s *BasicStrategy) Authenticate(ctx context.Context, req connect.AnyRequest
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		return secretKey, nil
+		return getSecretkey(), nil
 	})
 
 	if err != nil || !token.Valid {
@@ -79,7 +82,7 @@ func (s *BasicStrategy) Login(password string) (string, error) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, sessionData)
-	tokenString, err := token.SignedString(secretKey)
+	tokenString, err := token.SignedString(getSecretkey())
 	if err != nil {
 		return "", errors.New("failed to generate token")
 	}

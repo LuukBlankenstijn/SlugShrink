@@ -3,8 +3,8 @@ package app
 import (
 	"context"
 
+	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
 	gormrepo "github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
-	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/types"
 )
 
 type AuthConfigs struct {
@@ -17,11 +17,11 @@ func NewAuthConfigs(repo *gormrepo.AuthConfigRepo) AuthConfigs {
 	}
 }
 
-func (a *AuthConfigs) Get(ctx context.Context) (types.AuthStrategy, error) {
+func (a *AuthConfigs) Get(ctx context.Context) (authconfig.AuthStrategy, error) {
 	return a.repo.Get(ctx)
 }
 
-func (a *AuthConfigs) Set(ctx context.Context, strategy types.AuthStrategy) error {
+func (a *AuthConfigs) Set(ctx context.Context, strategy authconfig.AuthStrategy) error {
 	return a.repo.Set(ctx, strategy)
 }
 
@@ -31,7 +31,7 @@ func (a *AuthConfigs) Login(ctx context.Context, password string) (string, error
 		return "", err
 	}
 	switch stategy := config.(type) {
-	case *types.BasicStrategy:
+	case *authconfig.BasicStrategy:
 		return stategy.Login(password)
 	default:
 		return "", nil

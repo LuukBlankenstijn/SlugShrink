@@ -1,2 +1,3 @@
 .cache
-db
+sqlite_db
+.env

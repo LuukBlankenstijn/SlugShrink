@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
+	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
 	models "github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
-	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/types"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
@@ -20,7 +20,7 @@ func NewAuthConfigRepo(db *gorm.DB) *AuthConfigRepo {
 	}
 }
 
-func (r *AuthConfigRepo) Set(context context.Context, strategy types.AuthStrategy) error {
+func (r *AuthConfigRepo) Set(context context.Context, strategy authconfig.AuthStrategy) error {
 	existing, err := r.repo.First(context)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return r.repo.Create(context, &models.AuthConfigModel{
@@ -47,11 +47,11 @@ func (r *AuthConfigRepo) Set(context context.Context, strategy types.AuthStrateg
 	})
 }
 
-func (r *AuthConfigRepo) Get(context context.Context) (types.AuthStrategy, error) {
+func (r *AuthConfigRepo) Get(context context.Context) (authconfig.AuthStrategy, error) {
 	var config models.AuthConfigModel
 	config, err := r.repo.First(context)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return types.AuthlessStrategy{}, nil
+		return authconfig.AuthlessStrategy{}, nil
 	}
 	if err != nil {
 		return nil, err

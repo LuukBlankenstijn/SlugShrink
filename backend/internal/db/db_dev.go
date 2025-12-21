@@ -1,3 +1,5 @@
+//go:build !prod
+
 package db
 
 import (
@@ -7,7 +9,7 @@ import (
 )
 
 func Open() (*gorm.DB, error) {
-	db, err := gorm.Open(sqlite.Open("./db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("./sqlite_db"), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}

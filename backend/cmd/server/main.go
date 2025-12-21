@@ -9,10 +9,16 @@ import (
 	gormrepo "github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
 	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard"
 	"github.com/LuukBlankenstijn/gewish/internal/transport/api/public"
+	"github.com/joho/godotenv"
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("No .env file found, using system environment variables")
+	}
+
 	ctx := context.Background()
 	database, err := db.Open()
 	if err != nil {

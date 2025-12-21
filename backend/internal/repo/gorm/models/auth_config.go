@@ -4,16 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/types"
+	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
 type AuthConfigModel struct {
 	BaseModel
-	Type        types.AuthStrategyType
+	Type        authconfig.AuthStrategyType
 	RawStrategy datatypes.JSON
-	Strategy    types.AuthStrategy `gorm:"-"`
+	Strategy    authconfig.AuthStrategy `gorm:"-"`
 }
 
 func (AuthConfigModel) TableName() string {
@@ -34,7 +34,7 @@ func (m *AuthConfigModel) BeforeSave(tx *gorm.DB) error {
 }
 
 func (m *AuthConfigModel) AfterFind(tx *gorm.DB) error {
-	factory := types.AuthStrategyFactories[m.Type]
+	factory := authconfig.AuthStrategyFactories[m.Type]
 	if factory == nil {
 		return fmt.Errorf("unknown auth strategy kind: %q", m.Type)
 	}

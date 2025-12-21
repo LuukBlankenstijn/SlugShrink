@@ -9,7 +9,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 
 	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
-	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/types"
+	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
 )
 
 func (s *DashboardApi) GetAuthStatus(ctx context.Context, _ *emptypb.Empty) (*apiv1.AuthStatus, error) {
@@ -51,14 +51,14 @@ func (s *DashboardApi) Login(ctx context.Context, login *apiv1.BasicAuthLogin) (
 }
 
 func (s *DashboardApi) SetAuthConfig(ctx context.Context, setAuth *apiv1.SetAuth) (*emptypb.Empty, error) {
-	var config types.AuthStrategy
+	var config authconfig.AuthStrategy
 	switch apiConfig := setAuth.Config.(type) {
 	case *apiv1.SetAuth_BasicAuth:
-		config = types.NewBasicStrategy(apiConfig.BasicAuth.Password)
+		config = authconfig.NewBasicStrategy(apiConfig.BasicAuth.Password)
 	case *apiv1.SetAuth_Authless:
-		config = types.AuthlessStrategy{}
+		config = authconfig.AuthlessStrategy{}
 	default:
-		config = types.AuthlessStrategy{}
+		config = authconfig.AuthlessStrategy{}
 	}
 	return &emptypb.Empty{}, s.authConfigs.Set(ctx, config)
 }
@@ -69,11 +69,11 @@ func (s *DashboardApi) GetAuthConfig(ctx context.Context, empty *emptypb.Empty) 
 		return nil, err
 	}
 	switch config.Type() {
-	case types.AuthStrategyAuthless:
+	case authconfig.AuthStrategyAuthless:
 		return &apiv1.GetAuth{
 			Config: &apiv1.GetAuth_Authless{},
 		}, nil
-	case types.AuthStrategyBasic:
+	case authconfig.AuthStrategyBasic:
 		return &apiv1.GetAuth{
 			Config: &apiv1.GetAuth_BasicAuth{},
 		}, nil
