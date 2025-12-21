@@ -16,14 +16,15 @@
 				page,
 				pagesize: pageSize
 			}),
-		placeholderData: () => ({ data: [], total: 0 }),
 		keepPreviousData: true
 	}));
 
 	const redirects = $derived(() => query.data?.data ?? []);
 	const total = $derived(() => query.data?.total ?? 0);
 	const totalPages = $derived(() => Math.max(1, Math.ceil(total() / pageSize)));
-	const placeholderRows = $derived(() => Array.from({ length: Math.max(4, Math.min(8, pageSize)) }));
+	const placeholderRows = $derived(() =>
+		Array.from({ length: Math.max(4, Math.min(8, pageSize)) })
+	);
 	const { openRedirectModal } = getContext<ModalControls>(MODAL_CONTEXT);
 
 	const authStatus = createQuery(authStatusQueryOptions);
@@ -88,7 +89,7 @@
 			</thead>
 			<tbody class="divide-y divide-white/10">
 				{#if query.isLoading || (query.isFetching && !redirects().length)}
-					{#each placeholderRows() as _, idx}
+					{#each placeholderRows()}
 						<tr class="animate-pulse">
 							<td class="px-4 py-3">
 								<div class="h-6 w-20 rounded-full bg-white/10"></div>
@@ -144,11 +145,32 @@
 									{r.path}
 								</span>
 							</td>
-							<td class="px-4 py-3">
-								<span class="block max-w-136 truncate text-slate-200" title={r.targetUrl}>
-									{r.targetUrl}
-								</span>
-							</td>
+					<td class="px-4 py-3">
+						<div class="flex items-center gap-2">
+							<span class="block max-w-136 truncate text-slate-200" title={r.targetUrl}>
+								{r.targetUrl}
+							</span>
+							<a
+								href={r.targetUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/40"
+								title="Open in new tab"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.6"
+									class="h-4 w-4"
+								>
+									<path d="M7 7h10v10" />
+									<path d="M7 17 17 7" />
+								</svg>
+							</a>
+						</div>
+					</td>
 							<td class="px-4 py-3 text-right">
 								<button
 									type="button"
