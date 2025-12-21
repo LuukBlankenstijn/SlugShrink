@@ -10,9 +10,9 @@ import (
 
 type RedirectModel struct {
 	BaseModel
-	DomainId  uuid.UUID
+	DomainId  uuid.UUID   `gorm:"uniqueIndex:idx_unique_target"`
 	Domain    DomainModel `gorm:"foreignKey:DomainId"`
-	Path      string
+	Path      string      `gorm:"uniqueIndex:idx_unique_target"`
 	TargetUrl string
 	Active    bool
 	Creator   *string `gorm:"->;<-:create"`

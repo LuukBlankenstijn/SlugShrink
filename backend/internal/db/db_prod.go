@@ -13,7 +13,9 @@ import (
 )
 
 func Open() (*gorm.DB, error) {
-	db, err := gorm.Open(postgres.Open(buildPostgresDSN()), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(buildPostgresDSN()), &gorm.Config{
+		TranslateError: true,
+	})
 	if err != nil {
 		return nil, err
 	}

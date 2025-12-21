@@ -2,11 +2,13 @@ package app
 
 import (
 	"context"
+	"errors"
 
 	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
 	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
 	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 type Redirects struct {
@@ -78,6 +80,12 @@ func (a *Redirects) Create(ctx context.Context, redirect *apiv1.CreateRedirectRe
 		TargetUrl: redirect.TargetUrl,
 		Active:    redirect.Active,
 	})
+	if errors.Is(err, gorm.ErrDuplicatedKey) {
+		return nil, errors.New("this domain/path combination already exists")
+	}
+	if err != nil {
+		return nil, err
+	}
 	return &apiv1.Redirect{
 		DomainId:  redirect.DomainId,
 		Path:      redirect.Path,
@@ -104,6 +112,12 @@ func (a *Redirects) Put(ctx context.Context, redirect *apiv1.Redirect) (*apiv1.R
 		TargetUrl: redirect.TargetUrl,
 		Active:    redirect.Active,
 	})
+	if errors.Is(err, gorm.ErrDuplicatedKey) {
+		return nil, errors.New("this domain/path combination already exists")
+	}
+	if err != nil {
+		return nil, err
+	}
 	return &apiv1.Redirect{
 		Id:        updatedModel.ID.String(),
 		DomainId:  updatedModel.DomainId.String(),

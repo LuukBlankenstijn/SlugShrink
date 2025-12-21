@@ -73,8 +73,8 @@
 	});
 </script>
 
-<div class="min-h-svh bg-slate-950 text-slate-100">
-	<div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10">
+<div class="min-h-svh bg-slate-950 text-slate-100 overflow-hidden">
+	<div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 min-h-svh overflow-y-auto">
 		<header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
 			<div class="space-y-2">
 				<div class="flex gap-4">

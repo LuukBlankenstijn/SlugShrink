@@ -76,7 +76,7 @@
 				? api.putRedirect({ id: current?.id ?? '', domainId, path, targetUrl, active })
 				: api.createRedirect({ domainId, path, targetUrl, active }),
 		onSuccess: async () => {
-			qc.invalidateQueries({ queryKey: queryKeys.redirects() });
+			qc.invalidateQueries({ queryKey: queryKeys.allRedirects() });
 			close();
 		},
 		onError: (e) => {
@@ -87,7 +87,7 @@
 	const deleteRedirect = createMutation(() => ({
 		mutationFn: ({ id }: { id: string }) => api.deleteRedirect({ id }),
 		onSuccess: async () => {
-			qc.invalidateQueries({ queryKey: queryKeys.redirects() });
+			qc.invalidateQueries({ queryKey: queryKeys.allRedirects() });
 			close();
 		},
 		onError: (e) => {

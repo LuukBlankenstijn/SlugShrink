@@ -9,7 +9,9 @@ import (
 )
 
 func Open() (*gorm.DB, error) {
-	db, err := gorm.Open(sqlite.Open("./sqlite_db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("./sqlite_db"), &gorm.Config{
+		TranslateError: true,
+	})
 	if err != nil {
 		return nil, err
 	}
