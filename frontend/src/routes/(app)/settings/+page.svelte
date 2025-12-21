@@ -7,13 +7,14 @@
 	import { queryKeys } from '$lib/queryKeys';
 	import ProxyAuthSettings from './proxyAuthSettings.svelte';
 	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { hasPermission } from '$lib/auth';
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { UserPermission } from '../../../gen/api/v1/auth_pb';
 	const authStatus = createQuery(authStatusQueryOptions);
 
 	$effect(() => {
-		if (authStatus.data && authStatus.data.permission !== UserPermission.PERMISSION_ADMIN) {
+		if (!hasPermission(authStatus.data, UserPermission.PERMISSION_ADMIN)) {
 			goto(resolve('/redirects'));
 		}
 	});

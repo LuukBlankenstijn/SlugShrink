@@ -15,10 +15,12 @@ service ApiService {
   rpc DeleteRedirect(RedirectRequest) returns (google.protobuf.Empty) {
     option (api.v1.permissions) = PERMISSION_SUPERUSER;
     option (api.v1.permissions) = PERMISSION_ADMIN;
+    option (api.v1.permissions) = PERMISSION_CREATOR;
   }
   rpc PutRedirect(Redirect) returns (Redirect) {
     option (api.v1.permissions) = PERMISSION_SUPERUSER;
     option (api.v1.permissions) = PERMISSION_ADMIN;
+    option (api.v1.permissions) = PERMISSION_CREATOR;
   }
 
   rpc GetDomain(DomainRequest) returns (Domain) {}

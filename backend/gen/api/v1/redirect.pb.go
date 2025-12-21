@@ -171,12 +171,14 @@ func (x *RedirectsResponse) GetTotal() int32 {
 }
 
 type Redirect struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	DomainId      string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
-	Path          string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
-	TargetUrl     string                 `protobuf:"bytes,4,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
-	Active        bool                   `protobuf:"varint,5,opt,name=active,proto3" json:"active,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Id        string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	DomainId  string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
+	Path      string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
+	TargetUrl string                 `protobuf:"bytes,4,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
+	Active    bool                   `protobuf:"varint,5,opt,name=active,proto3" json:"active,omitempty"`
+	// ignore, is set by backend
+	Creator       *string `protobuf:"bytes,6,opt,name=creator,proto3,oneof" json:"creator,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -246,14 +248,24 @@ func (x *Redirect) GetActive() bool {
 	return false
 }
 
+func (x *Redirect) GetCreator() string {
+	if x != nil && x.Creator != nil {
+		return *x.Creator
+	}
+	return ""
+}
+
 type FullRedirect struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	DomainId      string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
-	Domain        string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
-	TargetUrl     string                 `protobuf:"bytes,5,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
-	Active        bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Id        string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	DomainId  string                 `protobuf:"bytes,2,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
+	Domain    string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
+	Path      string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
+	TargetUrl string                 `protobuf:"bytes,5,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
+	Active    bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
+	// @gotags: json:"-"
+	// ignore, is set by backend
+	Creator       *string `protobuf:"bytes,7,opt,name=creator,proto3,oneof" json:"creator,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -330,12 +342,22 @@ func (x *FullRedirect) GetActive() bool {
 	return false
 }
 
+func (x *FullRedirect) GetCreator() string {
+	if x != nil && x.Creator != nil {
+		return *x.Creator
+	}
+	return ""
+}
+
 type CreateRedirectRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DomainId      string                 `protobuf:"bytes,1,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
-	Path          string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	TargetUrl     string                 `protobuf:"bytes,3,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
-	Active        bool                   `protobuf:"varint,4,opt,name=active,proto3" json:"active,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	DomainId  string                 `protobuf:"bytes,1,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
+	Path      string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	TargetUrl string                 `protobuf:"bytes,3,opt,name=target_url,json=targetUrl,proto3" json:"target_url,omitempty"`
+	Active    bool                   `protobuf:"varint,4,opt,name=active,proto3" json:"active,omitempty"`
+	// @gotags: json:"-"
+	// ignore, is set by backend
+	Creator       *string `protobuf:"bytes,5,opt,name=creator,proto3,oneof" json:"creator,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -398,11 +420,18 @@ func (x *CreateRedirectRequest) GetActive() bool {
 	return false
 }
 
+func (x *CreateRedirectRequest) GetCreator() string {
+	if x != nil && x.Creator != nil {
+		return *x.Creator
+	}
+	return ""
+}
+
 var File_api_v1_redirect_proto protoreflect.FileDescriptor
 
 const file_api_v1_redirect_proto_rawDesc = "" +
 	"\n" +
-	"\x15api/v1/redirect.proto\x12\x06api.v1\x1a\x1bbuf/validate/validate.proto\"+\n" +
+	"\x15api/v1/redirect.proto\x12\x06api.v1\x1a\x14api/v1/options.proto\x1a\x1bbuf/validate/validate.proto\"+\n" +
 	"\x0fRedirectRequest\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"T\n" +
 	"\x10RedirectsRequest\x12\x1b\n" +
@@ -410,14 +439,17 @@ const file_api_v1_redirect_proto_rawDesc = "" +
 	"\bpagesize\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\bpagesize\"\\\n" +
 	"\x11RedirectsResponse\x12(\n" +
 	"\x04data\x18\x01 \x03(\v2\x14.api.v1.FullRedirectR\x04data\x12\x1d\n" +
-	"\x05total\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x05total\"\xad\x01\n" +
-	"\bRedirect\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12%\n" +
+	"\x05total\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x05total\"\xdc\x01\n" +
+	"\bRedirect\x12\x1c\n" +
+	"\x02id\x18\x01 \x01(\tB\f\xbaH\x05r\x03\xb0\x01\x01\x88\xa6\x1d\x01R\x02id\x12%\n" +
 	"\tdomain_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12\x1f\n" +
 	"\x04path\x18\x03 \x01(\tB\v\xbaH\br\x06:\x01/\x90\x01\x01R\x04path\x12'\n" +
 	"\n" +
 	"target_url\x18\x04 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x05 \x01(\bR\x06active\"\xf0\x01\n" +
+	"\x06active\x18\x05 \x01(\bR\x06active\x12\x1d\n" +
+	"\acreator\x18\x06 \x01(\tH\x00R\acreator\x88\x01\x01B\n" +
+	"\n" +
+	"\b_creator\"\x9b\x02\n" +
 	"\fFullRedirect\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12%\n" +
 	"\tdomain_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12=\n" +
@@ -425,13 +457,19 @@ const file_api_v1_redirect_proto_rawDesc = "" +
 	"\x04path\x18\x04 \x01(\tB\v\xbaH\br\x06:\x01/\x90\x01\x01R\x04path\x12'\n" +
 	"\n" +
 	"target_url\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x06 \x01(\bR\x06active\"\xa0\x01\n" +
+	"\x06active\x18\x06 \x01(\bR\x06active\x12\x1d\n" +
+	"\acreator\x18\a \x01(\tH\x00R\acreator\x88\x01\x01B\n" +
+	"\n" +
+	"\b_creator\"\xcf\x01\n" +
 	"\x15CreateRedirectRequest\x12%\n" +
-	"\tdomain_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12\x1f\n" +
-	"\x04path\x18\x02 \x01(\tB\v\xbaH\br\x06:\x01/\x90\x01\x01R\x04path\x12'\n" +
+	"\tdomain_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bdomainId\x12#\n" +
+	"\x04path\x18\x02 \x01(\tB\x0f\xbaH\br\x06:\x01/\x90\x01\x01\x88\xa6\x1d\x01R\x04path\x12'\n" +
 	"\n" +
 	"target_url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\ttargetUrl\x12\x16\n" +
-	"\x06active\x18\x04 \x01(\bR\x06activeB\x89\x01\n" +
+	"\x06active\x18\x04 \x01(\bR\x06active\x12\x1d\n" +
+	"\acreator\x18\x05 \x01(\tH\x00R\acreator\x88\x01\x01B\n" +
+	"\n" +
+	"\b_creatorB\x89\x01\n" +
 	"\n" +
 	"com.api.v1B\rRedirectProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
@@ -470,6 +508,10 @@ func file_api_v1_redirect_proto_init() {
 	if File_api_v1_redirect_proto != nil {
 		return
 	}
+	file_api_v1_options_proto_init()
+	file_api_v1_redirect_proto_msgTypes[3].OneofWrappers = []any{}
+	file_api_v1_redirect_proto_msgTypes[4].OneofWrappers = []any{}
+	file_api_v1_redirect_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

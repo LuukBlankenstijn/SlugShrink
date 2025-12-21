@@ -9,3 +9,7 @@ extend google.protobuf.MethodOptions {
   bool skip_auth = 50001;
   repeated UserPermission permissions = 50002;
 }
+
+extend google.protobuf.FieldOptions {
+  bool is_redirect_id = 60001;
+}

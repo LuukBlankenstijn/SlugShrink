@@ -28,7 +28,7 @@ func (baseStrategy) setContext(ctx context.Context, permission UserPermission, u
 	})
 }
 
-func (baseStrategy) GetAuthState(ctx context.Context) (*authContext, bool) {
+func GetAuthState(ctx context.Context) (*authContext, bool) {
 	switch value := ctx.Value(authContextKey).(type) {
 	case authContext:
 		return &value, true

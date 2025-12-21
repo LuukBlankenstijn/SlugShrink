@@ -6,6 +6,7 @@
 	import { setContext } from 'svelte';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { hasPermission } from '$lib/auth';
 	import Modal from '$lib/Modal.svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
 	import RedirectForm from '$lib/RedirectForm.svelte';
@@ -90,7 +91,7 @@
 						{/if}
 					</a>
 
-					{#if authStatus.data && [UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(authStatus.data.permission)}
+					{#if hasPermission(authStatus.data, UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER)}
 						<a
 							href={resolve('/domains')}
 							class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"
@@ -105,7 +106,7 @@
 						</a>
 					{/if}
 
-					{#if authStatus.data && authStatus.data.permission === UserPermission.PERMISSION_ADMIN}
+					{#if hasPermission(authStatus.data, UserPermission.PERMISSION_ADMIN)}
 						<a
 							href={resolve('/settings')}
 							class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"

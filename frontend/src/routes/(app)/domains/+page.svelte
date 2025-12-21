@@ -8,14 +8,16 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { UserPermission } from '../../../gen/api/v1/auth_pb';
+	import { hasPermission } from '$lib/auth';
 
 	const authStatus = createQuery(authStatusQueryOptions);
 
 	$effect(() => {
 		if (
-			authStatus.data &&
-			![UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(
-				authStatus.data.permission
+			!hasPermission(
+				authStatus.data,
+				UserPermission.PERMISSION_ADMIN,
+				UserPermission.PERMISSION_SUPERUSER
 			)
 		) {
 			goto(resolve('/redirects'));
@@ -77,7 +79,7 @@
 						<td class="px-4 py-3 text-right">
 							<button
 								type="button"
-								class="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
+								class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white transition hover:border-white/25 hover:bg-white/12 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
 								onclick={() => openDomainModal(d)}
 							>
 								Edit

@@ -38,6 +38,14 @@ var file_api_v1_options_proto_extTypes = []protoimpl.ExtensionInfo{
 		Tag:           "varint,50002,rep,packed,name=permissions,enum=api.v1.UserPermission",
 		Filename:      "api/v1/options.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+		ExtensionType: (*bool)(nil),
+		Field:         60001,
+		Name:          "api.v1.is_redirect_id",
+		Tag:           "varint,60001,opt,name=is_redirect_id",
+		Filename:      "api/v1/options.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -48,28 +56,37 @@ var (
 	E_Permissions = &file_api_v1_options_proto_extTypes[1]
 )
 
+// Extension fields to descriptorpb.FieldOptions.
+var (
+	// optional bool is_redirect_id = 60001;
+	E_IsRedirectId = &file_api_v1_options_proto_extTypes[2]
+)
+
 var File_api_v1_options_proto protoreflect.FileDescriptor
 
 const file_api_v1_options_proto_rawDesc = "" +
 	"\n" +
 	"\x14api/v1/options.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a google/protobuf/descriptor.proto:=\n" +
 	"\tskip_auth\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\bR\bskipAuth:Z\n" +
-	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x03(\x0e2\x16.api.v1.UserPermissionR\vpermissionsB\x88\x01\n" +
+	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x03(\x0e2\x16.api.v1.UserPermissionR\vpermissions:E\n" +
+	"\x0eis_redirect_id\x12\x1d.google.protobuf.FieldOptions\x18\xe1\xd4\x03 \x01(\bR\fisRedirectIdB\x88\x01\n" +
 	"\n" +
 	"com.api.v1B\fOptionsProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var file_api_v1_options_proto_goTypes = []any{
 	(*descriptorpb.MethodOptions)(nil), // 0: google.protobuf.MethodOptions
-	(UserPermission)(0),                // 1: api.v1.UserPermission
+	(*descriptorpb.FieldOptions)(nil),  // 1: google.protobuf.FieldOptions
+	(UserPermission)(0),                // 2: api.v1.UserPermission
 }
 var file_api_v1_options_proto_depIdxs = []int32{
 	0, // 0: api.v1.skip_auth:extendee -> google.protobuf.MethodOptions
 	0, // 1: api.v1.permissions:extendee -> google.protobuf.MethodOptions
-	1, // 2: api.v1.permissions:type_name -> api.v1.UserPermission
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	2, // [2:3] is the sub-list for extension type_name
-	0, // [0:2] is the sub-list for extension extendee
+	1, // 2: api.v1.is_redirect_id:extendee -> google.protobuf.FieldOptions
+	2, // 3: api.v1.permissions:type_name -> api.v1.UserPermission
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	3, // [3:4] is the sub-list for extension type_name
+	0, // [0:3] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
@@ -86,7 +103,7 @@ func file_api_v1_options_proto_init() {
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_v1_options_proto_rawDesc), len(file_api_v1_options_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   0,
-			NumExtensions: 2,
+			NumExtensions: 3,
 			NumServices:   0,
 		},
 		GoTypes:           file_api_v1_options_proto_goTypes,

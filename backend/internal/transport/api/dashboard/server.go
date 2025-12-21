@@ -32,7 +32,7 @@ func (a *DashboardApi) Run() error {
 		connect.WithInterceptors(
 			interceptors.LoggingInterceptor(),
 			interceptors.AuthenticationInterceptor(a.authConfigs),
-			interceptors.AuthorizationInterceptor(a.authConfigs),
+			interceptors.AuthorizationInterceptor(a.authConfigs, a.redirects),
 			validate.NewInterceptor(),
 		),
 	)

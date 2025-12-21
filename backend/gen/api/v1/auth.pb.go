@@ -29,6 +29,7 @@ const (
 	UserPermission_PERMISSION_USER        UserPermission = 1
 	UserPermission_PERMISSION_SUPERUSER   UserPermission = 2
 	UserPermission_PERMISSION_ADMIN       UserPermission = 3
+	UserPermission_PERMISSION_CREATOR     UserPermission = 4
 )
 
 // Enum value maps for UserPermission.
@@ -38,12 +39,14 @@ var (
 		1: "PERMISSION_USER",
 		2: "PERMISSION_SUPERUSER",
 		3: "PERMISSION_ADMIN",
+		4: "PERMISSION_CREATOR",
 	}
 	UserPermission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED": 0,
 		"PERMISSION_USER":        1,
 		"PERMISSION_SUPERUSER":   2,
 		"PERMISSION_ADMIN":       3,
+		"PERMISSION_CREATOR":     4,
 	}
 )
 
@@ -854,12 +857,13 @@ const file_api_v1_auth_proto_rawDesc = "" +
 	"basic_auth\x18\x02 \x01(\v2\x11.api.v1.BasicAuthH\x00R\tbasicAuth\x122\n" +
 	"\n" +
 	"proxy_auth\x18\x03 \x01(\v2\x11.api.v1.ProxyAuthH\x00R\tproxyAuthB\b\n" +
-	"\x06config*q\n" +
+	"\x06config*\x89\x01\n" +
 	"\x0eUserPermission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fPERMISSION_USER\x10\x01\x12\x18\n" +
 	"\x14PERMISSION_SUPERUSER\x10\x02\x12\x14\n" +
-	"\x10PERMISSION_ADMIN\x10\x03B\x85\x01\n" +
+	"\x10PERMISSION_ADMIN\x10\x03\x12\x16\n" +
+	"\x12PERMISSION_CREATOR\x10\x04B\x85\x01\n" +
 	"\n" +
 	"com.api.v1B\tAuthProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 

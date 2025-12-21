@@ -30,6 +30,7 @@ func (a *Redirects) Get(ctx context.Context, id uuid.UUID) (*apiv1.Redirect, err
 		Path:      m.Path,
 		TargetUrl: m.TargetUrl,
 		Active:    m.Active,
+		Creator:   m.Creator,
 	}, nil
 }
 
@@ -51,6 +52,7 @@ func (a *Redirects) GetMany(ctx context.Context, pageData *apiv1.RedirectsReques
 			Path:      redirect.Path,
 			TargetUrl: redirect.TargetUrl,
 			Active:    redirect.Active,
+			Creator:   redirect.Creator,
 		})
 	}
 
@@ -82,6 +84,7 @@ func (a *Redirects) Create(ctx context.Context, redirect *apiv1.CreateRedirectRe
 		TargetUrl: redirect.TargetUrl,
 		Active:    redirect.Active,
 		Id:        newRedirect.ID.String(),
+		Creator:   newRedirect.Creator,
 	}, err
 }
 
@@ -113,4 +116,12 @@ func (a *Redirects) Put(ctx context.Context, redirect *apiv1.Redirect) (*apiv1.R
 func (a *Redirects) FindLocationByHostAndPath(ctx context.Context, host, path string) (string, error) {
 	redirect, err := a.repo.FindRedirectForHostAndPath(ctx, host, path)
 	return redirect.TargetUrl, err
+}
+
+func (a *Redirects) IsOwner(ctx context.Context, redirectID uuid.UUID, user string) bool {
+	return a.repo.CheckIsOwner(ctx, user, redirectID)
+}
+
+func (a *Redirects) CheckIsCreator(ctx context.Context, user string, id uuid.UUID) bool {
+	return a.repo.CheckIsOwner(ctx, user, id)
 }

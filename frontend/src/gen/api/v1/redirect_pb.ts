@@ -4,6 +4,7 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import { file_api_v1_options } from "./options_pb";
 import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -11,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/redirect.proto.
  */
 export const file_api_v1_redirect: GenFile = /*@__PURE__*/
-  fileDesc("ChVhcGkvdjEvcmVkaXJlY3QucHJvdG8SBmFwaS52MSInCg9SZWRpcmVjdFJlcXVlc3QSFAoCaWQYASABKAlCCLpIBXIDsAEBIkQKEFJlZGlyZWN0c1JlcXVlc3QSFQoEcGFnZRgBIAEoBUIHukgEGgIoABIZCghwYWdlc2l6ZRgCIAEoBUIHukgEGgIoACJPChFSZWRpcmVjdHNSZXNwb25zZRIiCgRkYXRhGAEgAygLMhQuYXBpLnYxLkZ1bGxSZWRpcmVjdBIWCgV0b3RhbBgCIAEoBUIHukgEGgIoACKGAQoIUmVkaXJlY3QSFAoCaWQYASABKAlCCLpIBXIDsAEBEhsKCWRvbWFpbl9pZBgCIAEoCUIIukgFcgOwAQESGQoEcGF0aBgDIAEoCUILukgIcgY6AS+QAQESHAoKdGFyZ2V0X3VybBgEIAEoCUIIukgFcgOIAQESDgoGYWN0aXZlGAUgASgIIsEBCgxGdWxsUmVkaXJlY3QSFAoCaWQYASABKAlCCLpIBXIDsAEBEhsKCWRvbWFpbl9pZBgCIAEoCUIIukgFcgOwAQESNQoGZG9tYWluGAMgASgJQiW6SCJyIDIeXlthLXpBLVowLTkuLV0rKDpbMC05XXsxLDV9KT8kEhkKBHBhdGgYBCABKAlCC7pICHIGOgEvkAEBEhwKCnRhcmdldF91cmwYBSABKAlCCLpIBXIDiAEBEg4KBmFjdGl2ZRgGIAEoCCJ9ChVDcmVhdGVSZWRpcmVjdFJlcXVlc3QSGwoJZG9tYWluX2lkGAEgASgJQgi6SAVyA7ABARIZCgRwYXRoGAIgASgJQgu6SAhyBjoBL5ABARIcCgp0YXJnZXRfdXJsGAMgASgJQgi6SAVyA4gBARIOCgZhY3RpdmUYBCABKAhCiQEKCmNvbS5hcGkudjFCDVJlZGlyZWN0UHJvdG9QAVozZ2l0aHViLmNvbS9MdXVrQmxhbmtlbnN0aWpuL2dld2lzaC9nZW4vYXBpL3YxO2FwaXYxogIDQVhYqgIGQXBpLlYxygIGQXBpXFYx4gISQXBpXFYxXEdQQk1ldGFkYXRh6gIHQXBpOjpWMWIGcHJvdG8z", [file_buf_validate_validate]);
+  fileDesc("ChVhcGkvdjEvcmVkaXJlY3QucHJvdG8SBmFwaS52MSInCg9SZWRpcmVjdFJlcXVlc3QSFAoCaWQYASABKAlCCLpIBXIDsAEBIkQKEFJlZGlyZWN0c1JlcXVlc3QSFQoEcGFnZRgBIAEoBUIHukgEGgIoABIZCghwYWdlc2l6ZRgCIAEoBUIHukgEGgIoACJPChFSZWRpcmVjdHNSZXNwb25zZRIiCgRkYXRhGAEgAygLMhQuYXBpLnYxLkZ1bGxSZWRpcmVjdBIWCgV0b3RhbBgCIAEoBUIHukgEGgIoACKsAQoIUmVkaXJlY3QSGAoCaWQYASABKAlCDLpIBXIDsAEBiKYdARIbCglkb21haW5faWQYAiABKAlCCLpIBXIDsAEBEhkKBHBhdGgYAyABKAlCC7pICHIGOgEvkAEBEhwKCnRhcmdldF91cmwYBCABKAlCCLpIBXIDiAEBEg4KBmFjdGl2ZRgFIAEoCBIUCgdjcmVhdG9yGAYgASgJSACIAQFCCgoIX2NyZWF0b3Ii4wEKDEZ1bGxSZWRpcmVjdBIUCgJpZBgBIAEoCUIIukgFcgOwAQESGwoJZG9tYWluX2lkGAIgASgJQgi6SAVyA7ABARI1CgZkb21haW4YAyABKAlCJbpIInIgMh5eW2EtekEtWjAtOS4tXSsoOlswLTldezEsNX0pPyQSGQoEcGF0aBgEIAEoCUILukgIcgY6AS+QAQESHAoKdGFyZ2V0X3VybBgFIAEoCUIIukgFcgOIAQESDgoGYWN0aXZlGAYgASgIEhQKB2NyZWF0b3IYByABKAlIAIgBAUIKCghfY3JlYXRvciKjAQoVQ3JlYXRlUmVkaXJlY3RSZXF1ZXN0EhsKCWRvbWFpbl9pZBgBIAEoCUIIukgFcgOwAQESHQoEcGF0aBgCIAEoCUIPukgIcgY6AS+QAQGIph0BEhwKCnRhcmdldF91cmwYAyABKAlCCLpIBXIDiAEBEg4KBmFjdGl2ZRgEIAEoCBIUCgdjcmVhdG9yGAUgASgJSACIAQFCCgoIX2NyZWF0b3JCiQEKCmNvbS5hcGkudjFCDVJlZGlyZWN0UHJvdG9QAVozZ2l0aHViLmNvbS9MdXVrQmxhbmtlbnN0aWpuL2dld2lzaC9nZW4vYXBpL3YxO2FwaXYxogIDQVhYqgIGQXBpLlYxygIGQXBpXFYx4gISQXBpXFYxXEdQQk1ldGFkYXRh6gIHQXBpOjpWMWIGcHJvdG8z", [file_api_v1_options, file_buf_validate_validate]);
 
 /**
  * @generated from message api.v1.RedirectRequest
@@ -102,6 +103,13 @@ export type Redirect = Message<"api.v1.Redirect"> & {
    * @generated from field: bool active = 5;
    */
   active: boolean;
+
+  /**
+   * ignore, is set by backend
+   *
+   * @generated from field: optional string creator = 6;
+   */
+  creator?: string;
 };
 
 /**
@@ -144,6 +152,14 @@ export type FullRedirect = Message<"api.v1.FullRedirect"> & {
    * @generated from field: bool active = 6;
    */
   active: boolean;
+
+  /**
+   * @gotags: json:"-"
+   * ignore, is set by backend
+   *
+   * @generated from field: optional string creator = 7;
+   */
+  creator?: string;
 };
 
 /**
@@ -176,6 +192,14 @@ export type CreateRedirectRequest = Message<"api.v1.CreateRedirectRequest"> & {
    * @generated from field: bool active = 4;
    */
   active: boolean;
+
+  /**
+   * @gotags: json:"-"
+   * ignore, is set by backend
+   *
+   * @generated from field: optional string creator = 5;
+   */
+  creator?: string;
 };
 
 /**

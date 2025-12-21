@@ -9,6 +9,7 @@ enum UserPermission {
   PERMISSION_USER = 1;
   PERMISSION_SUPERUSER = 2;
   PERMISSION_ADMIN = 3;
+  PERMISSION_CREATOR = 4;
 }
 
 message Authenticated {

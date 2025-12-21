@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	models "github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
@@ -36,7 +37,7 @@ func (r *RedirectRepo) FindRedirectForHostAndPath(context context.Context, host,
 	return redirect, err
 }
 
-func (r RedirectRepo) GetFullRedirects(context context.Context, page, pagesize int) ([]models.RedirectModel, int64, error) {
+func (r *RedirectRepo) GetFullRedirects(context context.Context, page, pagesize int) ([]models.RedirectModel, int64, error) {
 	found, err := r.repo.Preload("Domain", nil).Limit(pagesize).Offset((page - 1) * pagesize).Find(context)
 	if err != nil {
 		return []models.RedirectModel{}, 0, err
@@ -44,4 +45,9 @@ func (r RedirectRepo) GetFullRedirects(context context.Context, page, pagesize i
 	count, err := r.repo.Count(context, "id")
 
 	return found, count, err
+}
+
+func (r *RedirectRepo) CheckIsOwner(context context.Context, user string, id uuid.UUID) bool {
+	found, err := r.repo.Where("id = ?", id.String()).First(context)
+	return err == nil && found.Creator != nil && *found.Creator == user
 }

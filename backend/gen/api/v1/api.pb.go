@@ -25,14 +25,14 @@ var File_api_v1_api_proto protoreflect.FileDescriptor
 
 const file_api_v1_api_proto_rawDesc = "" +
 	"\n" +
-	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\x96\a\n" +
+	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\x98\a\n" +
 	"\n" +
 	"ApiService\x12:\n" +
 	"\vGetRedirect\x12\x17.api.v1.RedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12E\n" +
 	"\fGetRedirects\x12\x18.api.v1.RedirectsRequest\x1a\x19.api.v1.RedirectsResponse\"\x00\x12C\n" +
-	"\x0eCreateRedirect\x12\x1d.api.v1.CreateRedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12I\n" +
-	"\x0eDeleteRedirect\x12\x17.api.v1.RedirectRequest\x1a\x16.google.protobuf.Empty\"\x06\x92\xb5\x18\x02\x02\x03\x129\n" +
-	"\vPutRedirect\x12\x10.api.v1.Redirect\x1a\x10.api.v1.Redirect\"\x06\x92\xb5\x18\x02\x02\x03\x124\n" +
+	"\x0eCreateRedirect\x12\x1d.api.v1.CreateRedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12J\n" +
+	"\x0eDeleteRedirect\x12\x17.api.v1.RedirectRequest\x1a\x16.google.protobuf.Empty\"\a\x92\xb5\x18\x03\x02\x03\x04\x12:\n" +
+	"\vPutRedirect\x12\x10.api.v1.Redirect\x1a\x10.api.v1.Redirect\"\a\x92\xb5\x18\x03\x02\x03\x04\x124\n" +
 	"\tGetDomain\x12\x15.api.v1.DomainRequest\x1a\x0e.api.v1.Domain\"\x00\x12?\n" +
 	"\n" +
 	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12E\n" +

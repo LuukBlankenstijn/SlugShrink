@@ -14,11 +14,7 @@ import (
 )
 
 func (s *DashboardApi) GetAuthStatus(ctx context.Context, _ *emptypb.Empty) (*apiv1.AuthStatus, error) {
-	config, err := s.authConfigs.Get(ctx)
-	if err != nil {
-		return nil, err
-	}
-	contextValue, isAuthenticated := config.GetAuthState(ctx)
+	contextValue, isAuthenticated := authconfig.GetAuthState(ctx)
 	if !isAuthenticated {
 		return &apiv1.AuthStatus{
 			Status: &apiv1.AuthStatus_Unauthenticated{

@@ -16,6 +16,14 @@
 	const { openRedirectModal } = getContext<ModalControls>(MODAL_CONTEXT);
 
 	const authStatus = createQuery(authStatusQueryOptions);
+
+	const canEdit = (creator?: string) => {
+		return (
+			authStatus.data &&
+			(authStatus.data.userId === creator ||
+				!(authStatus.data.permission === UserPermission.PERMISSION_USER))
+		);
+	};
 </script>
 
 <svelte:head>
@@ -43,9 +51,7 @@
 					<th class="px-4 py-3">Domain</th>
 					<th class="px-4 py-3">Path</th>
 					<th class="px-4 py-3">Target</th>
-					{#if authStatus.data && [UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(authStatus.data.permission)}
-						<th class="px-4 py-3"></th>
-					{/if}
+					<th class="px-4 py-3"></th>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-white/10">
@@ -90,17 +96,17 @@
 								{r.targetUrl}
 							</span>
 						</td>
-						{#if authStatus.data && [UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(authStatus.data.permission)}
-							<td class="px-4 py-3 text-right">
-								<button
-									type="button"
-									class="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
-									onclick={() => openRedirectModal(r)}
-								>
-									Edit
-								</button>
-							</td>
-						{/if}
+						<td class="px-4 py-3 text-right">
+							<button
+								type="button"
+								class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white transition focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none enabled:border-white/25 enabled:hover:bg-white/12 disabled:cursor-not-allowed disabled:opacity-50"
+								onclick={() => openRedirectModal(r)}
+								title={canEdit(r.creator) ? '' : 'You are not the owner of this redirect'}
+								disabled={!canEdit(r.creator)}
+							>
+								Edit
+							</button>
+						</td>
 					</tr>
 				{/each}
 			</tbody>

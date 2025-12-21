@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package api.v1;
 
+import "api/v1/options.proto";
 import "buf/validate/validate.proto";
 
 message RedirectRequest {
@@ -19,7 +20,10 @@ message RedirectsResponse {
 }
 
 message Redirect {
-  string id = 1 [(buf.validate.field).string.uuid = true];
+  string id = 1 [
+    (buf.validate.field).string.uuid = true,
+    (api.v1.is_redirect_id) = true
+  ];
   string domain_id = 2 [(buf.validate.field).string.uuid = true];
   string path = 3 [
     (buf.validate.field).string.uri_ref = true,
@@ -27,6 +31,9 @@ message Redirect {
   ];
   string target_url = 4 [(buf.validate.field).string.uri = true];
   bool active = 5;
+
+  // ignore, is set by backend
+  optional string creator = 6;
 }
 
 message FullRedirect {
@@ -39,14 +46,23 @@ message FullRedirect {
   ];
   string target_url = 5 [(buf.validate.field).string.uri = true];
   bool active = 6;
+
+  // @gotags: json:"-"
+  // ignore, is set by backend
+  optional string creator = 7;
 }
 
 message CreateRedirectRequest {
   string domain_id = 1 [(buf.validate.field).string.uuid = true];
   string path = 2 [
     (buf.validate.field).string.uri_ref = true,
-    (buf.validate.field).string.prefix = "/"
+    (buf.validate.field).string.prefix = "/",
+    (api.v1.is_redirect_id) = true
   ];
   string target_url = 3 [(buf.validate.field).string.uri = true];
   bool active = 4;
+
+  // @gotags: json:"-"
+  // ignore, is set by backend
+  optional string creator = 5;
 }
