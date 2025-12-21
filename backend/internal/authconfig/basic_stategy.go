@@ -26,10 +26,9 @@ type JWTClaims struct {
 }
 
 type BasicStrategy struct {
+	baseStrategy
 	PasswordHash []byte `json:"password"`
 }
-
-const basicAuthContextKey contextKey = "basic_auth"
 
 func (BasicStrategy) Type() AuthStrategyType { return AuthStrategyBasic }
 
@@ -59,14 +58,8 @@ func (s *BasicStrategy) Authenticate(ctx context.Context, req connect.AnyRequest
 	if err != nil || !token.Valid {
 		return ctx, errors.New("invalid token")
 	}
-	ctx = context.WithValue(ctx, basicAuthContextKey, true)
+	ctx = s.setContext(ctx, Admin, nil)
 	return ctx, nil
-}
-
-func (*BasicStrategy) IsAuthenticated(ctx context.Context) bool {
-	value, ok := ctx.Value(basicAuthContextKey).(bool)
-	return value && ok
-
 }
 
 func (s *BasicStrategy) Login(password string) (string, error) {

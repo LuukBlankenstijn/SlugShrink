@@ -4,6 +4,8 @@
 	import { getContext } from 'svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
 	import { queryKeys } from '$lib/queryKeys';
+	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { UserPermission } from '../../../gen/api/v1/auth_pb';
 
 	const query = createQuery(() => ({
 		queryKey: queryKeys.redirects(),
@@ -12,6 +14,8 @@
 
 	const redirects = $derived(() => query.data?.data ?? []);
 	const { openRedirectModal } = getContext<ModalControls>(MODAL_CONTEXT);
+
+	const authStatus = createQuery(authStatusQueryOptions);
 </script>
 
 <svelte:head>
@@ -39,7 +43,9 @@
 					<th class="px-4 py-3">Domain</th>
 					<th class="px-4 py-3">Path</th>
 					<th class="px-4 py-3">Target</th>
-					<th class="px-4 py-3"></th>
+					{#if authStatus.data && [UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(authStatus.data.permission)}
+						<th class="px-4 py-3"></th>
+					{/if}
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-white/10">
@@ -84,15 +90,17 @@
 								{r.targetUrl}
 							</span>
 						</td>
-						<td class="px-4 py-3 text-right">
-							<button
-								type="button"
-								class="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
-								onclick={() => openRedirectModal(r)}
-							>
-								Edit
-							</button>
-						</td>
+						{#if authStatus.data && [UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(authStatus.data.permission)}
+							<td class="px-4 py-3 text-right">
+								<button
+									type="button"
+									class="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
+									onclick={() => openRedirectModal(r)}
+								>
+									Edit
+								</button>
+							</td>
+						{/if}
 					</tr>
 				{/each}
 			</tbody>

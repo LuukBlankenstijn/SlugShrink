@@ -30,32 +30,46 @@ var file_api_v1_options_proto_extTypes = []protoimpl.ExtensionInfo{
 		Tag:           "varint,50001,opt,name=skip_auth",
 		Filename:      "api/v1/options.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: ([]UserPermission)(nil),
+		Field:         50002,
+		Name:          "api.v1.permissions",
+		Tag:           "varint,50002,rep,packed,name=permissions,enum=api.v1.UserPermission",
+		Filename:      "api/v1/options.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
 	// optional bool skip_auth = 50001;
 	E_SkipAuth = &file_api_v1_options_proto_extTypes[0]
+	// repeated api.v1.UserPermission permissions = 50002;
+	E_Permissions = &file_api_v1_options_proto_extTypes[1]
 )
 
 var File_api_v1_options_proto protoreflect.FileDescriptor
 
 const file_api_v1_options_proto_rawDesc = "" +
 	"\n" +
-	"\x14api/v1/options.proto\x12\x06api.v1\x1a google/protobuf/descriptor.proto:=\n" +
-	"\tskip_auth\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\bR\bskipAuthB\x88\x01\n" +
+	"\x14api/v1/options.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a google/protobuf/descriptor.proto:=\n" +
+	"\tskip_auth\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\bR\bskipAuth:Z\n" +
+	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x03(\x0e2\x16.api.v1.UserPermissionR\vpermissionsB\x88\x01\n" +
 	"\n" +
 	"com.api.v1B\fOptionsProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var file_api_v1_options_proto_goTypes = []any{
 	(*descriptorpb.MethodOptions)(nil), // 0: google.protobuf.MethodOptions
+	(UserPermission)(0),                // 1: api.v1.UserPermission
 }
 var file_api_v1_options_proto_depIdxs = []int32{
 	0, // 0: api.v1.skip_auth:extendee -> google.protobuf.MethodOptions
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	0, // [0:1] is the sub-list for extension extendee
+	0, // 1: api.v1.permissions:extendee -> google.protobuf.MethodOptions
+	1, // 2: api.v1.permissions:type_name -> api.v1.UserPermission
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	2, // [2:3] is the sub-list for extension type_name
+	0, // [0:2] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
@@ -64,6 +78,7 @@ func file_api_v1_options_proto_init() {
 	if File_api_v1_options_proto != nil {
 		return
 	}
+	file_api_v1_auth_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
@@ -71,7 +86,7 @@ func file_api_v1_options_proto_init() {
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_v1_options_proto_rawDesc), len(file_api_v1_options_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   0,
-			NumExtensions: 1,
+			NumExtensions: 2,
 			NumServices:   0,
 		},
 		GoTypes:           file_api_v1_options_proto_goTypes,

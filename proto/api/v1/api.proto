@@ -11,15 +11,30 @@ import "google/protobuf/empty.proto";
 service ApiService {
   rpc GetRedirect(RedirectRequest) returns (Redirect) {}
   rpc GetRedirects(RedirectsRequest) returns (RedirectsResponse) {}
-  rpc DeleteRedirect(RedirectRequest) returns (google.protobuf.Empty) {}
-  rpc PutRedirect(Redirect) returns (Redirect) {}
   rpc CreateRedirect(CreateRedirectRequest) returns (Redirect) {}
+  rpc DeleteRedirect(RedirectRequest) returns (google.protobuf.Empty) {
+    option (api.v1.permissions) = PERMISSION_SUPERUSER;
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
+  rpc PutRedirect(Redirect) returns (Redirect) {
+    option (api.v1.permissions) = PERMISSION_SUPERUSER;
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
 
   rpc GetDomain(DomainRequest) returns (Domain) {}
   rpc GetDomains(google.protobuf.Empty) returns (DomainsResponse) {}
-  rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {}
-  rpc PutDomain(Domain) returns (Domain) {}
-  rpc CreateDomain(CreateDomainRequest) returns (Domain) {}
+  rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {
+    option (api.v1.permissions) = PERMISSION_SUPERUSER;
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
+  rpc PutDomain(Domain) returns (Domain) {
+    option (api.v1.permissions) = PERMISSION_SUPERUSER;
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
+  rpc CreateDomain(CreateDomainRequest) returns (Domain) {
+    option (api.v1.permissions) = PERMISSION_SUPERUSER;
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
 
   rpc GetAuthStatus(google.protobuf.Empty) returns (AuthStatus) {
     option (api.v1.skip_auth) = true;
@@ -27,6 +42,10 @@ service ApiService {
   rpc Login(BasicAuthLogin) returns (google.protobuf.Empty) {
     option (api.v1.skip_auth) = true;
   }
-  rpc SetAuthConfig(SetAuth) returns (google.protobuf.Empty) {}
-  rpc GetAuthConfig(google.protobuf.Empty) returns (GetAuth) {}
+  rpc SetAuthConfig(SetAuth) returns (google.protobuf.Empty) {
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
+  rpc GetAuthConfig(google.protobuf.Empty) returns (GetAuth) {
+    option (api.v1.permissions) = PERMISSION_ADMIN;
+  }
 }

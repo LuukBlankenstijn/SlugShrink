@@ -1,0 +1,17 @@
+log:
+  level: DEBUG
+
+entryPoints:
+  port8091:
+    address: ":8091"
+  port8092:
+    address: ":8092"
+  port8093:
+    address: ":8093"
+  port8094:
+    address: ":8094"
+
+providers:
+  file:
+    filename: /etc/traefik/dynamic.yaml
+    watch: true

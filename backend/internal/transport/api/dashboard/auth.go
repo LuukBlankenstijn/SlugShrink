@@ -3,6 +3,7 @@ package dashboard
 import (
 	"context"
 	"errors"
+	"log/slog"
 	"net/http"
 
 	"connectrpc.com/connect"
@@ -17,9 +18,32 @@ func (s *DashboardApi) GetAuthStatus(ctx context.Context, _ *emptypb.Empty) (*ap
 	if err != nil {
 		return nil, err
 	}
-	return &apiv1.AuthStatus{
-		Authenticated: config.IsAuthenticated(ctx),
-	}, nil
+	contextValue, isAuthenticated := config.GetAuthState(ctx)
+	if !isAuthenticated {
+		return &apiv1.AuthStatus{
+			Status: &apiv1.AuthStatus_Unauthenticated{
+				Unauthenticated: &apiv1.Unauthenticated{},
+			},
+		}, nil
+	} else {
+		var permission apiv1.UserPermission
+		switch contextValue.UserPermission {
+		case authconfig.Admin:
+			permission = apiv1.UserPermission_PERMISSION_ADMIN
+		case authconfig.SuperUser:
+			permission = apiv1.UserPermission_PERMISSION_SUPERUSER
+		default:
+			permission = apiv1.UserPermission_PERMISSION_USER
+		}
+		return &apiv1.AuthStatus{
+			Status: &apiv1.AuthStatus_Authenticated{
+				Authenticated: &apiv1.Authenticated{
+					Permission: permission,
+					UserId:     contextValue.UserId,
+				},
+			},
+		}, nil
+	}
 }
 
 func (s *DashboardApi) Login(ctx context.Context, login *apiv1.BasicAuthLogin) (*emptypb.Empty, error) {
@@ -57,6 +81,14 @@ func (s *DashboardApi) SetAuthConfig(ctx context.Context, setAuth *apiv1.SetAuth
 		config = authconfig.NewBasicStrategy(apiConfig.BasicAuth.Password)
 	case *apiv1.SetAuth_Authless:
 		config = authconfig.AuthlessStrategy{}
+	case *apiv1.SetAuth_ProxyAuth:
+		config = authconfig.NewProxyStrategy(
+			apiConfig.ProxyAuth.GroupHeader,
+			apiConfig.ProxyAuth.UserIdHeader,
+			apiConfig.ProxyAuth.SuperUserGroups,
+			apiConfig.ProxyAuth.AdminGroups,
+			apiConfig.ProxyAuth.GroupsSeparator,
+		)
 	default:
 		config = authconfig.AuthlessStrategy{}
 	}
@@ -77,6 +109,24 @@ func (s *DashboardApi) GetAuthConfig(ctx context.Context, empty *emptypb.Empty) 
 		return &apiv1.GetAuth{
 			Config: &apiv1.GetAuth_BasicAuth{},
 		}, nil
+	case authconfig.AuthStrategyProxy:
+		config, ok := config.(*authconfig.ProxyStrategy)
+		if !ok {
+			slog.Error("config value does not match config type")
+			return nil, connect.NewError(connect.CodeInternal, nil)
+		}
+		return &apiv1.GetAuth{
+			Config: &apiv1.GetAuth_ProxyAuth{
+				ProxyAuth: &apiv1.ProxyAuth{
+					GroupHeader:     config.GroupHeader,
+					UserIdHeader:    config.UserIdHeader,
+					SuperUserGroups: config.SuperUserGroups,
+					AdminGroups:     config.AdminGroups,
+					GroupsSeparator: config.GroupSeparator,
+				},
+			},
+		}, nil
+
 	default:
 		return nil, errors.New("unknow auth type")
 	}

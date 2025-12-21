@@ -25,32 +25,32 @@ var File_api_v1_api_proto protoreflect.FileDescriptor
 
 const file_api_v1_api_proto_rawDesc = "" +
 	"\n" +
-	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\xee\x06\n" +
+	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\x96\a\n" +
 	"\n" +
 	"ApiService\x12:\n" +
 	"\vGetRedirect\x12\x17.api.v1.RedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12E\n" +
 	"\fGetRedirects\x12\x18.api.v1.RedirectsRequest\x1a\x19.api.v1.RedirectsResponse\"\x00\x12C\n" +
-	"\x0eDeleteRedirect\x12\x17.api.v1.RedirectRequest\x1a\x16.google.protobuf.Empty\"\x00\x123\n" +
-	"\vPutRedirect\x12\x10.api.v1.Redirect\x1a\x10.api.v1.Redirect\"\x00\x12C\n" +
-	"\x0eCreateRedirect\x12\x1d.api.v1.CreateRedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x124\n" +
+	"\x0eCreateRedirect\x12\x1d.api.v1.CreateRedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12I\n" +
+	"\x0eDeleteRedirect\x12\x17.api.v1.RedirectRequest\x1a\x16.google.protobuf.Empty\"\x06\x92\xb5\x18\x02\x02\x03\x129\n" +
+	"\vPutRedirect\x12\x10.api.v1.Redirect\x1a\x10.api.v1.Redirect\"\x06\x92\xb5\x18\x02\x02\x03\x124\n" +
 	"\tGetDomain\x12\x15.api.v1.DomainRequest\x1a\x0e.api.v1.Domain\"\x00\x12?\n" +
 	"\n" +
-	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12?\n" +
-	"\fDeleteDomain\x12\x15.api.v1.DomainRequest\x1a\x16.google.protobuf.Empty\"\x00\x12-\n" +
-	"\tPutDomain\x12\x0e.api.v1.Domain\x1a\x0e.api.v1.Domain\"\x00\x12=\n" +
-	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x00\x12A\n" +
+	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12E\n" +
+	"\fDeleteDomain\x12\x15.api.v1.DomainRequest\x1a\x16.google.protobuf.Empty\"\x06\x92\xb5\x18\x02\x02\x03\x123\n" +
+	"\tPutDomain\x12\x0e.api.v1.Domain\x1a\x0e.api.v1.Domain\"\x06\x92\xb5\x18\x02\x02\x03\x12C\n" +
+	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x06\x92\xb5\x18\x02\x02\x03\x12A\n" +
 	"\rGetAuthStatus\x12\x16.google.protobuf.Empty\x1a\x12.api.v1.AuthStatus\"\x04\x88\xb5\x18\x01\x12=\n" +
-	"\x05Login\x12\x16.api.v1.BasicAuthLogin\x1a\x16.google.protobuf.Empty\"\x04\x88\xb5\x18\x01\x12:\n" +
-	"\rSetAuthConfig\x12\x0f.api.v1.SetAuth\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
-	"\rGetAuthConfig\x12\x16.google.protobuf.Empty\x1a\x0f.api.v1.GetAuth\"\x00B\x84\x01\n" +
+	"\x05Login\x12\x16.api.v1.BasicAuthLogin\x1a\x16.google.protobuf.Empty\"\x04\x88\xb5\x18\x01\x12?\n" +
+	"\rSetAuthConfig\x12\x0f.api.v1.SetAuth\x1a\x16.google.protobuf.Empty\"\x05\x92\xb5\x18\x01\x03\x12?\n" +
+	"\rGetAuthConfig\x12\x16.google.protobuf.Empty\x1a\x0f.api.v1.GetAuth\"\x05\x92\xb5\x18\x01\x03B\x84\x01\n" +
 	"\n" +
 	"com.api.v1B\bApiProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var file_api_v1_api_proto_goTypes = []any{
 	(*RedirectRequest)(nil),       // 0: api.v1.RedirectRequest
 	(*RedirectsRequest)(nil),      // 1: api.v1.RedirectsRequest
-	(*Redirect)(nil),              // 2: api.v1.Redirect
-	(*CreateRedirectRequest)(nil), // 3: api.v1.CreateRedirectRequest
+	(*CreateRedirectRequest)(nil), // 2: api.v1.CreateRedirectRequest
+	(*Redirect)(nil),              // 3: api.v1.Redirect
 	(*DomainRequest)(nil),         // 4: api.v1.DomainRequest
 	(*emptypb.Empty)(nil),         // 5: google.protobuf.Empty
 	(*Domain)(nil),                // 6: api.v1.Domain
@@ -65,9 +65,9 @@ var file_api_v1_api_proto_goTypes = []any{
 var file_api_v1_api_proto_depIdxs = []int32{
 	0,  // 0: api.v1.ApiService.GetRedirect:input_type -> api.v1.RedirectRequest
 	1,  // 1: api.v1.ApiService.GetRedirects:input_type -> api.v1.RedirectsRequest
-	0,  // 2: api.v1.ApiService.DeleteRedirect:input_type -> api.v1.RedirectRequest
-	2,  // 3: api.v1.ApiService.PutRedirect:input_type -> api.v1.Redirect
-	3,  // 4: api.v1.ApiService.CreateRedirect:input_type -> api.v1.CreateRedirectRequest
+	2,  // 2: api.v1.ApiService.CreateRedirect:input_type -> api.v1.CreateRedirectRequest
+	0,  // 3: api.v1.ApiService.DeleteRedirect:input_type -> api.v1.RedirectRequest
+	3,  // 4: api.v1.ApiService.PutRedirect:input_type -> api.v1.Redirect
 	4,  // 5: api.v1.ApiService.GetDomain:input_type -> api.v1.DomainRequest
 	5,  // 6: api.v1.ApiService.GetDomains:input_type -> google.protobuf.Empty
 	4,  // 7: api.v1.ApiService.DeleteDomain:input_type -> api.v1.DomainRequest
@@ -77,11 +77,11 @@ var file_api_v1_api_proto_depIdxs = []int32{
 	8,  // 11: api.v1.ApiService.Login:input_type -> api.v1.BasicAuthLogin
 	9,  // 12: api.v1.ApiService.SetAuthConfig:input_type -> api.v1.SetAuth
 	5,  // 13: api.v1.ApiService.GetAuthConfig:input_type -> google.protobuf.Empty
-	2,  // 14: api.v1.ApiService.GetRedirect:output_type -> api.v1.Redirect
+	3,  // 14: api.v1.ApiService.GetRedirect:output_type -> api.v1.Redirect
 	10, // 15: api.v1.ApiService.GetRedirects:output_type -> api.v1.RedirectsResponse
-	5,  // 16: api.v1.ApiService.DeleteRedirect:output_type -> google.protobuf.Empty
-	2,  // 17: api.v1.ApiService.PutRedirect:output_type -> api.v1.Redirect
-	2,  // 18: api.v1.ApiService.CreateRedirect:output_type -> api.v1.Redirect
+	3,  // 16: api.v1.ApiService.CreateRedirect:output_type -> api.v1.Redirect
+	5,  // 17: api.v1.ApiService.DeleteRedirect:output_type -> google.protobuf.Empty
+	3,  // 18: api.v1.ApiService.PutRedirect:output_type -> api.v1.Redirect
 	6,  // 19: api.v1.ApiService.GetDomain:output_type -> api.v1.Domain
 	11, // 20: api.v1.ApiService.GetDomains:output_type -> api.v1.DomainsResponse
 	5,  // 21: api.v1.ApiService.DeleteDomain:output_type -> google.protobuf.Empty

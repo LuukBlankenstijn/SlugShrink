@@ -2,8 +2,8 @@
 // @generated from file api/v1/auth.proto (package api.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -11,16 +11,63 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/auth.proto.
  */
 export const file_api_v1_auth: GenFile = /*@__PURE__*/
-  fileDesc("ChFhcGkvdjEvYXV0aC5wcm90bxIGYXBpLnYxIiMKCkF1dGhTdGF0dXMSFQoNYXV0aGVudGljYXRlZBgBIAEoCCIiCg5CYXNpY0F1dGhMb2dpbhIQCghwYXNzd29yZBgBIAEoCSINCgtTZXRBdXRobGVzcyK9AwoMU2V0QmFzaWNBdXRoEhwKCHBhc3N3b3JkGAEgASgJQgq6SAdyBRAIGIABEiUKEXJlcGVhdGVkX3Bhc3N3b3JkGAIgASgJQgq6SAdyBRAIGIABOucCukjjAhprCg9wYXNzd29yZHNfbWF0Y2gSL3Bhc3N3b3JkIGFuZCByZXBlYXRlZF9wYXNzd29yZCBtdXN0IGJlIHRoZSBzYW1lGid0aGlzLnBhc3N3b3JkID09IHRoaXMucmVwZWF0ZWRfcGFzc3dvcmQa8wEKEXBhc3N3b3JkX3N0cmVuZ3RoEkBwYXNzd29yZCBtdXN0IGNvbnRhaW4gdXBwZXIsIGxvd2VyLCBkaWdpdCwgYW5kIHNwZWNpYWwgY2hhcmFjdGVyGpsBdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlthLXpdLionKSAmJiB0aGlzLnBhc3N3b3JkLm1hdGNoZXMoJy4qW0EtWl0uKicpICYmIHRoaXMucGFzc3dvcmQubWF0Y2hlcygnLipbMC05XS4qJykgJiYgdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlteQS1aYS16MC05XS4qJykinwEKDFNldFByb3h5QXV0aBIUCgxncm91cF9oZWFkZXIYASABKAkSFgoOdXNlcl9pZF9oZWFkZXIYAiABKAkSGAoQc3VwZXJfdXNlcl9ncm91cBgDIAMoCRITCgthZG1pbl9ncm91cBgEIAMoCRIdChBncm91cHNfc2VwYXJhdG9yGAUgASgJSACIAQFCEwoRX2dyb3Vwc19zZXBhcmF0b3IilAEKB1NldEF1dGgSJwoIYXV0aGxlc3MYASABKAsyEy5hcGkudjEuU2V0QXV0aGxlc3NIABIqCgpiYXNpY19hdXRoGAIgASgLMhQuYXBpLnYxLlNldEJhc2ljQXV0aEgAEioKCnByb3h5X2F1dGgYAyABKAsyFC5hcGkudjEuU2V0UHJveHlBdXRoSABCCAoGY29uZmlnIgoKCEF1dGhsZXNzIgsKCUJhc2ljQXV0aCKcAQoJUHJveHlBdXRoEhQKDGdyb3VwX2hlYWRlchgBIAEoCRIWCg51c2VyX2lkX2hlYWRlchgCIAEoCRIYChBzdXBlcl91c2VyX2dyb3VwGAMgAygJEhMKC2FkbWluX2dyb3VwGAQgAygJEh0KEGdyb3Vwc19zZXBhcmF0b3IYBSABKAlIAIgBAUITChFfZ3JvdXBzX3NlcGFyYXRvciKLAQoHR2V0QXV0aBIkCghhdXRobGVzcxgBIAEoCzIQLmFwaS52MS5BdXRobGVzc0gAEicKCmJhc2ljX2F1dGgYAiABKAsyES5hcGkudjEuQmFzaWNBdXRoSAASJwoKcHJveHlfYXV0aBgDIAEoCzIRLmFwaS52MS5Qcm94eUF1dGhIAEIICgZjb25maWdChQEKCmNvbS5hcGkudjFCCUF1dGhQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate]);
+  fileDesc("ChFhcGkvdjEvYXV0aC5wcm90bxIGYXBpLnYxIl0KDUF1dGhlbnRpY2F0ZWQSKgoKcGVybWlzc2lvbhgBIAEoDjIWLmFwaS52MS5Vc2VyUGVybWlzc2lvbhIUCgd1c2VyX2lkGAIgASgJSACIAQFCCgoIX3VzZXJfaWQiEQoPVW5hdXRoZW50aWNhdGVkInoKCkF1dGhTdGF0dXMSLgoNYXV0aGVudGljYXRlZBgBIAEoCzIVLmFwaS52MS5BdXRoZW50aWNhdGVkSAASMgoPdW5hdXRoZW50aWNhdGVkGAIgASgLMhcuYXBpLnYxLlVuYXV0aGVudGljYXRlZEgAQggKBnN0YXR1cyIiCg5CYXNpY0F1dGhMb2dpbhIQCghwYXNzd29yZBgBIAEoCSINCgtTZXRBdXRobGVzcyK9AwoMU2V0QmFzaWNBdXRoEhwKCHBhc3N3b3JkGAEgASgJQgq6SAdyBRAIGIABEiUKEXJlcGVhdGVkX3Bhc3N3b3JkGAIgASgJQgq6SAdyBRAIGIABOucCukjjAhprCg9wYXNzd29yZHNfbWF0Y2gSL3Bhc3N3b3JkIGFuZCByZXBlYXRlZF9wYXNzd29yZCBtdXN0IGJlIHRoZSBzYW1lGid0aGlzLnBhc3N3b3JkID09IHRoaXMucmVwZWF0ZWRfcGFzc3dvcmQa8wEKEXBhc3N3b3JkX3N0cmVuZ3RoEkBwYXNzd29yZCBtdXN0IGNvbnRhaW4gdXBwZXIsIGxvd2VyLCBkaWdpdCwgYW5kIHNwZWNpYWwgY2hhcmFjdGVyGpsBdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlthLXpdLionKSAmJiB0aGlzLnBhc3N3b3JkLm1hdGNoZXMoJy4qW0EtWl0uKicpICYmIHRoaXMucGFzc3dvcmQubWF0Y2hlcygnLipbMC05XS4qJykgJiYgdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlteQS1aYS16MC05XS4qJykitAEKDFNldFByb3h5QXV0aBIdCgxncm91cF9oZWFkZXIYASABKAlCB7pIBHICEAESFgoOdXNlcl9pZF9oZWFkZXIYAiABKAkSGQoRc3VwZXJfdXNlcl9ncm91cHMYAyADKAkSHgoMYWRtaW5fZ3JvdXBzGAQgAygJQgi6SAWSAQIIARIdChBncm91cHNfc2VwYXJhdG9yGAUgASgJSACIAQFCEwoRX2dyb3Vwc19zZXBhcmF0b3IilAEKB1NldEF1dGgSJwoIYXV0aGxlc3MYASABKAsyEy5hcGkudjEuU2V0QXV0aGxlc3NIABIqCgpiYXNpY19hdXRoGAIgASgLMhQuYXBpLnYxLlNldEJhc2ljQXV0aEgAEioKCnByb3h5X2F1dGgYAyABKAsyFC5hcGkudjEuU2V0UHJveHlBdXRoSABCCAoGY29uZmlnIgoKCEF1dGhsZXNzIgsKCUJhc2ljQXV0aCKeAQoJUHJveHlBdXRoEhQKDGdyb3VwX2hlYWRlchgBIAEoCRIWCg51c2VyX2lkX2hlYWRlchgCIAEoCRIZChFzdXBlcl91c2VyX2dyb3VwcxgDIAMoCRIUCgxhZG1pbl9ncm91cHMYBCADKAkSHQoQZ3JvdXBzX3NlcGFyYXRvchgFIAEoCUgAiAEBQhMKEV9ncm91cHNfc2VwYXJhdG9yIosBCgdHZXRBdXRoEiQKCGF1dGhsZXNzGAEgASgLMhAuYXBpLnYxLkF1dGhsZXNzSAASJwoKYmFzaWNfYXV0aBgCIAEoCzIRLmFwaS52MS5CYXNpY0F1dGhIABInCgpwcm94eV9hdXRoGAMgASgLMhEuYXBpLnYxLlByb3h5QXV0aEgAQggKBmNvbmZpZypxCg5Vc2VyUGVybWlzc2lvbhIaChZQRVJNSVNTSU9OX1VOU1BFQ0lGSUVEEAASEwoPUEVSTUlTU0lPTl9VU0VSEAESGAoUUEVSTUlTU0lPTl9TVVBFUlVTRVIQAhIUChBQRVJNSVNTSU9OX0FETUlOEANChQEKCmNvbS5hcGkudjFCCUF1dGhQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate]);
+
+/**
+ * @generated from message api.v1.Authenticated
+ */
+export type Authenticated = Message<"api.v1.Authenticated"> & {
+  /**
+   * @generated from field: api.v1.UserPermission permission = 1;
+   */
+  permission: UserPermission;
+
+  /**
+   * @generated from field: optional string user_id = 2;
+   */
+  userId?: string;
+};
+
+/**
+ * Describes the message api.v1.Authenticated.
+ * Use `create(AuthenticatedSchema)` to create a new message.
+ */
+export const AuthenticatedSchema: GenMessage<Authenticated> = /*@__PURE__*/
+  messageDesc(file_api_v1_auth, 0);
+
+/**
+ * @generated from message api.v1.Unauthenticated
+ */
+export type Unauthenticated = Message<"api.v1.Unauthenticated"> & {
+};
+
+/**
+ * Describes the message api.v1.Unauthenticated.
+ * Use `create(UnauthenticatedSchema)` to create a new message.
+ */
+export const UnauthenticatedSchema: GenMessage<Unauthenticated> = /*@__PURE__*/
+  messageDesc(file_api_v1_auth, 1);
 
 /**
  * @generated from message api.v1.AuthStatus
  */
 export type AuthStatus = Message<"api.v1.AuthStatus"> & {
   /**
-   * @generated from field: bool authenticated = 1;
+   * @generated from oneof api.v1.AuthStatus.status
    */
-  authenticated: boolean;
+  status: {
+    /**
+     * @generated from field: api.v1.Authenticated authenticated = 1;
+     */
+    value: Authenticated;
+    case: "authenticated";
+  } | {
+    /**
+     * @generated from field: api.v1.Unauthenticated unauthenticated = 2;
+     */
+    value: Unauthenticated;
+    case: "unauthenticated";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
@@ -28,7 +75,7 @@ export type AuthStatus = Message<"api.v1.AuthStatus"> & {
  * Use `create(AuthStatusSchema)` to create a new message.
  */
 export const AuthStatusSchema: GenMessage<AuthStatus> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 0);
+  messageDesc(file_api_v1_auth, 2);
 
 /**
  * @generated from message api.v1.BasicAuthLogin
@@ -45,7 +92,7 @@ export type BasicAuthLogin = Message<"api.v1.BasicAuthLogin"> & {
  * Use `create(BasicAuthLoginSchema)` to create a new message.
  */
 export const BasicAuthLoginSchema: GenMessage<BasicAuthLogin> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 1);
+  messageDesc(file_api_v1_auth, 3);
 
 /**
  * @generated from message api.v1.SetAuthless
@@ -58,7 +105,7 @@ export type SetAuthless = Message<"api.v1.SetAuthless"> & {
  * Use `create(SetAuthlessSchema)` to create a new message.
  */
 export const SetAuthlessSchema: GenMessage<SetAuthless> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 2);
+  messageDesc(file_api_v1_auth, 4);
 
 /**
  * @generated from message api.v1.SetBasicAuth
@@ -80,7 +127,7 @@ export type SetBasicAuth = Message<"api.v1.SetBasicAuth"> & {
  * Use `create(SetBasicAuthSchema)` to create a new message.
  */
 export const SetBasicAuthSchema: GenMessage<SetBasicAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 3);
+  messageDesc(file_api_v1_auth, 5);
 
 /**
  * @generated from message api.v1.SetProxyAuth
@@ -97,14 +144,14 @@ export type SetProxyAuth = Message<"api.v1.SetProxyAuth"> & {
   userIdHeader: string;
 
   /**
-   * @generated from field: repeated string super_user_group = 3;
+   * @generated from field: repeated string super_user_groups = 3;
    */
-  superUserGroup: string[];
+  superUserGroups: string[];
 
   /**
-   * @generated from field: repeated string admin_group = 4;
+   * @generated from field: repeated string admin_groups = 4;
    */
-  adminGroup: string[];
+  adminGroups: string[];
 
   /**
    * @generated from field: optional string groups_separator = 5;
@@ -117,7 +164,7 @@ export type SetProxyAuth = Message<"api.v1.SetProxyAuth"> & {
  * Use `create(SetProxyAuthSchema)` to create a new message.
  */
 export const SetProxyAuthSchema: GenMessage<SetProxyAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 4);
+  messageDesc(file_api_v1_auth, 6);
 
 /**
  * @generated from message api.v1.SetAuth
@@ -152,7 +199,7 @@ export type SetAuth = Message<"api.v1.SetAuth"> & {
  * Use `create(SetAuthSchema)` to create a new message.
  */
 export const SetAuthSchema: GenMessage<SetAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 5);
+  messageDesc(file_api_v1_auth, 7);
 
 /**
  * @generated from message api.v1.Authless
@@ -165,7 +212,7 @@ export type Authless = Message<"api.v1.Authless"> & {
  * Use `create(AuthlessSchema)` to create a new message.
  */
 export const AuthlessSchema: GenMessage<Authless> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 6);
+  messageDesc(file_api_v1_auth, 8);
 
 /**
  * @generated from message api.v1.BasicAuth
@@ -178,7 +225,7 @@ export type BasicAuth = Message<"api.v1.BasicAuth"> & {
  * Use `create(BasicAuthSchema)` to create a new message.
  */
 export const BasicAuthSchema: GenMessage<BasicAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 7);
+  messageDesc(file_api_v1_auth, 9);
 
 /**
  * @generated from message api.v1.ProxyAuth
@@ -195,14 +242,14 @@ export type ProxyAuth = Message<"api.v1.ProxyAuth"> & {
   userIdHeader: string;
 
   /**
-   * @generated from field: repeated string super_user_group = 3;
+   * @generated from field: repeated string super_user_groups = 3;
    */
-  superUserGroup: string[];
+  superUserGroups: string[];
 
   /**
-   * @generated from field: repeated string admin_group = 4;
+   * @generated from field: repeated string admin_groups = 4;
    */
-  adminGroup: string[];
+  adminGroups: string[];
 
   /**
    * @generated from field: optional string groups_separator = 5;
@@ -215,7 +262,7 @@ export type ProxyAuth = Message<"api.v1.ProxyAuth"> & {
  * Use `create(ProxyAuthSchema)` to create a new message.
  */
 export const ProxyAuthSchema: GenMessage<ProxyAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 8);
+  messageDesc(file_api_v1_auth, 10);
 
 /**
  * @generated from message api.v1.GetAuth
@@ -250,5 +297,36 @@ export type GetAuth = Message<"api.v1.GetAuth"> & {
  * Use `create(GetAuthSchema)` to create a new message.
  */
 export const GetAuthSchema: GenMessage<GetAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 9);
+  messageDesc(file_api_v1_auth, 11);
+
+/**
+ * @generated from enum api.v1.UserPermission
+ */
+export enum UserPermission {
+  /**
+   * @generated from enum value: PERMISSION_UNSPECIFIED = 0;
+   */
+  PERMISSION_UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: PERMISSION_USER = 1;
+   */
+  PERMISSION_USER = 1,
+
+  /**
+   * @generated from enum value: PERMISSION_SUPERUSER = 2;
+   */
+  PERMISSION_SUPERUSER = 2,
+
+  /**
+   * @generated from enum value: PERMISSION_ADMIN = 3;
+   */
+  PERMISSION_ADMIN = 3,
+}
+
+/**
+ * Describes the enum api.v1.UserPermission.
+ */
+export const UserPermissionSchema: GenEnum<UserPermission> = /*@__PURE__*/
+  enumDesc(file_api_v1_auth, 0);
 

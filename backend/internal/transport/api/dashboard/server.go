@@ -31,7 +31,8 @@ func (a *DashboardApi) Run() error {
 		a,
 		connect.WithInterceptors(
 			interceptors.LoggingInterceptor(),
-			interceptors.AuthInterceptor(a.authConfigs),
+			interceptors.AuthenticationInterceptor(a.authConfigs),
+			interceptors.AuthorizationInterceptor(a.authConfigs),
 			validate.NewInterceptor(),
 		),
 	)

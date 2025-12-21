@@ -26,7 +26,7 @@
 	const pending = $derived(login.isPending);
 
 	$effect(() => {
-		if (authStatus.data === true) {
+		if (authStatus.data) {
 			goto(resolve('/(app)/redirects'));
 		}
 	});

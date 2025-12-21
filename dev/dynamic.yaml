@@ -1,0 +1,69 @@
+http:
+  services:
+    app:
+      loadBalancer:
+        servers:
+          - url: "http://localhost:5173"
+  middlewares:
+    user1:
+      headers:
+        customRequestHeaders:
+          X-Proxy-Groups: "user"
+          X-Proxy-User: "user1"
+    user2:
+      headers:
+        customRequestHeaders:
+          X-Proxy-Groups: "user"
+          X-Proxy-User: "user2"
+
+
+    superUser:
+      headers:
+        customRequestHeaders:
+          X-Proxy-Groups: "superUser|user"
+          X-Proxy-User: "superUser"
+
+
+    admin:
+      headers:
+        customRequestHeaders:
+          X-Proxy-Groups: "admin|superUser|user"
+          X-Proxy-User: "admin"
+
+  routers:
+    router8091:
+      entryPoints:
+        - port8091
+      rule: "PathPrefix(`/`)"
+      middlewares:
+        - user1
+      service: app
+      priority: 100
+
+
+    router8092:
+      entryPoints:
+        - port8092
+      rule: "PathPrefix(`/`)"
+      middlewares:
+        - user2
+      service: app
+      priority: 100
+
+    router8093:
+      entryPoints:
+        - port8093
+      rule: "PathPrefix(`/`)"
+      middlewares:
+        - superUser
+      service: app
+      priority: 100
+
+    router8094:
+      entryPoints:
+        - port8094
+      rule: "PathPrefix(`/`)"
+      middlewares:
+        - admin
+      service: app
+      priority: 100

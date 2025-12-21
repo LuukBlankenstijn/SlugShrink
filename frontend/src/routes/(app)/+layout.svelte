@@ -12,6 +12,7 @@
 	import DomainForm from '$lib/DomainForm.svelte';
 	import type { Domain } from '../../gen/api/v1/domain_pb';
 	import type { FullRedirect } from '../../gen/api/v1/redirect_pb';
+	import { UserPermission } from '../../gen/api/v1/auth_pb';
 
 	let open = $state(false);
 	let selectedDomain = $state<Domain | null>(null);
@@ -21,7 +22,9 @@
 		if (page.url.pathname.startsWith('/settings')) return 'settings';
 		return 'redirects';
 	});
-	const mode = $derived(() => (selectedDomain ? 'domains' : selectedRedirect ? 'redirects' : active()));
+	const mode = $derived(() =>
+		selectedDomain ? 'domains' : selectedRedirect ? 'redirects' : active()
+	);
 	const modalTitle = $derived(() => {
 		if (mode() === 'domains') return selectedDomain ? 'Edit domain' : 'New domain';
 		if (mode() === 'redirects') return selectedRedirect ? 'Edit redirect' : 'New redirect';
@@ -87,35 +90,39 @@
 						{/if}
 					</a>
 
-					<a
-						href={resolve('/domains')}
-						class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"
-						class:active={active() === 'domains'}
-					>
-						Domains
-						{#if active() === 'domains'}
-							<span
-								class="absolute -bottom-2 left-0 h-px w-full bg-linear-to-r from-cyan-400/70 via-blue-500/70 to-violet-500/70"
-							></span>
-						{/if}
-					</a>
+					{#if authStatus.data && [UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(authStatus.data.permission)}
+						<a
+							href={resolve('/domains')}
+							class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"
+							class:active={active() === 'domains'}
+						>
+							Domains
+							{#if active() === 'domains'}
+								<span
+									class="absolute -bottom-2 left-0 h-px w-full bg-linear-to-r from-cyan-400/70 via-blue-500/70 to-violet-500/70"
+								></span>
+							{/if}
+						</a>
+					{/if}
 
-					<a
-						href={resolve('/settings')}
-						class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"
-						class:active={active() === 'settings'}
-					>
-						Settings
-						{#if active() === 'settings'}
-							<span
-								class="absolute -bottom-2 left-0 h-px w-full bg-linear-to-r from-cyan-400/70 via-blue-500/70 to-violet-500/70"
-							></span>
-						{/if}
-					</a>
+					{#if authStatus.data && authStatus.data.permission === UserPermission.PERMISSION_ADMIN}
+						<a
+							href={resolve('/settings')}
+							class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"
+							class:active={active() === 'settings'}
+						>
+							Settings
+							{#if active() === 'settings'}
+								<span
+									class="absolute -bottom-2 left-0 h-px w-full bg-linear-to-r from-cyan-400/70 via-blue-500/70 to-violet-500/70"
+								></span>
+							{/if}
+						</a>
+					{/if}
 				</div>
 			</div>
 
-			<div class="flex items-center gap-3 min-h-[42px]">
+			<div class="flex min-h-[42px] items-center gap-3">
 				{#if active() === 'domains' || active() === 'redirects'}
 					<button
 						type="button"

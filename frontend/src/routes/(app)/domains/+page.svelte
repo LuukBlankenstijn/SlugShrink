@@ -4,6 +4,23 @@
 	import { getContext } from 'svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
 	import { queryKeys } from '$lib/queryKeys';
+	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { resolve } from '$app/paths';
+	import { goto } from '$app/navigation';
+	import { UserPermission } from '../../../gen/api/v1/auth_pb';
+
+	const authStatus = createQuery(authStatusQueryOptions);
+
+	$effect(() => {
+		if (
+			authStatus.data &&
+			![UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER].includes(
+				authStatus.data.permission
+			)
+		) {
+			goto(resolve('/redirects'));
+		}
+	});
 
 	const query = createQuery(() => ({
 		queryKey: queryKeys.domains(),

@@ -57,9 +57,7 @@
 	function validate() {
 		commitPendingInputs();
 		if (!groupHeader?.trim()) return 'Group header is required';
-		if (!userIdHeader?.trim()) return 'User ID header is required';
 		if (!adminGroups.length) return 'At least one admin group is required';
-		// groupSeparator is optional
 		return null;
 	}
 
@@ -158,8 +156,8 @@
 		/>
 	</div>
 	<div>
-		<label for="superUserGroup-input" class="flex items-center gap-2 text-sm text-slate-200">
-			Super user group
+		<label for="superUserGroups-input" class="flex items-center gap-2 text-sm text-slate-200">
+			Super user groups
 			<span
 				class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-slate-500/60 text-xs text-slate-200"
 				title="Groups that grant super user rights; add multiple">?</span
@@ -169,7 +167,7 @@
 			<input
 				bind:value={superUserGroupInput}
 				onkeydown={handleSuperUserKeydown}
-				id="superUserGroup-input"
+				id="superUserGroups-input"
 				class="w-full rounded-lg border border-white/10 bg-slate-900/70 px-3 py-2 pr-12 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
 				placeholder="Type a group name and press Enter"
 			/>
@@ -192,8 +190,8 @@
 		</div>
 	</div>
 	<div>
-		<label for="adminGroup-input" class="flex items-center gap-2 text-sm text-slate-200">
-			Admin group
+		<label for="adminGroups-input" class="flex items-center gap-2 text-sm text-slate-200">
+			Admin groups
 			<span
 				class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-slate-500/60 text-xs text-slate-200"
 				title="Groups that grant admin rights; add multiple">?</span
@@ -203,7 +201,7 @@
 			<input
 				bind:value={adminGroupInput}
 				onkeydown={handleAdminKeydown}
-				id="adminGroup-input"
+				id="adminGroups-input"
 				class="w-full rounded-lg border border-white/10 bg-slate-900/70 px-3 py-2 pr-12 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
 				placeholder="Type a group name and press Enter"
 			/>

@@ -14,7 +14,7 @@ import (
 	"google.golang.org/protobuf/types/descriptorpb"
 )
 
-func AuthInterceptor(authConfigs app.AuthConfigs) connect.UnaryInterceptorFunc {
+func AuthenticationInterceptor(authConfigs app.AuthConfigs) connect.UnaryInterceptorFunc {
 	return connect.UnaryInterceptorFunc(func(next connect.UnaryFunc) connect.UnaryFunc {
 		return func(ctx context.Context, req connect.AnyRequest) (connect.AnyResponse, error) {
 			skip, _, _ := skipAuth(req.Spec().Procedure)

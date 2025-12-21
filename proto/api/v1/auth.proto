@@ -4,8 +4,25 @@ package api.v1;
 
 import "buf/validate/validate.proto";
 
+enum UserPermission {
+  PERMISSION_UNSPECIFIED = 0;
+  PERMISSION_USER = 1;
+  PERMISSION_SUPERUSER = 2;
+  PERMISSION_ADMIN = 3;
+}
+
+message Authenticated {
+  UserPermission permission = 1;
+  optional string user_id = 2;
+}
+
+message Unauthenticated {}
+
 message AuthStatus {
-  bool authenticated = 1;
+  oneof status {
+    Authenticated authenticated = 1;
+    Unauthenticated unauthenticated = 2;
+  }
 }
 
 message BasicAuthLogin {
@@ -39,10 +56,10 @@ message SetBasicAuth {
 }
 
 message SetProxyAuth {
-  string group_header = 1;
+  string group_header = 1 [(buf.validate.field).string.min_len = 1];
   string user_id_header = 2;
-  repeated string super_user_group = 3;
-  repeated string admin_group = 4;
+  repeated string super_user_groups = 3;
+  repeated string admin_groups = 4 [(buf.validate.field).repeated.min_items = 1];
   optional string groups_separator = 5;
 }
 
@@ -61,8 +78,8 @@ message BasicAuth {}
 message ProxyAuth {
   string group_header = 1;
   string user_id_header = 2;
-  repeated string super_user_group = 3;
-  repeated string admin_group = 4;
+  repeated string super_user_groups = 3;
+  repeated string admin_groups = 4;
   optional string groups_separator = 5;
 }
 

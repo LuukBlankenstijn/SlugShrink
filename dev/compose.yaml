@@ -1,0 +1,9 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    network_mode: host
+    volumes:
+      - ./traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./dynamic.yaml:/etc/traefik/dynamic.yaml:ro
+    restart: unless-stopped

@@ -6,6 +6,18 @@
 	import AuthlessSettings from './authlessSettings.svelte';
 	import { queryKeys } from '$lib/queryKeys';
 	import ProxyAuthSettings from './proxyAuthSettings.svelte';
+	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { resolve } from '$app/paths';
+	import { goto } from '$app/navigation';
+	import { UserPermission } from '../../../gen/api/v1/auth_pb';
+	const authStatus = createQuery(authStatusQueryOptions);
+
+	$effect(() => {
+		if (authStatus.data && authStatus.data.permission !== UserPermission.PERMISSION_ADMIN) {
+			goto(resolve('/redirects'));
+		}
+	});
+
 	let saveTrigger = $state(0);
 
 	const query = createQuery(() => ({

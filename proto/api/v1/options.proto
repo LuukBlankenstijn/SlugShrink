@@ -2,8 +2,10 @@ syntax = "proto3";
 
 package api.v1;
 
+import "api/v1/auth.proto";
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
   bool skip_auth = 50001;
+  repeated UserPermission permissions = 50002;
 }

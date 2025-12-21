@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
-	import type { FullRedirect } from '../gen/api/v1/api_pb';
 	import { api } from './api.svelte';
 	import Modal from '$lib/Modal.svelte';
 	import { queryKeys } from '$lib/queryKeys';
+	import type { FullRedirect } from '../gen/api/v1/redirect_pb';
 
 	interface Props {
 		readonly onClose: () => void;

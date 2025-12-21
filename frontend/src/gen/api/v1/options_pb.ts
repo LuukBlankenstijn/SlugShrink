@@ -4,6 +4,8 @@
 
 import type { GenExtension, GenFile } from "@bufbuild/protobuf/codegenv2";
 import { extDesc, fileDesc } from "@bufbuild/protobuf/codegenv2";
+import type { UserPermission } from "./auth_pb";
+import { file_api_v1_auth } from "./auth_pb";
 import type { MethodOptions } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 
@@ -11,11 +13,17 @@ import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
  * Describes the file api/v1/options.proto.
  */
 export const file_api_v1_options: GenFile = /*@__PURE__*/
-  fileDesc("ChRhcGkvdjEvb3B0aW9ucy5wcm90bxIGYXBpLnYxOj0KCXNraXBfYXV0aBIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGNGGAyABKAhSCHNraXBBdXRoQogBCgpjb20uYXBpLnYxQgxPcHRpb25zUHJvdG9QAVozZ2l0aHViLmNvbS9MdXVrQmxhbmtlbnN0aWpuL2dld2lzaC9nZW4vYXBpL3YxO2FwaXYxogIDQVhYqgIGQXBpLlYxygIGQXBpXFYx4gISQXBpXFYxXEdQQk1ldGFkYXRh6gIHQXBpOjpWMWIGcHJvdG8z", [file_google_protobuf_descriptor]);
+  fileDesc("ChRhcGkvdjEvb3B0aW9ucy5wcm90bxIGYXBpLnYxOj0KCXNraXBfYXV0aBIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGNGGAyABKAhSCHNraXBBdXRoOloKC3Blcm1pc3Npb25zEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY0oYDIAMoDjIWLmFwaS52MS5Vc2VyUGVybWlzc2lvblILcGVybWlzc2lvbnNCiAEKCmNvbS5hcGkudjFCDE9wdGlvbnNQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_api_v1_auth, file_google_protobuf_descriptor]);
 
 /**
  * @generated from extension: bool skip_auth = 50001;
  */
 export const skip_auth: GenExtension<MethodOptions, boolean> = /*@__PURE__*/
   extDesc(file_api_v1_options, 0);
+
+/**
+ * @generated from extension: repeated api.v1.UserPermission permissions = 50002;
+ */
+export const permissions: GenExtension<MethodOptions, UserPermission[]> = /*@__PURE__*/
+  extDesc(file_api_v1_options, 1);
 
