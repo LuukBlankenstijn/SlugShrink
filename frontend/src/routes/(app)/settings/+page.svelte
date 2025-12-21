@@ -5,6 +5,7 @@
 	import { getMethod, methods } from './authMethods';
 	import AuthlessSettings from './authlessSettings.svelte';
 	import { queryKeys } from '$lib/queryKeys';
+	import ProxyAuthSettings from './proxyAuthSettings.svelte';
 	let saveTrigger = $state(0);
 
 	const query = createQuery(() => ({
@@ -78,6 +79,13 @@
 
 				{#if userSelection === 'basicAuth'}
 					<BasicAuthSetting {saveTrigger}></BasicAuthSetting>
+				{:else if userSelection === 'proxyAuth'}
+					{#if query.data.config.case === 'proxyAuth'}
+						<ProxyAuthSettings {saveTrigger} currentConfig={query.data.config.value}
+						></ProxyAuthSettings>
+					{:else}
+						<ProxyAuthSettings {saveTrigger}></ProxyAuthSettings>
+					{/if}
 				{:else}
 					<AuthlessSettings {saveTrigger}></AuthlessSettings>
 				{/if}

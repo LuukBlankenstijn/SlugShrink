@@ -110,6 +110,42 @@ func (x *BasicAuthLogin) GetPassword() string {
 	return ""
 }
 
+type SetAuthless struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAuthless) Reset() {
+	*x = SetAuthless{}
+	mi := &file_api_v1_auth_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAuthless) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAuthless) ProtoMessage() {}
+
+func (x *SetAuthless) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_auth_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAuthless.ProtoReflect.Descriptor instead.
+func (*SetAuthless) Descriptor() ([]byte, []int) {
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{2}
+}
+
 type SetBasicAuth struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Password         string                 `protobuf:"bytes,1,opt,name=password,proto3" json:"password,omitempty"`
@@ -120,7 +156,7 @@ type SetBasicAuth struct {
 
 func (x *SetBasicAuth) Reset() {
 	*x = SetBasicAuth{}
-	mi := &file_api_v1_auth_proto_msgTypes[2]
+	mi := &file_api_v1_auth_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -132,7 +168,7 @@ func (x *SetBasicAuth) String() string {
 func (*SetBasicAuth) ProtoMessage() {}
 
 func (x *SetBasicAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_auth_proto_msgTypes[2]
+	mi := &file_api_v1_auth_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -145,7 +181,7 @@ func (x *SetBasicAuth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetBasicAuth.ProtoReflect.Descriptor instead.
 func (*SetBasicAuth) Descriptor() ([]byte, []int) {
-	return file_api_v1_auth_proto_rawDescGZIP(), []int{2}
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SetBasicAuth) GetPassword() string {
@@ -162,27 +198,32 @@ func (x *SetBasicAuth) GetRepeatedPassword() string {
 	return ""
 }
 
-type SetAuthless struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type SetProxyAuth struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	GroupHeader     string                 `protobuf:"bytes,1,opt,name=group_header,json=groupHeader,proto3" json:"group_header,omitempty"`
+	UserIdHeader    string                 `protobuf:"bytes,2,opt,name=user_id_header,json=userIdHeader,proto3" json:"user_id_header,omitempty"`
+	SuperUserGroup  []string               `protobuf:"bytes,3,rep,name=super_user_group,json=superUserGroup,proto3" json:"super_user_group,omitempty"`
+	AdminGroup      []string               `protobuf:"bytes,4,rep,name=admin_group,json=adminGroup,proto3" json:"admin_group,omitempty"`
+	GroupsSeparator *string                `protobuf:"bytes,5,opt,name=groups_separator,json=groupsSeparator,proto3,oneof" json:"groups_separator,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *SetAuthless) Reset() {
-	*x = SetAuthless{}
-	mi := &file_api_v1_auth_proto_msgTypes[3]
+func (x *SetProxyAuth) Reset() {
+	*x = SetProxyAuth{}
+	mi := &file_api_v1_auth_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAuthless) String() string {
+func (x *SetProxyAuth) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAuthless) ProtoMessage() {}
+func (*SetProxyAuth) ProtoMessage() {}
 
-func (x *SetAuthless) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_auth_proto_msgTypes[3]
+func (x *SetProxyAuth) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_auth_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -193,9 +234,44 @@ func (x *SetAuthless) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAuthless.ProtoReflect.Descriptor instead.
-func (*SetAuthless) Descriptor() ([]byte, []int) {
-	return file_api_v1_auth_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use SetProxyAuth.ProtoReflect.Descriptor instead.
+func (*SetProxyAuth) Descriptor() ([]byte, []int) {
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SetProxyAuth) GetGroupHeader() string {
+	if x != nil {
+		return x.GroupHeader
+	}
+	return ""
+}
+
+func (x *SetProxyAuth) GetUserIdHeader() string {
+	if x != nil {
+		return x.UserIdHeader
+	}
+	return ""
+}
+
+func (x *SetProxyAuth) GetSuperUserGroup() []string {
+	if x != nil {
+		return x.SuperUserGroup
+	}
+	return nil
+}
+
+func (x *SetProxyAuth) GetAdminGroup() []string {
+	if x != nil {
+		return x.AdminGroup
+	}
+	return nil
+}
+
+func (x *SetProxyAuth) GetGroupsSeparator() string {
+	if x != nil && x.GroupsSeparator != nil {
+		return *x.GroupsSeparator
+	}
+	return ""
 }
 
 type SetAuth struct {
@@ -204,6 +280,7 @@ type SetAuth struct {
 	//
 	//	*SetAuth_Authless
 	//	*SetAuth_BasicAuth
+	//	*SetAuth_ProxyAuth
 	Config        isSetAuth_Config `protobuf_oneof:"config"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -211,7 +288,7 @@ type SetAuth struct {
 
 func (x *SetAuth) Reset() {
 	*x = SetAuth{}
-	mi := &file_api_v1_auth_proto_msgTypes[4]
+	mi := &file_api_v1_auth_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -223,7 +300,7 @@ func (x *SetAuth) String() string {
 func (*SetAuth) ProtoMessage() {}
 
 func (x *SetAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_auth_proto_msgTypes[4]
+	mi := &file_api_v1_auth_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -236,7 +313,7 @@ func (x *SetAuth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAuth.ProtoReflect.Descriptor instead.
 func (*SetAuth) Descriptor() ([]byte, []int) {
-	return file_api_v1_auth_proto_rawDescGZIP(), []int{4}
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SetAuth) GetConfig() isSetAuth_Config {
@@ -264,6 +341,15 @@ func (x *SetAuth) GetBasicAuth() *SetBasicAuth {
 	return nil
 }
 
+func (x *SetAuth) GetProxyAuth() *SetProxyAuth {
+	if x != nil {
+		if x, ok := x.Config.(*SetAuth_ProxyAuth); ok {
+			return x.ProxyAuth
+		}
+	}
+	return nil
+}
+
 type isSetAuth_Config interface {
 	isSetAuth_Config()
 }
@@ -276,9 +362,15 @@ type SetAuth_BasicAuth struct {
 	BasicAuth *SetBasicAuth `protobuf:"bytes,2,opt,name=basic_auth,json=basicAuth,proto3,oneof"`
 }
 
+type SetAuth_ProxyAuth struct {
+	ProxyAuth *SetProxyAuth `protobuf:"bytes,3,opt,name=proxy_auth,json=proxyAuth,proto3,oneof"`
+}
+
 func (*SetAuth_Authless) isSetAuth_Config() {}
 
 func (*SetAuth_BasicAuth) isSetAuth_Config() {}
+
+func (*SetAuth_ProxyAuth) isSetAuth_Config() {}
 
 type Authless struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -288,7 +380,7 @@ type Authless struct {
 
 func (x *Authless) Reset() {
 	*x = Authless{}
-	mi := &file_api_v1_auth_proto_msgTypes[5]
+	mi := &file_api_v1_auth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -300,7 +392,7 @@ func (x *Authless) String() string {
 func (*Authless) ProtoMessage() {}
 
 func (x *Authless) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_auth_proto_msgTypes[5]
+	mi := &file_api_v1_auth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -313,7 +405,7 @@ func (x *Authless) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Authless.ProtoReflect.Descriptor instead.
 func (*Authless) Descriptor() ([]byte, []int) {
-	return file_api_v1_auth_proto_rawDescGZIP(), []int{5}
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{6}
 }
 
 type BasicAuth struct {
@@ -324,7 +416,7 @@ type BasicAuth struct {
 
 func (x *BasicAuth) Reset() {
 	*x = BasicAuth{}
-	mi := &file_api_v1_auth_proto_msgTypes[6]
+	mi := &file_api_v1_auth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -336,7 +428,7 @@ func (x *BasicAuth) String() string {
 func (*BasicAuth) ProtoMessage() {}
 
 func (x *BasicAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_auth_proto_msgTypes[6]
+	mi := &file_api_v1_auth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +441,83 @@ func (x *BasicAuth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BasicAuth.ProtoReflect.Descriptor instead.
 func (*BasicAuth) Descriptor() ([]byte, []int) {
-	return file_api_v1_auth_proto_rawDescGZIP(), []int{6}
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{7}
+}
+
+type ProxyAuth struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	GroupHeader     string                 `protobuf:"bytes,1,opt,name=group_header,json=groupHeader,proto3" json:"group_header,omitempty"`
+	UserIdHeader    string                 `protobuf:"bytes,2,opt,name=user_id_header,json=userIdHeader,proto3" json:"user_id_header,omitempty"`
+	SuperUserGroup  []string               `protobuf:"bytes,3,rep,name=super_user_group,json=superUserGroup,proto3" json:"super_user_group,omitempty"`
+	AdminGroup      []string               `protobuf:"bytes,4,rep,name=admin_group,json=adminGroup,proto3" json:"admin_group,omitempty"`
+	GroupsSeparator *string                `protobuf:"bytes,5,opt,name=groups_separator,json=groupsSeparator,proto3,oneof" json:"groups_separator,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ProxyAuth) Reset() {
+	*x = ProxyAuth{}
+	mi := &file_api_v1_auth_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProxyAuth) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProxyAuth) ProtoMessage() {}
+
+func (x *ProxyAuth) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_auth_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProxyAuth.ProtoReflect.Descriptor instead.
+func (*ProxyAuth) Descriptor() ([]byte, []int) {
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ProxyAuth) GetGroupHeader() string {
+	if x != nil {
+		return x.GroupHeader
+	}
+	return ""
+}
+
+func (x *ProxyAuth) GetUserIdHeader() string {
+	if x != nil {
+		return x.UserIdHeader
+	}
+	return ""
+}
+
+func (x *ProxyAuth) GetSuperUserGroup() []string {
+	if x != nil {
+		return x.SuperUserGroup
+	}
+	return nil
+}
+
+func (x *ProxyAuth) GetAdminGroup() []string {
+	if x != nil {
+		return x.AdminGroup
+	}
+	return nil
+}
+
+func (x *ProxyAuth) GetGroupsSeparator() string {
+	if x != nil && x.GroupsSeparator != nil {
+		return *x.GroupsSeparator
+	}
+	return ""
 }
 
 type GetAuth struct {
@@ -358,6 +526,7 @@ type GetAuth struct {
 	//
 	//	*GetAuth_Authless
 	//	*GetAuth_BasicAuth
+	//	*GetAuth_ProxyAuth
 	Config        isGetAuth_Config `protobuf_oneof:"config"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -365,7 +534,7 @@ type GetAuth struct {
 
 func (x *GetAuth) Reset() {
 	*x = GetAuth{}
-	mi := &file_api_v1_auth_proto_msgTypes[7]
+	mi := &file_api_v1_auth_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -377,7 +546,7 @@ func (x *GetAuth) String() string {
 func (*GetAuth) ProtoMessage() {}
 
 func (x *GetAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_auth_proto_msgTypes[7]
+	mi := &file_api_v1_auth_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -390,7 +559,7 @@ func (x *GetAuth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAuth.ProtoReflect.Descriptor instead.
 func (*GetAuth) Descriptor() ([]byte, []int) {
-	return file_api_v1_auth_proto_rawDescGZIP(), []int{7}
+	return file_api_v1_auth_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetAuth) GetConfig() isGetAuth_Config {
@@ -418,6 +587,15 @@ func (x *GetAuth) GetBasicAuth() *BasicAuth {
 	return nil
 }
 
+func (x *GetAuth) GetProxyAuth() *ProxyAuth {
+	if x != nil {
+		if x, ok := x.Config.(*GetAuth_ProxyAuth); ok {
+			return x.ProxyAuth
+		}
+	}
+	return nil
+}
+
 type isGetAuth_Config interface {
 	isGetAuth_Config()
 }
@@ -430,9 +608,15 @@ type GetAuth_BasicAuth struct {
 	BasicAuth *BasicAuth `protobuf:"bytes,2,opt,name=basic_auth,json=basicAuth,proto3,oneof"`
 }
 
+type GetAuth_ProxyAuth struct {
+	ProxyAuth *ProxyAuth `protobuf:"bytes,3,opt,name=proxy_auth,json=proxyAuth,proto3,oneof"`
+}
+
 func (*GetAuth_Authless) isGetAuth_Config() {}
 
 func (*GetAuth_BasicAuth) isGetAuth_Config() {}
+
+func (*GetAuth_ProxyAuth) isGetAuth_Config() {}
 
 var File_api_v1_auth_proto protoreflect.FileDescriptor
 
@@ -443,27 +627,47 @@ const file_api_v1_auth_proto_rawDesc = "" +
 	"AuthStatus\x12$\n" +
 	"\rauthenticated\x18\x01 \x01(\bR\rauthenticated\",\n" +
 	"\x0eBasicAuthLogin\x12\x1a\n" +
-	"\bpassword\x18\x01 \x01(\tR\bpassword\"\xd9\x03\n" +
+	"\bpassword\x18\x01 \x01(\tR\bpassword\"\r\n" +
+	"\vSetAuthless\"\xd9\x03\n" +
 	"\fSetBasicAuth\x12&\n" +
 	"\bpassword\x18\x01 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\b\x18\x80\x01R\bpassword\x127\n" +
 	"\x11repeated_password\x18\x02 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\b\x18\x80\x01R\x10repeatedPassword:\xe7\x02\xbaH\xe3\x02\x1ak\n" +
 	"\x0fpasswords_match\x12/password and repeated_password must be the same\x1a'this.password == this.repeated_password\x1a\xf3\x01\n" +
-	"\x11password_strength\x12@password must contain upper, lower, digit, and special character\x1a\x9b\x01this.password.matches('.*[a-z].*') && this.password.matches('.*[A-Z].*') && this.password.matches('.*[0-9].*') && this.password.matches('.*[^A-Za-z0-9].*')\"\r\n" +
-	"\vSetAuthless\"}\n" +
+	"\x11password_strength\x12@password must contain upper, lower, digit, and special character\x1a\x9b\x01this.password.matches('.*[a-z].*') && this.password.matches('.*[A-Z].*') && this.password.matches('.*[0-9].*') && this.password.matches('.*[^A-Za-z0-9].*')\"\xe7\x01\n" +
+	"\fSetProxyAuth\x12!\n" +
+	"\fgroup_header\x18\x01 \x01(\tR\vgroupHeader\x12$\n" +
+	"\x0euser_id_header\x18\x02 \x01(\tR\fuserIdHeader\x12(\n" +
+	"\x10super_user_group\x18\x03 \x03(\tR\x0esuperUserGroup\x12\x1f\n" +
+	"\vadmin_group\x18\x04 \x03(\tR\n" +
+	"adminGroup\x12.\n" +
+	"\x10groups_separator\x18\x05 \x01(\tH\x00R\x0fgroupsSeparator\x88\x01\x01B\x13\n" +
+	"\x11_groups_separator\"\xb4\x01\n" +
 	"\aSetAuth\x121\n" +
 	"\bauthless\x18\x01 \x01(\v2\x13.api.v1.SetAuthlessH\x00R\bauthless\x125\n" +
 	"\n" +
-	"basic_auth\x18\x02 \x01(\v2\x14.api.v1.SetBasicAuthH\x00R\tbasicAuthB\b\n" +
+	"basic_auth\x18\x02 \x01(\v2\x14.api.v1.SetBasicAuthH\x00R\tbasicAuth\x125\n" +
+	"\n" +
+	"proxy_auth\x18\x03 \x01(\v2\x14.api.v1.SetProxyAuthH\x00R\tproxyAuthB\b\n" +
 	"\x06config\"\n" +
 	"\n" +
 	"\bAuthless\"\v\n" +
-	"\tBasicAuth\"w\n" +
+	"\tBasicAuth\"\xe4\x01\n" +
+	"\tProxyAuth\x12!\n" +
+	"\fgroup_header\x18\x01 \x01(\tR\vgroupHeader\x12$\n" +
+	"\x0euser_id_header\x18\x02 \x01(\tR\fuserIdHeader\x12(\n" +
+	"\x10super_user_group\x18\x03 \x03(\tR\x0esuperUserGroup\x12\x1f\n" +
+	"\vadmin_group\x18\x04 \x03(\tR\n" +
+	"adminGroup\x12.\n" +
+	"\x10groups_separator\x18\x05 \x01(\tH\x00R\x0fgroupsSeparator\x88\x01\x01B\x13\n" +
+	"\x11_groups_separator\"\xab\x01\n" +
 	"\aGetAuth\x12.\n" +
 	"\bauthless\x18\x01 \x01(\v2\x10.api.v1.AuthlessH\x00R\bauthless\x122\n" +
 	"\n" +
-	"basic_auth\x18\x02 \x01(\v2\x11.api.v1.BasicAuthH\x00R\tbasicAuthB\b\n" +
+	"basic_auth\x18\x02 \x01(\v2\x11.api.v1.BasicAuthH\x00R\tbasicAuth\x122\n" +
+	"\n" +
+	"proxy_auth\x18\x03 \x01(\v2\x11.api.v1.ProxyAuthH\x00R\tproxyAuthB\b\n" +
 	"\x06configB\x85\x01\n" +
 	"\n" +
 	"com.api.v1B\tAuthProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
@@ -480,27 +684,31 @@ func file_api_v1_auth_proto_rawDescGZIP() []byte {
 	return file_api_v1_auth_proto_rawDescData
 }
 
-var file_api_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_v1_auth_proto_goTypes = []any{
 	(*AuthStatus)(nil),     // 0: api.v1.AuthStatus
 	(*BasicAuthLogin)(nil), // 1: api.v1.BasicAuthLogin
-	(*SetBasicAuth)(nil),   // 2: api.v1.SetBasicAuth
-	(*SetAuthless)(nil),    // 3: api.v1.SetAuthless
-	(*SetAuth)(nil),        // 4: api.v1.SetAuth
-	(*Authless)(nil),       // 5: api.v1.Authless
-	(*BasicAuth)(nil),      // 6: api.v1.BasicAuth
-	(*GetAuth)(nil),        // 7: api.v1.GetAuth
+	(*SetAuthless)(nil),    // 2: api.v1.SetAuthless
+	(*SetBasicAuth)(nil),   // 3: api.v1.SetBasicAuth
+	(*SetProxyAuth)(nil),   // 4: api.v1.SetProxyAuth
+	(*SetAuth)(nil),        // 5: api.v1.SetAuth
+	(*Authless)(nil),       // 6: api.v1.Authless
+	(*BasicAuth)(nil),      // 7: api.v1.BasicAuth
+	(*ProxyAuth)(nil),      // 8: api.v1.ProxyAuth
+	(*GetAuth)(nil),        // 9: api.v1.GetAuth
 }
 var file_api_v1_auth_proto_depIdxs = []int32{
-	3, // 0: api.v1.SetAuth.authless:type_name -> api.v1.SetAuthless
-	2, // 1: api.v1.SetAuth.basic_auth:type_name -> api.v1.SetBasicAuth
-	5, // 2: api.v1.GetAuth.authless:type_name -> api.v1.Authless
-	6, // 3: api.v1.GetAuth.basic_auth:type_name -> api.v1.BasicAuth
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 0: api.v1.SetAuth.authless:type_name -> api.v1.SetAuthless
+	3, // 1: api.v1.SetAuth.basic_auth:type_name -> api.v1.SetBasicAuth
+	4, // 2: api.v1.SetAuth.proxy_auth:type_name -> api.v1.SetProxyAuth
+	6, // 3: api.v1.GetAuth.authless:type_name -> api.v1.Authless
+	7, // 4: api.v1.GetAuth.basic_auth:type_name -> api.v1.BasicAuth
+	8, // 5: api.v1.GetAuth.proxy_auth:type_name -> api.v1.ProxyAuth
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_v1_auth_proto_init() }
@@ -508,13 +716,17 @@ func file_api_v1_auth_proto_init() {
 	if File_api_v1_auth_proto != nil {
 		return
 	}
-	file_api_v1_auth_proto_msgTypes[4].OneofWrappers = []any{
+	file_api_v1_auth_proto_msgTypes[4].OneofWrappers = []any{}
+	file_api_v1_auth_proto_msgTypes[5].OneofWrappers = []any{
 		(*SetAuth_Authless)(nil),
 		(*SetAuth_BasicAuth)(nil),
+		(*SetAuth_ProxyAuth)(nil),
 	}
-	file_api_v1_auth_proto_msgTypes[7].OneofWrappers = []any{
+	file_api_v1_auth_proto_msgTypes[8].OneofWrappers = []any{}
+	file_api_v1_auth_proto_msgTypes[9].OneofWrappers = []any{
 		(*GetAuth_Authless)(nil),
 		(*GetAuth_BasicAuth)(nil),
+		(*GetAuth_ProxyAuth)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -522,7 +734,7 @@ func file_api_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_v1_auth_proto_rawDesc), len(file_api_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

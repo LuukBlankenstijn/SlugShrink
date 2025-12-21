@@ -12,6 +12,8 @@ message BasicAuthLogin {
   string password = 1;
 }
 
+message SetAuthless {}
+
 message SetBasicAuth {
   string password = 1 [(buf.validate.field).string = {
     min_len: 8
@@ -36,12 +38,19 @@ message SetBasicAuth {
   };
 }
 
-message SetAuthless {}
+message SetProxyAuth {
+  string group_header = 1;
+  string user_id_header = 2;
+  repeated string super_user_group = 3;
+  repeated string admin_group = 4;
+  optional string groups_separator = 5;
+}
 
 message SetAuth {
   oneof config {
     SetAuthless authless = 1;
     SetBasicAuth basic_auth = 2;
+    SetProxyAuth proxy_auth = 3;
   }
 }
 
@@ -49,9 +58,18 @@ message Authless {}
 
 message BasicAuth {}
 
+message ProxyAuth {
+  string group_header = 1;
+  string user_id_header = 2;
+  repeated string super_user_group = 3;
+  repeated string admin_group = 4;
+  optional string groups_separator = 5;
+}
+
 message GetAuth {
   oneof config {
     Authless authless = 1;
     BasicAuth basic_auth = 2;
+    ProxyAuth proxy_auth = 3;
   }
 }

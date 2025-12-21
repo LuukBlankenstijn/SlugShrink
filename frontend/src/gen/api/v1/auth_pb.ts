@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/auth.proto.
  */
 export const file_api_v1_auth: GenFile = /*@__PURE__*/
-  fileDesc("ChFhcGkvdjEvYXV0aC5wcm90bxIGYXBpLnYxIiMKCkF1dGhTdGF0dXMSFQoNYXV0aGVudGljYXRlZBgBIAEoCCIiCg5CYXNpY0F1dGhMb2dpbhIQCghwYXNzd29yZBgBIAEoCSK9AwoMU2V0QmFzaWNBdXRoEhwKCHBhc3N3b3JkGAEgASgJQgq6SAdyBRAIGIABEiUKEXJlcGVhdGVkX3Bhc3N3b3JkGAIgASgJQgq6SAdyBRAIGIABOucCukjjAhprCg9wYXNzd29yZHNfbWF0Y2gSL3Bhc3N3b3JkIGFuZCByZXBlYXRlZF9wYXNzd29yZCBtdXN0IGJlIHRoZSBzYW1lGid0aGlzLnBhc3N3b3JkID09IHRoaXMucmVwZWF0ZWRfcGFzc3dvcmQa8wEKEXBhc3N3b3JkX3N0cmVuZ3RoEkBwYXNzd29yZCBtdXN0IGNvbnRhaW4gdXBwZXIsIGxvd2VyLCBkaWdpdCwgYW5kIHNwZWNpYWwgY2hhcmFjdGVyGpsBdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlthLXpdLionKSAmJiB0aGlzLnBhc3N3b3JkLm1hdGNoZXMoJy4qW0EtWl0uKicpICYmIHRoaXMucGFzc3dvcmQubWF0Y2hlcygnLipbMC05XS4qJykgJiYgdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlteQS1aYS16MC05XS4qJykiDQoLU2V0QXV0aGxlc3MiaAoHU2V0QXV0aBInCghhdXRobGVzcxgBIAEoCzITLmFwaS52MS5TZXRBdXRobGVzc0gAEioKCmJhc2ljX2F1dGgYAiABKAsyFC5hcGkudjEuU2V0QmFzaWNBdXRoSABCCAoGY29uZmlnIgoKCEF1dGhsZXNzIgsKCUJhc2ljQXV0aCJiCgdHZXRBdXRoEiQKCGF1dGhsZXNzGAEgASgLMhAuYXBpLnYxLkF1dGhsZXNzSAASJwoKYmFzaWNfYXV0aBgCIAEoCzIRLmFwaS52MS5CYXNpY0F1dGhIAEIICgZjb25maWdChQEKCmNvbS5hcGkudjFCCUF1dGhQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate]);
+  fileDesc("ChFhcGkvdjEvYXV0aC5wcm90bxIGYXBpLnYxIiMKCkF1dGhTdGF0dXMSFQoNYXV0aGVudGljYXRlZBgBIAEoCCIiCg5CYXNpY0F1dGhMb2dpbhIQCghwYXNzd29yZBgBIAEoCSINCgtTZXRBdXRobGVzcyK9AwoMU2V0QmFzaWNBdXRoEhwKCHBhc3N3b3JkGAEgASgJQgq6SAdyBRAIGIABEiUKEXJlcGVhdGVkX3Bhc3N3b3JkGAIgASgJQgq6SAdyBRAIGIABOucCukjjAhprCg9wYXNzd29yZHNfbWF0Y2gSL3Bhc3N3b3JkIGFuZCByZXBlYXRlZF9wYXNzd29yZCBtdXN0IGJlIHRoZSBzYW1lGid0aGlzLnBhc3N3b3JkID09IHRoaXMucmVwZWF0ZWRfcGFzc3dvcmQa8wEKEXBhc3N3b3JkX3N0cmVuZ3RoEkBwYXNzd29yZCBtdXN0IGNvbnRhaW4gdXBwZXIsIGxvd2VyLCBkaWdpdCwgYW5kIHNwZWNpYWwgY2hhcmFjdGVyGpsBdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlthLXpdLionKSAmJiB0aGlzLnBhc3N3b3JkLm1hdGNoZXMoJy4qW0EtWl0uKicpICYmIHRoaXMucGFzc3dvcmQubWF0Y2hlcygnLipbMC05XS4qJykgJiYgdGhpcy5wYXNzd29yZC5tYXRjaGVzKCcuKlteQS1aYS16MC05XS4qJykinwEKDFNldFByb3h5QXV0aBIUCgxncm91cF9oZWFkZXIYASABKAkSFgoOdXNlcl9pZF9oZWFkZXIYAiABKAkSGAoQc3VwZXJfdXNlcl9ncm91cBgDIAMoCRITCgthZG1pbl9ncm91cBgEIAMoCRIdChBncm91cHNfc2VwYXJhdG9yGAUgASgJSACIAQFCEwoRX2dyb3Vwc19zZXBhcmF0b3IilAEKB1NldEF1dGgSJwoIYXV0aGxlc3MYASABKAsyEy5hcGkudjEuU2V0QXV0aGxlc3NIABIqCgpiYXNpY19hdXRoGAIgASgLMhQuYXBpLnYxLlNldEJhc2ljQXV0aEgAEioKCnByb3h5X2F1dGgYAyABKAsyFC5hcGkudjEuU2V0UHJveHlBdXRoSABCCAoGY29uZmlnIgoKCEF1dGhsZXNzIgsKCUJhc2ljQXV0aCKcAQoJUHJveHlBdXRoEhQKDGdyb3VwX2hlYWRlchgBIAEoCRIWCg51c2VyX2lkX2hlYWRlchgCIAEoCRIYChBzdXBlcl91c2VyX2dyb3VwGAMgAygJEhMKC2FkbWluX2dyb3VwGAQgAygJEh0KEGdyb3Vwc19zZXBhcmF0b3IYBSABKAlIAIgBAUITChFfZ3JvdXBzX3NlcGFyYXRvciKLAQoHR2V0QXV0aBIkCghhdXRobGVzcxgBIAEoCzIQLmFwaS52MS5BdXRobGVzc0gAEicKCmJhc2ljX2F1dGgYAiABKAsyES5hcGkudjEuQmFzaWNBdXRoSAASJwoKcHJveHlfYXV0aBgDIAEoCzIRLmFwaS52MS5Qcm94eUF1dGhIAEIICgZjb25maWdChQEKCmNvbS5hcGkudjFCCUF1dGhQcm90b1ABWjNnaXRodWIuY29tL0x1dWtCbGFua2Vuc3Rpam4vZ2V3aXNoL2dlbi9hcGkvdjE7YXBpdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate]);
 
 /**
  * @generated from message api.v1.AuthStatus
@@ -48,6 +48,19 @@ export const BasicAuthLoginSchema: GenMessage<BasicAuthLogin> = /*@__PURE__*/
   messageDesc(file_api_v1_auth, 1);
 
 /**
+ * @generated from message api.v1.SetAuthless
+ */
+export type SetAuthless = Message<"api.v1.SetAuthless"> & {
+};
+
+/**
+ * Describes the message api.v1.SetAuthless.
+ * Use `create(SetAuthlessSchema)` to create a new message.
+ */
+export const SetAuthlessSchema: GenMessage<SetAuthless> = /*@__PURE__*/
+  messageDesc(file_api_v1_auth, 2);
+
+/**
  * @generated from message api.v1.SetBasicAuth
  */
 export type SetBasicAuth = Message<"api.v1.SetBasicAuth"> & {
@@ -67,20 +80,44 @@ export type SetBasicAuth = Message<"api.v1.SetBasicAuth"> & {
  * Use `create(SetBasicAuthSchema)` to create a new message.
  */
 export const SetBasicAuthSchema: GenMessage<SetBasicAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 2);
+  messageDesc(file_api_v1_auth, 3);
 
 /**
- * @generated from message api.v1.SetAuthless
+ * @generated from message api.v1.SetProxyAuth
  */
-export type SetAuthless = Message<"api.v1.SetAuthless"> & {
+export type SetProxyAuth = Message<"api.v1.SetProxyAuth"> & {
+  /**
+   * @generated from field: string group_header = 1;
+   */
+  groupHeader: string;
+
+  /**
+   * @generated from field: string user_id_header = 2;
+   */
+  userIdHeader: string;
+
+  /**
+   * @generated from field: repeated string super_user_group = 3;
+   */
+  superUserGroup: string[];
+
+  /**
+   * @generated from field: repeated string admin_group = 4;
+   */
+  adminGroup: string[];
+
+  /**
+   * @generated from field: optional string groups_separator = 5;
+   */
+  groupsSeparator?: string;
 };
 
 /**
- * Describes the message api.v1.SetAuthless.
- * Use `create(SetAuthlessSchema)` to create a new message.
+ * Describes the message api.v1.SetProxyAuth.
+ * Use `create(SetProxyAuthSchema)` to create a new message.
  */
-export const SetAuthlessSchema: GenMessage<SetAuthless> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 3);
+export const SetProxyAuthSchema: GenMessage<SetProxyAuth> = /*@__PURE__*/
+  messageDesc(file_api_v1_auth, 4);
 
 /**
  * @generated from message api.v1.SetAuth
@@ -101,6 +138,12 @@ export type SetAuth = Message<"api.v1.SetAuth"> & {
      */
     value: SetBasicAuth;
     case: "basicAuth";
+  } | {
+    /**
+     * @generated from field: api.v1.SetProxyAuth proxy_auth = 3;
+     */
+    value: SetProxyAuth;
+    case: "proxyAuth";
   } | { case: undefined; value?: undefined };
 };
 
@@ -109,7 +152,7 @@ export type SetAuth = Message<"api.v1.SetAuth"> & {
  * Use `create(SetAuthSchema)` to create a new message.
  */
 export const SetAuthSchema: GenMessage<SetAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 4);
+  messageDesc(file_api_v1_auth, 5);
 
 /**
  * @generated from message api.v1.Authless
@@ -122,7 +165,7 @@ export type Authless = Message<"api.v1.Authless"> & {
  * Use `create(AuthlessSchema)` to create a new message.
  */
 export const AuthlessSchema: GenMessage<Authless> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 5);
+  messageDesc(file_api_v1_auth, 6);
 
 /**
  * @generated from message api.v1.BasicAuth
@@ -135,7 +178,44 @@ export type BasicAuth = Message<"api.v1.BasicAuth"> & {
  * Use `create(BasicAuthSchema)` to create a new message.
  */
 export const BasicAuthSchema: GenMessage<BasicAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 6);
+  messageDesc(file_api_v1_auth, 7);
+
+/**
+ * @generated from message api.v1.ProxyAuth
+ */
+export type ProxyAuth = Message<"api.v1.ProxyAuth"> & {
+  /**
+   * @generated from field: string group_header = 1;
+   */
+  groupHeader: string;
+
+  /**
+   * @generated from field: string user_id_header = 2;
+   */
+  userIdHeader: string;
+
+  /**
+   * @generated from field: repeated string super_user_group = 3;
+   */
+  superUserGroup: string[];
+
+  /**
+   * @generated from field: repeated string admin_group = 4;
+   */
+  adminGroup: string[];
+
+  /**
+   * @generated from field: optional string groups_separator = 5;
+   */
+  groupsSeparator?: string;
+};
+
+/**
+ * Describes the message api.v1.ProxyAuth.
+ * Use `create(ProxyAuthSchema)` to create a new message.
+ */
+export const ProxyAuthSchema: GenMessage<ProxyAuth> = /*@__PURE__*/
+  messageDesc(file_api_v1_auth, 8);
 
 /**
  * @generated from message api.v1.GetAuth
@@ -156,6 +236,12 @@ export type GetAuth = Message<"api.v1.GetAuth"> & {
      */
     value: BasicAuth;
     case: "basicAuth";
+  } | {
+    /**
+     * @generated from field: api.v1.ProxyAuth proxy_auth = 3;
+     */
+    value: ProxyAuth;
+    case: "proxyAuth";
   } | { case: undefined; value?: undefined };
 };
 
@@ -164,5 +250,5 @@ export type GetAuth = Message<"api.v1.GetAuth"> & {
  * Use `create(GetAuthSchema)` to create a new message.
  */
 export const GetAuthSchema: GenMessage<GetAuth> = /*@__PURE__*/
-  messageDesc(file_api_v1_auth, 7);
+  messageDesc(file_api_v1_auth, 9);
 
