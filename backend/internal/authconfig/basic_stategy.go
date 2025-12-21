@@ -4,17 +4,19 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"time"
 
 	"connectrpc.com/connect"
+	"github.com/LuukBlankenstijn/gewish/internal/logging"
 	"github.com/LuukBlankenstijn/gewish/internal/utils"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func getSecretkey() string {
-	return utils.EnvOrPanic("JWT_SECRET")
+func getSecretkey() []byte {
+	return []byte(utils.EnvOrPanic("JWT_SECRET"))
 }
 
 type JWTClaims struct {
@@ -76,7 +78,7 @@ func (s *BasicStrategy) Login(password string) (string, error) {
 		LoggedIn:         true,
 		SessionCreatedAt: time.Now().Unix(),
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(1 * time.Hour)), // Token expires in 1 hour
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(1 * time.Hour)),
 			Issuer:    "gewi.sh",
 		},
 	}
@@ -84,6 +86,7 @@ func (s *BasicStrategy) Login(password string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, sessionData)
 	tokenString, err := token.SignedString(getSecretkey())
 	if err != nil {
+		logging.Logger().Warn("failed to sign token", slog.Any("err", err))
 		return "", errors.New("failed to generate token")
 	}
 	return tokenString, nil

@@ -1,12 +1,15 @@
 package public
 
 import (
-	"log"
+	"errors"
+	"log/slog"
 	"net/http"
 	"path"
 	"strings"
 
 	"github.com/LuukBlankenstijn/gewish/internal/app"
+	"github.com/LuukBlankenstijn/gewish/internal/logging"
+	"gorm.io/gorm"
 )
 
 type PublicApi struct {
@@ -46,10 +49,14 @@ func (p *PublicApi) redirectHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	location, err := p.redirects.FindLocationByHostAndPath(r.Context(), host, path)
 	if err != nil {
-		log.Default().Printf("Warning: no redirect found for \"%s%s\"", host, r.URL.String())
+		level := slog.LevelError
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			level = slog.LevelWarn
+		}
+		logging.Logger().Log(r.Context(), level, "failed to resolve redirect", slog.String("host", host), slog.String("path", r.URL.String()), slog.Any("error", err))
 		http.NotFound(w, r)
 		return
 	}
-	log.Default().Printf("Info: redirecting \"%s%s\" to \"%s\"", host, r.URL.String(), location)
+	logging.Logger().Info("redirecting request", slog.String("host", host), slog.String("path", r.URL.String()), slog.String("location", location))
 	http.Redirect(w, r, location, http.StatusFound)
 }

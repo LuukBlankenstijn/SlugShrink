@@ -8,7 +8,7 @@ import (
 	"connectrpc.com/validate"
 	"github.com/LuukBlankenstijn/gewish/gen/api/v1/apiv1connect"
 	"github.com/LuukBlankenstijn/gewish/internal/app"
-	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/auth"
+	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/interceptors"
 )
 
 type DashboardApi struct {
@@ -30,7 +30,8 @@ func (a *DashboardApi) Run() error {
 	path, handler := apiv1connect.NewApiServiceHandler(
 		a,
 		connect.WithInterceptors(
-			auth.AuthInterceptor(a.authConfigs),
+			interceptors.LoggingInterceptor(),
+			interceptors.AuthInterceptor(a.authConfigs),
 			validate.NewInterceptor(),
 		),
 	)

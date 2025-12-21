@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"log"
+	"log/slog"
 
 	"github.com/LuukBlankenstijn/gewish/internal/app"
 	"github.com/LuukBlankenstijn/gewish/internal/db"
+	"github.com/LuukBlankenstijn/gewish/internal/logging"
 	gormrepo "github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
 	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard"
 	"github.com/LuukBlankenstijn/gewish/internal/transport/api/public"
@@ -16,13 +17,13 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Println("No .env file found, using system environment variables")
+		logging.Logger().Info("No .env file found, using system environment variables", slog.Any("error", err))
 	}
 
 	ctx := context.Background()
 	database, err := db.Open()
 	if err != nil {
-		log.Fatal(err)
+		logging.Fatal("failed to open database", slog.Any("error", err))
 	}
 
 	redirectRepo := gormrepo.NewRedirectsRepo(database)
@@ -40,5 +41,7 @@ func main() {
 	g.Go(dashboardApi.Run)
 	g.Go(publicApi.Run)
 
-	log.Fatal(g.Wait())
+	if err := g.Wait(); err != nil {
+		logging.Fatal("server run failed", slog.Any("error", err))
+	}
 }
