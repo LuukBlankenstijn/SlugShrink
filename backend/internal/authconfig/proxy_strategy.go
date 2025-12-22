@@ -33,7 +33,11 @@ func NewProxyStrategy(
 func (s *ProxyStrategy) Type() AuthStrategyType { return AuthStrategyProxy }
 
 func (s *ProxyStrategy) Authenticate(ctx context.Context, req connect.AnyRequest) (context.Context, error) {
-	rawGroups := strings.Split(req.Header().Get(s.GroupHeader), "|")
+	separator := "|"
+	if s.GroupSeparator != nil {
+		separator = *s.GroupSeparator
+	}
+	rawGroups := strings.Split(req.Header().Get(s.GroupHeader), separator)
 	contextValue := authContext{}
 	if includesGroup(s.AdminGroups, rawGroups) {
 		contextValue.UserPermission = Admin
