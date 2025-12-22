@@ -12,12 +12,7 @@
 	const authStatus = createQuery(authStatusQueryOptions);
 
 	$effect(() => {
-		if (
-			!hasPermission(
-				authStatus.data,
-				UserPermission.PERMISSION_ADMIN,
-			)
-		) {
+		if (authStatus.data && !hasPermission(authStatus.data, UserPermission.PERMISSION_ADMIN)) {
 			goto(resolve('/redirects'));
 		}
 	});
