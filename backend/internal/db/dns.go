@@ -31,5 +31,5 @@ func buildMysqlDSN() string {
 
 func buildSqliteDSN() string {
 	path := utils.EnvOrDefault("DB_PATH", "local.db")
-	return fmt.Sprintf("file:%s?_foreign_keys=on", path)
+	return fmt.Sprintf("file:%s?_pragma=foreign_keys(1)", path)
 }

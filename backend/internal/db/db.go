@@ -5,9 +5,9 @@ import (
 
 	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
 	"github.com/LuukBlankenstijn/gewish/internal/utils"
+	"github.com/glebarez/sqlite"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
