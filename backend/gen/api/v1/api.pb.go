@@ -25,7 +25,7 @@ var File_api_v1_api_proto protoreflect.FileDescriptor
 
 const file_api_v1_api_proto_rawDesc = "" +
 	"\n" +
-	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\x98\a\n" +
+	"\x10api/v1/api.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a\x13api/v1/domain.proto\x1a\x14api/v1/options.proto\x1a\x15api/v1/redirect.proto\x1a\x1bgoogle/protobuf/empty.proto2\x95\a\n" +
 	"\n" +
 	"ApiService\x12:\n" +
 	"\vGetRedirect\x12\x17.api.v1.RedirectRequest\x1a\x10.api.v1.Redirect\"\x00\x12E\n" +
@@ -35,10 +35,10 @@ const file_api_v1_api_proto_rawDesc = "" +
 	"\vPutRedirect\x12\x10.api.v1.Redirect\x1a\x10.api.v1.Redirect\"\a\x92\xb5\x18\x03\x02\x03\x04\x124\n" +
 	"\tGetDomain\x12\x15.api.v1.DomainRequest\x1a\x0e.api.v1.Domain\"\x00\x12?\n" +
 	"\n" +
-	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12E\n" +
-	"\fDeleteDomain\x12\x15.api.v1.DomainRequest\x1a\x16.google.protobuf.Empty\"\x06\x92\xb5\x18\x02\x02\x03\x123\n" +
-	"\tPutDomain\x12\x0e.api.v1.Domain\x1a\x0e.api.v1.Domain\"\x06\x92\xb5\x18\x02\x02\x03\x12C\n" +
-	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x06\x92\xb5\x18\x02\x02\x03\x12A\n" +
+	"GetDomains\x12\x16.google.protobuf.Empty\x1a\x17.api.v1.DomainsResponse\"\x00\x12D\n" +
+	"\fDeleteDomain\x12\x15.api.v1.DomainRequest\x1a\x16.google.protobuf.Empty\"\x05\x92\xb5\x18\x01\x03\x122\n" +
+	"\tPutDomain\x12\x0e.api.v1.Domain\x1a\x0e.api.v1.Domain\"\x05\x92\xb5\x18\x01\x03\x12B\n" +
+	"\fCreateDomain\x12\x1b.api.v1.CreateDomainRequest\x1a\x0e.api.v1.Domain\"\x05\x92\xb5\x18\x01\x03\x12A\n" +
 	"\rGetAuthStatus\x12\x16.google.protobuf.Empty\x1a\x12.api.v1.AuthStatus\"\x04\x88\xb5\x18\x01\x12=\n" +
 	"\x05Login\x12\x16.api.v1.BasicAuthLogin\x1a\x16.google.protobuf.Empty\"\x04\x88\xb5\x18\x01\x12?\n" +
 	"\rSetAuthConfig\x12\x0f.api.v1.SetAuth\x1a\x16.google.protobuf.Empty\"\x05\x92\xb5\x18\x01\x03\x12?\n" +

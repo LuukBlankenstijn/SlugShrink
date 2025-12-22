@@ -73,8 +73,8 @@
 	});
 </script>
 
-<div class="min-h-svh bg-slate-950 text-slate-100 overflow-hidden">
-	<div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 min-h-svh overflow-y-auto">
+<div class="min-h-svh overflow-hidden bg-slate-950 text-slate-100">
+	<div class="mx-auto flex min-h-svh max-w-6xl flex-col gap-6 overflow-y-auto px-4 py-10">
 		<header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
 			<div class="space-y-2">
 				<div class="flex gap-4">
@@ -91,7 +91,7 @@
 						{/if}
 					</a>
 
-					{#if hasPermission(authStatus.data, UserPermission.PERMISSION_ADMIN, UserPermission.PERMISSION_SUPERUSER)}
+					{#if hasPermission(authStatus.data, UserPermission.PERMISSION_ADMIN)}
 						<a
 							href={resolve('/domains')}
 							class="relative text-2xl font-semibold tracking-tight text-white/60 hover:text-white"

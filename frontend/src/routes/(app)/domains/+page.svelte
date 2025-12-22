@@ -16,7 +16,6 @@
 			!hasPermission(
 				authStatus.data,
 				UserPermission.PERMISSION_ADMIN,
-				UserPermission.PERMISSION_SUPERUSER
 			)
 		) {
 			goto(resolve('/redirects'));

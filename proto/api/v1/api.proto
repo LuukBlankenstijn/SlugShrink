@@ -26,15 +26,12 @@ service ApiService {
   rpc GetDomain(DomainRequest) returns (Domain) {}
   rpc GetDomains(google.protobuf.Empty) returns (DomainsResponse) {}
   rpc DeleteDomain(DomainRequest) returns (google.protobuf.Empty) {
-    option (api.v1.permissions) = PERMISSION_SUPERUSER;
     option (api.v1.permissions) = PERMISSION_ADMIN;
   }
   rpc PutDomain(Domain) returns (Domain) {
-    option (api.v1.permissions) = PERMISSION_SUPERUSER;
     option (api.v1.permissions) = PERMISSION_ADMIN;
   }
   rpc CreateDomain(CreateDomainRequest) returns (Domain) {
-    option (api.v1.permissions) = PERMISSION_SUPERUSER;
     option (api.v1.permissions) = PERMISSION_ADMIN;
   }
 

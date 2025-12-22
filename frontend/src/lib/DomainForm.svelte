@@ -97,7 +97,13 @@
 			class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
 			disabled={saveDomain.isPending}
 		>
-			{saveDomain.isPending ? 'Saving…' : 'Save'}
+			{#if saveDomain.isPending}
+				Saving…
+			{:else if current}
+				Update
+			{:else}
+				Save
+			{/if}
 		</button>
 
 		{#if current}
