@@ -1,3 +1,4 @@
 .cache
 sqlite_db
 .env
+local.db

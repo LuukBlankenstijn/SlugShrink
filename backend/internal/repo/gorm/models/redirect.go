@@ -11,7 +11,7 @@ import (
 type RedirectModel struct {
 	BaseModel
 	DomainId  uuid.UUID   `gorm:"uniqueIndex:idx_unique_target"`
-	Domain    DomainModel `gorm:"foreignKey:DomainId"`
+	Domain    DomainModel `gorm:"foreignKey:DomainId;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Path      string      `gorm:"uniqueIndex:idx_unique_target"`
 	TargetUrl string
 	Active    bool
