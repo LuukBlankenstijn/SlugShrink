@@ -33,6 +33,8 @@ The `dev/` folder contains a Traefik setup that forwards to the local frontend (
 
 - Docker Compose: see `compose.example.yaml` for a Postgres-backed setup.
 
+The dashboard is served on port 8080, and the server doing the actual redirects on 8081.
+
 ## Environment variables
 
 | Variable      | Options / Default                                         | Description                                             |
