@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
-	import type { Domain } from '../gen/api/v1/api_pb';
+	import type { Domain } from '../gen/api/v1/domain_pb';
 	import { api } from './api.svelte';
 	import Modal from '$lib/Modal.svelte';
 	import { queryKeys } from '$lib/queryKeys';
+	import { deleteDomainMutationOptions, saveDomainMutationOptions } from '$lib/mutationOptions';
 
 	interface Props {
 		readonly onClose: () => void;
@@ -31,7 +32,7 @@
 	};
 
 	const deleteDomain = createMutation(() => ({
-		mutationFn: ({ id }: { id: string }) => api.deleteDomain({ id }),
+		...deleteDomainMutationOptions(api),
 		onSuccess: async () => {
 			qc.invalidateQueries({ queryKey: queryKeys.domains() });
 			close();
@@ -41,13 +42,8 @@
 		}
 	}));
 
-	const createDomain = createMutation(() => ({
-		mutationFn: ({ name, domain }: { name: string; domain: string }) => {
-			if (current) {
-				return api.putDomain({ id: current.id, name, domain });
-			}
-			return api.createDomain({ name, domain });
-		},
+	const saveDomain = createMutation(() => ({
+		...saveDomainMutationOptions(api, current),
 		onSuccess: async () => {
 			qc.invalidateQueries({ queryKey: queryKeys.domains() });
 			close();
@@ -62,7 +58,7 @@
 	class="space-y-4"
 	onsubmit={(e) => {
 		e.preventDefault();
-		createDomain.mutate({ name, domain });
+		saveDomain.mutate({ name, domain });
 	}}
 >
 	<label class="block">
@@ -99,9 +95,9 @@
 		<button
 			type="submit"
 			class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-			disabled={createDomain.isPending}
+			disabled={saveDomain.isPending}
 		>
-			{createDomain.isPending ? 'Saving…' : 'Save'}
+			{saveDomain.isPending ? 'Saving…' : 'Save'}
 		</button>
 
 		{#if current}

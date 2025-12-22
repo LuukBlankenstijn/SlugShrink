@@ -1,5 +1,5 @@
 import { makeApi } from '$lib/api.svelte';
-import { authConfigQueryOptions } from '$lib/queryOptions';
+import { redirectsQueryOptions } from '$lib/queryOptions';
 import { browser } from '$app/environment';
 import type { PageLoad } from './$types';
 
@@ -8,5 +8,5 @@ export const load: PageLoad = async ({ parent, fetch }) => {
   const api = makeApi(fetch);
 
   if (!browser) return;
-  await queryClient.prefetchQuery(authConfigQueryOptions(api));
+  await queryClient.prefetchQuery(redirectsQueryOptions({ page: 1, pageSize: 10, search: "" }, api));
 };

@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { api } from '$lib/api.svelte';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { getContext } from 'svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
-	import { queryKeys } from '$lib/queryKeys';
 	import { authStatusQueryOptions } from '$lib/queries/authStatus';
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { UserPermission } from '../../../gen/api/v1/auth_pb';
 	import { hasPermission } from '$lib/auth';
+	import { domainsQueryOptions } from '$lib/queryOptions';
 
 	const authStatus = createQuery(authStatusQueryOptions);
 
@@ -24,10 +23,7 @@
 		}
 	});
 
-	const query = createQuery(() => ({
-		queryKey: queryKeys.domains(),
-		queryFn: () => api.getDomains({})
-	}));
+	const query = createQuery(() => domainsQueryOptions());
 
 	const domains = $derived(() => query.data?.data ?? []);
 	const { openDomainModal } = getContext<ModalControls>(MODAL_CONTEXT);

@@ -14,4 +14,6 @@ export const makeApi = (fetchFn: typeof fetch) => {
 	return createClient(ApiService, transport);
 };
 
+export type ApiClient = ReturnType<typeof makeApi>;
+
 export const api = makeApi(fetch);

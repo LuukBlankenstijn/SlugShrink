@@ -5,38 +5,33 @@
 	import { authStatusQueryKey } from '$lib/queries/authStatus';
 	import { queryKeys } from '$lib/queryKeys';
 	import type { ProxyAuth } from '../../../gen/api/v1/auth_pb';
+	import { proxyAuthConfigMutationOptions } from '$lib/mutationOptions';
 
 	const { saveTrigger, currentConfig }: { saveTrigger: number; currentConfig?: ProxyAuth } =
 		$props();
 	const queryclient = useQueryClient();
-	let lastProcessedTrigger = saveTrigger;
+	let lastProcessedTrigger = $state(0);
 
-	let groupHeader = $state(currentConfig?.groupHeader ?? '');
-	let userIdHeader = $state(currentConfig?.userIdHeader ?? '');
-	let superUserGroups = $state(currentConfig?.superUserGroups ?? []);
-	let adminGroups = $state(currentConfig?.adminGroups ?? []);
+	let groupHeader = $state('');
+	let userIdHeader = $state('');
+	let superUserGroups = $state<string[]>([]);
+	let adminGroups = $state<string[]>([]);
 	let superUserGroupInput = $state('');
 	let adminGroupInput = $state('');
-	let groupSeparator = $state(currentConfig?.groupsSeparator ?? '');
+	let groupSeparator = $state('');
 	let validationError = $state<string | null>(null);
 	let serverError = $state<string | null>(null);
 
 	const errorMessage = $derived(validationError ?? serverError);
 
 	const mutation = createMutation(() => ({
-		mutationFn: () =>
-			api.setAuthConfig({
-				config: {
-					case: 'proxyAuth',
-					value: {
-						groupHeader,
-						userIdHeader,
-						superUserGroups,
-						adminGroups,
-						groupsSeparator: groupSeparator ?? undefined
-					}
-				}
-			}),
+		...proxyAuthConfigMutationOptions(api, {
+			groupHeader,
+			userIdHeader,
+			superUserGroups,
+			adminGroups,
+			groupSeparator
+		}),
 		onError: (err: unknown) => {
 			serverError = err instanceof Error ? err.message : 'Something went wrong';
 		},
@@ -46,7 +41,6 @@
 			queryclient.invalidateQueries({ queryKey: queryKeys.authConfig() });
 			queryclient.invalidateQueries({ queryKey: authStatusQueryKey });
 		},
-		retry: false
 	}));
 
 	function commitPendingInputs() {
@@ -104,22 +98,32 @@
 	}
 
 	$effect(() => {
-		if (saveTrigger > lastProcessedTrigger && !mutation.isPending) {
-			lastProcessedTrigger = saveTrigger;
-			untrack(() => {
-				const validation = validate();
-				if (validation) {
-					validationError = validation;
-					return;
-				}
-				mutation.mutate();
-			});
-		}
+		if (saveTrigger <= lastProcessedTrigger || mutation.isPending) return;
+		lastProcessedTrigger = saveTrigger;
+		untrack(() => {
+			const validation = validate();
+			if (validation) {
+				validationError = validation;
+				return;
+			}
+			mutation.mutate();
+		});
 	});
 
 	$effect(() => {
 		validationError = null;
 		serverError = null;
+	});
+
+	$effect(() => {
+		if (!currentConfig) return;
+		groupHeader = currentConfig.groupHeader ?? '';
+		userIdHeader = currentConfig.userIdHeader ?? '';
+		superUserGroups = [...(currentConfig.superUserGroups ?? [])];
+		adminGroups = [...(currentConfig.adminGroups ?? [])];
+		groupSeparator = currentConfig.groupsSeparator ?? '';
+		superUserGroupInput = '';
+		adminGroupInput = '';
 	});
 </script>
 

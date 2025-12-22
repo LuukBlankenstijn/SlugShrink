@@ -4,6 +4,8 @@
 	import Modal from '$lib/Modal.svelte';
 	import { queryKeys } from '$lib/queryKeys';
 	import type { FullRedirect } from '../gen/api/v1/redirect_pb';
+	import { domainsQueryOptions } from '$lib/queryOptions';
+	import { deleteRedirectMutationOptions, saveRedirectMutationOptions } from '$lib/mutationOptions';
 
 	interface Props {
 		readonly onClose: () => void;
@@ -13,10 +15,7 @@
 	const { onClose, current }: Props = $props();
 
 	const qc = useQueryClient();
-	const domainsQuery = createQuery(() => ({
-		queryKey: queryKeys.domains(),
-		queryFn: () => api.getDomains({})
-	}));
+	const domainsQuery = createQuery(() => domainsQueryOptions(api));
 
 	const domains = $derived(() => domainsQuery.data?.data ?? []);
 
@@ -60,21 +59,8 @@
 		}
 	});
 
-	const createRedirect = createMutation(() => ({
-		mutationFn: ({
-			domainId,
-			path,
-			targetUrl,
-			active
-		}: {
-			domainId: string;
-			path: string;
-			targetUrl: string;
-			active: boolean;
-		}) =>
-			isEditing()
-				? api.putRedirect({ id: current?.id ?? '', domainId, path, targetUrl, active })
-				: api.createRedirect({ domainId, path, targetUrl, active }),
+	const saveRedirect = createMutation(() => ({
+		...saveRedirectMutationOptions(api, current),
 		onSuccess: async () => {
 			qc.invalidateQueries({ queryKey: queryKeys.allRedirects() });
 			close();
@@ -85,7 +71,7 @@
 	}));
 
 	const deleteRedirect = createMutation(() => ({
-		mutationFn: ({ id }: { id: string }) => api.deleteRedirect({ id }),
+		...deleteRedirectMutationOptions(api),
 		onSuccess: async () => {
 			qc.invalidateQueries({ queryKey: queryKeys.allRedirects() });
 			close();
@@ -100,7 +86,7 @@
 	class="space-y-4"
 	onsubmit={(e) => {
 		e.preventDefault();
-		createRedirect.mutate({ domainId, path, targetUrl, active });
+		saveRedirect.mutate({ domainId, path, targetUrl, active });
 	}}
 >
 	<label class="block space-y-1.5">
@@ -161,9 +147,9 @@
 		<button
 			type="submit"
 			class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-			disabled={createRedirect.isPending || domains().length === 0}
+			disabled={saveRedirect.isPending || domains().length === 0}
 		>
-			{#if createRedirect.isPending}
+			{#if saveRedirect.isPending}
 				Saving…
 			{:else if isEditing()}
 				Update

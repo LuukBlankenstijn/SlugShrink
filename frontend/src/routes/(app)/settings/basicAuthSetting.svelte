@@ -6,10 +6,11 @@
 	import { untrack } from 'svelte';
 	import { authStatusQueryKey } from '$lib/queries/authStatus';
 	import { queryKeys } from '$lib/queryKeys';
+	import { basicAuthConfigMutationOptions } from '$lib/mutationOptions';
 
 	const { saveTrigger } = $props();
 	const queryclient = useQueryClient();
-	let lastProcessedTrigger = saveTrigger;
+	let lastProcessedTrigger = $state(0);
 
 	let password = $state('');
 	let repeatedPassword = $state('');
@@ -22,16 +23,7 @@
 	const errorMessage = $derived(validationError ?? serverError);
 
 	const mutation = createMutation(() => ({
-		mutationFn: () =>
-			api.setAuthConfig({
-				config: {
-					case: 'basicAuth',
-					value: {
-						password: password,
-						repeatedPassword: repeatedPassword
-					}
-				}
-			}),
+		...basicAuthConfigMutationOptions(api, { password, repeatedPassword }),
 		onError: (err: unknown) => {
 			serverError = err instanceof Error ? err.message : 'Something went wrong';
 		},
@@ -42,7 +34,6 @@
 			queryclient.invalidateQueries({ queryKey: authStatusQueryKey });
 			goto(resolve('/login'));
 		},
-		retry: false
 	}));
 
 	function validatePasswords() {
@@ -78,14 +69,13 @@
 	}
 
 	$effect(() => {
-		if (saveTrigger > lastProcessedTrigger && !mutation.isPending) {
-			lastProcessedTrigger = saveTrigger;
-			untrack(() => {
-				if (validatePasswords()) {
-					mutation.mutate();
-				}
-			});
-		}
+		if (saveTrigger <= lastProcessedTrigger || mutation.isPending) return;
+		lastProcessedTrigger = saveTrigger;
+		untrack(() => {
+			if (validatePasswords()) {
+				mutation.mutate();
+			}
+		});
 	});
 
 	$effect(() => {

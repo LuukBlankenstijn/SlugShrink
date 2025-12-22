@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { api } from '$lib/api.svelte';
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
 	import { authStatusQueryOptions } from '$lib/queries/authStatus';
 	import { queryKeys } from '$lib/queryKeys';
+	import { loginMutationOptions } from '$lib/mutationOptions';
 	const queryClient = useQueryClient();
 
 	let password = $state('');
@@ -13,7 +13,7 @@
 	const authStatus = createQuery(authStatusQueryOptions);
 
 	const login = createMutation(() => ({
-		mutationFn: ({ password }: { password: string }) => api.login({ password }),
+		...loginMutationOptions(),
 		onSuccess: () => {
 			queryClient.setQueryData(queryKeys.authStatus(), () => true);
 			error = '';

@@ -1,36 +1,28 @@
 <script lang="ts">
-	import { api } from '$lib/api.svelte';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 	import { untrack } from 'svelte';
 	import { authStatusQueryKey } from '$lib/queries/authStatus';
 	import { queryKeys } from '$lib/queryKeys';
+	import { authlessConfigMutationOptions } from '$lib/mutationOptions';
 
 	const { saveTrigger } = $props();
 	const queryclient = useQueryClient();
-	let lastProcessedTrigger = saveTrigger;
+	let lastProcessedTrigger = $state(0);
 
 	const mutation = createMutation(() => ({
-		mutationFn: () =>
-			api.setAuthConfig({
-				config: {
-					case: 'authless',
-					value: {}
-				}
-			}),
+		...authlessConfigMutationOptions(),
 		onSuccess: () => {
 			queryclient.invalidateQueries({ queryKey: queryKeys.authConfig() });
 			queryclient.invalidateQueries({ queryKey: authStatusQueryKey });
 		},
-		retry: false
 	}));
 
 	$effect(() => {
-		if (saveTrigger > lastProcessedTrigger && !mutation.isPending) {
-			lastProcessedTrigger = saveTrigger;
-			untrack(() => {
-				mutation.mutate();
-			});
-		}
+		if (saveTrigger <= lastProcessedTrigger || mutation.isPending) return;
+		lastProcessedTrigger = saveTrigger;
+		untrack(() => {
+			mutation.mutate();
+		});
 	});
 </script>
 

@@ -70,6 +70,7 @@ type RedirectsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	Pagesize      int32                  `protobuf:"varint,2,opt,name=pagesize,proto3" json:"pagesize,omitempty"`
+	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,6 +117,13 @@ func (x *RedirectsRequest) GetPagesize() int32 {
 		return x.Pagesize
 	}
 	return 0
+}
+
+func (x *RedirectsRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
 }
 
 type RedirectsResponse struct {
@@ -433,10 +441,11 @@ const file_api_v1_redirect_proto_rawDesc = "" +
 	"\n" +
 	"\x15api/v1/redirect.proto\x12\x06api.v1\x1a\x14api/v1/options.proto\x1a\x1bbuf/validate/validate.proto\"+\n" +
 	"\x0fRedirectRequest\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"T\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"l\n" +
 	"\x10RedirectsRequest\x12\x1b\n" +
 	"\x04page\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x04page\x12#\n" +
-	"\bpagesize\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\bpagesize\"\\\n" +
+	"\bpagesize\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\bpagesize\x12\x16\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\"\\\n" +
 	"\x11RedirectsResponse\x12(\n" +
 	"\x04data\x18\x01 \x03(\v2\x14.api.v1.FullRedirectR\x04data\x12\x1d\n" +
 	"\x05total\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x05total\"\xdc\x01\n" +

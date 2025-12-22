@@ -1,23 +1,28 @@
 <script lang="ts">
-	import { api } from '$lib/api.svelte';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { getContext } from 'svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
-	import { queryKeys } from '$lib/queryKeys';
 	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { redirectsQueryOptions } from '$lib/queryOptions';
 	import { UserPermission } from '../../../gen/api/v1/auth_pb';
 
 	let page = $state(1);
 	let pageSize = $state(10);
-	const query = createQuery(() => ({
-		queryKey: queryKeys.redirects(page, pageSize),
-		queryFn: () =>
-			api.getRedirects({
-				page,
-				pagesize: pageSize
-			}),
-		keepPreviousData: true
-	}));
+	let searchInput = $state('');
+	let search = $state('');
+	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+	function handleSearchInput(value: string) {
+		searchInput = value;
+		page = 1;
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
+		debounceTimer = setTimeout(() => {
+			search = value;
+		}, 200);
+	}
+	const query = createQuery(() => redirectsQueryOptions({ page, pageSize, search }));
 
 	const redirects = $derived(() => query.data?.data ?? []);
 	const total = $derived(() => query.data?.total ?? 0);
@@ -53,26 +58,15 @@
 			<span class="font-semibold text-slate-100">{total()}</span>
 			{total() === 1 ? 'redirect' : 'redirects'} found
 		</p>
-		<div class="hidden items-center gap-3 text-xs text-slate-300 sm:flex">
-			<button
-				type="button"
-				class="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 font-semibold text-white transition enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
-				onclick={() => (page = Math.max(1, page - 1))}
-				disabled={page === 1 || query.isFetching}
-			>
-				Prev
-			</button>
-			<span class="text-slate-200">
-				Page {page} / {totalPages()}
-			</span>
-			<button
-				type="button"
-				class="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 font-semibold text-white transition enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
-				onclick={() => (page = Math.min(totalPages(), page + 1))}
-				disabled={page >= totalPages() || query.isFetching}
-			>
-				Next
-			</button>
+		<div class="w-full sm:max-w-xs">
+			<input
+				type="search"
+				inputmode="search"
+				placeholder="Search path or target"
+				class="w-full rounded-lg border border-white/15 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
+				value={searchInput}
+				oninput={(e) => handleSearchInput((e.target as HTMLInputElement).value)}
+			/>
 		</div>
 	</div>
 
@@ -145,32 +139,30 @@
 									{r.path}
 								</span>
 							</td>
-					<td class="px-4 py-3">
-						<div class="flex items-center gap-2">
-							<span class="block max-w-136 truncate text-slate-200" title={r.targetUrl}>
-								{r.targetUrl}
-							</span>
-							<a
-								href={r.targetUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/40"
-								title="Open in new tab"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="1.6"
-									class="h-4 w-4"
-								>
-									<path d="M7 7h10v10" />
-									<path d="M7 17 17 7" />
-								</svg>
-							</a>
-						</div>
-					</td>
+							<td class="px-4 py-3">
+								<div class="flex items-center gap-3">
+									<span class="block min-w-0 flex-1 truncate text-slate-200" title={r.targetUrl}>
+										{r.targetUrl}
+									</span>
+									<button
+										class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-200 transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
+										title="Open in new tab"
+										onclick={() => window.open(r.targetUrl, '_blank', 'noreferrer')}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.6"
+											class="h-4 w-4"
+										>
+											<path d="M7 7h10v10" />
+											<path d="M7 17 17 7" />
+										</svg>
+									</button>
+								</div>
+							</td>
 							<td class="px-4 py-3 text-right">
 								<button
 									type="button"

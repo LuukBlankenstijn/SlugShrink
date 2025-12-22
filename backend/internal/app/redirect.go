@@ -3,6 +3,7 @@ package app
 import (
 	"context"
 	"errors"
+	"strings"
 
 	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
 	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
@@ -43,7 +44,8 @@ func (a *Redirects) GetMany(ctx context.Context, pageData *apiv1.RedirectsReques
 	if pageData.Pagesize == 0 {
 		pageData.Pagesize = 10
 	}
-	redirects, total, err := a.repo.GetFullRedirects(ctx, int(pageData.Page), int(pageData.Pagesize))
+	search := strings.TrimSpace(pageData.Search)
+	redirects, total, err := a.repo.GetFullRedirects(ctx, int(pageData.Page), int(pageData.Pagesize), search)
 	data := []*apiv1.FullRedirect{}
 
 	for _, redirect := range redirects {

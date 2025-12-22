@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { api } from '$lib/api.svelte';
 	import { createQuery } from '@tanstack/svelte-query';
 	import BasicAuthSetting from './basicAuthSetting.svelte';
 	import { getMethod, methods } from './authMethods';
 	import AuthlessSettings from './authlessSettings.svelte';
-	import { queryKeys } from '$lib/queryKeys';
 	import ProxyAuthSettings from './proxyAuthSettings.svelte';
 	import { authStatusQueryOptions } from '$lib/queries/authStatus';
+	import { authConfigQueryOptions } from '$lib/queryOptions';
 	import { hasPermission } from '$lib/auth';
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
@@ -21,10 +20,7 @@
 
 	let saveTrigger = $state(0);
 
-	const query = createQuery(() => ({
-		queryKey: queryKeys.authConfig(),
-		queryFn: () => api.getAuthConfig({})
-	}));
+	const query = createQuery(() => authConfigQueryOptions());
 
 	let userSelection = $state<string | null>(null);
 	let selection = $derived(userSelection ?? query.data?.config.case ?? '');

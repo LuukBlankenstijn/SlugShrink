@@ -1,13 +1,12 @@
 import { makeApi } from '$lib/api.svelte';
-import { queryKeys } from '$lib/queryKeys';
+import { domainsQueryOptions } from '$lib/queryOptions';
+import { browser } from '$app/environment';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ parent, fetch }) => {
 	const { queryClient } = await parent();
 	const api = makeApi(fetch);
 
-	await queryClient.prefetchQuery({
-		queryKey: queryKeys.domains(),
-		queryFn: () => api.getDomains({})
-	});
+	if (!browser) return;
+	await queryClient.prefetchQuery(domainsQueryOptions(api));
 };

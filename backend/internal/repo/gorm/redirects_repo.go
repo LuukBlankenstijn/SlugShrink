@@ -37,12 +37,25 @@ func (r *RedirectRepo) FindRedirectForHostAndPath(context context.Context, host,
 	return redirect, err
 }
 
-func (r *RedirectRepo) GetFullRedirects(context context.Context, page, pagesize int) ([]models.RedirectModel, int64, error) {
-	found, err := r.repo.Preload("Domain", nil).Limit(pagesize).Offset((page - 1) * pagesize).Find(context)
+func (r *RedirectRepo) GetFullRedirects(context context.Context, page, pagesize int, search string) ([]models.RedirectModel, int64, error) {
+	query := r.repo.Preload("Domain", nil)
+	if search != "" {
+		like := "%" + strings.ToLower(search) + "%"
+		query = query.Where("LOWER(path) LIKE ? OR LOWER(target_url) LIKE ?", like, like)
+	}
+
+	found, err := query.Limit(pagesize).Offset((page - 1) * pagesize).Find(context)
 	if err != nil {
 		return []models.RedirectModel{}, 0, err
 	}
-	count, err := r.repo.Count(context, "id")
+
+	var count int64
+	if search != "" {
+		like := "%" + strings.ToLower(search) + "%"
+		count, err = r.repo.Where("LOWER(path) LIKE ? OR LOWER(target_url) LIKE ?", like, like).Count(context, "id")
+	} else {
+		count, err = r.repo.Count(context, "id")
+	}
 
 	return found, count, err
 }
