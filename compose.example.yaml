@@ -1,6 +1,6 @@
 services:
   app:
-    image: gewish
+    image: ghcr.io/luukblankenstijn/gewi.sh:latest
     container_name: gewish-app
     ports:
       - "8080:8080"
