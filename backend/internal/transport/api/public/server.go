@@ -32,7 +32,7 @@ func (a *PublicApi) Run() error {
 	p.SetHTTP1(true)
 	p.SetUnencryptedHTTP2(true)
 	s := http.Server{
-		Addr:      "localhost:8081",
+		Addr:      "0.0.0.0:8081",
 		Handler:   mux,
 		Protocols: p,
 	}

@@ -2,16 +2,28 @@ package db
 
 import (
 	"fmt"
+	"time"
 
+	"github.com/LuukBlankenstijn/gewish/internal/logging"
 	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
 	"github.com/LuukBlankenstijn/gewish/internal/utils"
 	"github.com/glebarez/sqlite"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 func Open() (*gorm.DB, error) {
+	gormLogger := &SlogAdapter{
+		Logger: logging.Logger(),
+		Config: logger.Config{
+			SlowThreshold:             200 * time.Millisecond,
+			LogLevel:                  logger.Warn,
+			IgnoreRecordNotFoundError: true,
+			Colorful:                  false,
+		},
+	}
 	dbType := utils.EnvOrDefault("DB_TYPE", "sqlite") // options: postgres, mysql, sqlite
 
 	var dialector gorm.Dialector
@@ -29,6 +41,7 @@ func Open() (*gorm.DB, error) {
 
 	db, err := gorm.Open(dialector, &gorm.Config{
 		TranslateError: true,
+		Logger:         gormLogger,
 	})
 	if err != nil {
 		return nil, err

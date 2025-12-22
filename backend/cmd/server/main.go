@@ -17,7 +17,7 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		logging.Logger().Info("No .env file found, using system environment variables", slog.Any("error", err))
+		logging.Logger().Debug("No .env file found, using system environment variables", slog.Any("error", err))
 	}
 
 	ctx := context.Background()

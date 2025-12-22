@@ -9,6 +9,7 @@ import (
 	"github.com/LuukBlankenstijn/gewish/gen/api/v1/apiv1connect"
 	"github.com/LuukBlankenstijn/gewish/internal/app"
 	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/interceptors"
+	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/static"
 )
 
 type DashboardApi struct {
@@ -43,12 +44,13 @@ func (a *DashboardApi) Run() error {
 	)
 	mux.Handle(grpcreflect.NewHandlerV1(reflector))
 	mux.Handle(grpcreflect.NewHandlerV1Alpha(reflector))
+	static.RegisterFrontend(mux)
 
 	p := new(http.Protocols)
 	p.SetHTTP1(true)
 	p.SetUnencryptedHTTP2(true)
 	s := http.Server{
-		Addr:      "localhost:8080",
+		Addr:      "0.0.0.0:8080",
 		Handler:   mux,
 		Protocols: p,
 	}
