@@ -35,11 +35,16 @@
 	const authStatus = createQuery(authStatusQueryOptions);
 
 	const canEdit = (creator?: string) => {
-		return (
-			authStatus.data &&
-			(authStatus.data.userId === creator ||
-				!(authStatus.data.permission === UserPermission.PERMISSION_USER))
-		);
+		if (!authStatus.data) {
+			return false;
+		}
+		if (
+			authStatus.data.permission === UserPermission.PERMISSION_ADMIN ||
+			authStatus.data.permission === UserPermission.PERMISSION_SUPERUSER
+		) {
+			return true;
+		}
+		return authStatus.data.userId !== undefined && authStatus.data.userId === creator;
 	};
 </script>
 
