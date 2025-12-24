@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
-	"github.com/LuukBlankenstijn/gewish/internal/logging"
-	"github.com/LuukBlankenstijn/gewish/internal/utils"
+	"github.com/LuukBlankenstijn/slugshrink/internal/logging"
+	"github.com/LuukBlankenstijn/slugshrink/internal/utils"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -72,7 +72,7 @@ func (s *BasicStrategy) Login(password string) (string, error) {
 		SessionCreatedAt: time.Now().Unix(),
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(1 * time.Hour)),
-			Issuer:    "gewi.sh",
+			Issuer:    "slugshrink",
 		},
 	}
 

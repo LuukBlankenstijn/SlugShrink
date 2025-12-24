@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-	<title>Domains · gewi.sh</title>
+	<title>Domains · SlugShrink</title>
 </svelte:head>
 
 <section

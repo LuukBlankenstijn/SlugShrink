@@ -237,9 +237,9 @@ const file_api_v1_domain_proto_rawDesc = "" +
 	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domain\"h\n" +
 	"\x13CreateDomainRequest\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12=\n" +
-	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domainB\x87\x01\n" +
+	"\x06domain\x18\x03 \x01(\tB%\xbaH\"r 2\x1e^[a-zA-Z0-9.-]+(:[0-9]{1,5})?$R\x06domainB\x8b\x01\n" +
 	"\n" +
-	"com.api.v1B\vDomainProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
+	"com.api.v1B\vDomainProtoP\x01Z7github.com/LuukBlankenstijn/slugshrink/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var (
 	file_api_v1_domain_proto_rawDescOnce sync.Once

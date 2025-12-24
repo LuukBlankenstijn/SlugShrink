@@ -863,9 +863,9 @@ const file_api_v1_auth_proto_rawDesc = "" +
 	"\x0fPERMISSION_USER\x10\x01\x12\x18\n" +
 	"\x14PERMISSION_SUPERUSER\x10\x02\x12\x14\n" +
 	"\x10PERMISSION_ADMIN\x10\x03\x12\x16\n" +
-	"\x12PERMISSION_CREATOR\x10\x04B\x85\x01\n" +
+	"\x12PERMISSION_CREATOR\x10\x04B\x89\x01\n" +
 	"\n" +
-	"com.api.v1B\tAuthProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
+	"com.api.v1B\tAuthProtoP\x01Z7github.com/LuukBlankenstijn/slugshrink/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var (
 	file_api_v1_auth_proto_rawDescOnce sync.Once

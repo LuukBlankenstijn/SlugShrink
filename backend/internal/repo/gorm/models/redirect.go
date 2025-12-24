@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 
-	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
+	"github.com/LuukBlankenstijn/slugshrink/internal/authconfig"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )

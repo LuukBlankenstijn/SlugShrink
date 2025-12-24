@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/LuukBlankenstijn/gewish/internal/utils"
+	"github.com/LuukBlankenstijn/slugshrink/internal/utils"
 )
 
 func buildPostgresDSN() string {

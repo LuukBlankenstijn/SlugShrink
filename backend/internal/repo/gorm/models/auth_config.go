@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
+	"github.com/LuukBlankenstijn/slugshrink/internal/authconfig"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )

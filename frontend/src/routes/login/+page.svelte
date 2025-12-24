@@ -39,7 +39,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign in · gewi.sh</title>
+	<title>Sign in · slugshrink</title>
 </svelte:head>
 
 <div class="min-h-svh bg-slate-950 text-slate-100">
@@ -52,7 +52,7 @@
 				<span
 					class="bg-linear-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text font-semibold text-transparent"
 				>
-					gewi.sh
+					slugshrink
 				</span>
 			</p>
 			<h1 class="text-3xl font-semibold tracking-tight">Welcome back</h1>

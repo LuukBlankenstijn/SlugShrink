@@ -3,8 +3,8 @@ package app
 import (
 	"context"
 
-	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
-	gormrepo "github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
+	"github.com/LuukBlankenstijn/slugshrink/internal/authconfig"
+	gormrepo "github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm"
 )
 
 type AuthConfigs struct {

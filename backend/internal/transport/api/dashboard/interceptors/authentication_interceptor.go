@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"connectrpc.com/connect"
-	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
-	"github.com/LuukBlankenstijn/gewish/internal/app"
+	apiv1 "github.com/LuukBlankenstijn/slugshrink/gen/api/v1"
+	"github.com/LuukBlankenstijn/slugshrink/internal/app"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/reflect/protoregistry"

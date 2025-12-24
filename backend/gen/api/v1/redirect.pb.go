@@ -478,9 +478,9 @@ const file_api_v1_redirect_proto_rawDesc = "" +
 	"\x06active\x18\x04 \x01(\bR\x06active\x12\x1d\n" +
 	"\acreator\x18\x05 \x01(\tH\x00R\acreator\x88\x01\x01B\n" +
 	"\n" +
-	"\b_creatorB\x89\x01\n" +
+	"\b_creatorB\x8d\x01\n" +
 	"\n" +
-	"com.api.v1B\rRedirectProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
+	"com.api.v1B\rRedirectProtoP\x01Z7github.com/LuukBlankenstijn/slugshrink/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var (
 	file_api_v1_redirect_proto_rawDescOnce sync.Once

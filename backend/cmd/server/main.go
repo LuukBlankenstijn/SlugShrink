@@ -4,12 +4,12 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/LuukBlankenstijn/gewish/internal/app"
-	"github.com/LuukBlankenstijn/gewish/internal/db"
-	"github.com/LuukBlankenstijn/gewish/internal/logging"
-	gormrepo "github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
-	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard"
-	"github.com/LuukBlankenstijn/gewish/internal/transport/api/public"
+	"github.com/LuukBlankenstijn/slugshrink/internal/app"
+	"github.com/LuukBlankenstijn/slugshrink/internal/db"
+	"github.com/LuukBlankenstijn/slugshrink/internal/logging"
+	gormrepo "github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm"
+	"github.com/LuukBlankenstijn/slugshrink/internal/transport/api/dashboard"
+	"github.com/LuukBlankenstijn/slugshrink/internal/transport/api/public"
 	"github.com/joho/godotenv"
 	"golang.org/x/sync/errgroup"
 )

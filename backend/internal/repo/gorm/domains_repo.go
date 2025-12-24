@@ -1,7 +1,7 @@
 package gormrepo
 
 import (
-	models "github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
+	models "github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm/models"
 	"gorm.io/gorm"
 )
 

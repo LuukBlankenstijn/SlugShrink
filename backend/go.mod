@@ -1,4 +1,4 @@
-module github.com/LuukBlankenstijn/gewish
+module github.com/LuukBlankenstijn/slugshrink
 
 go 1.25.4
 

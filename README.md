@@ -1,6 +1,6 @@
-# Gewi&#46;sh
+# SlugShrink
 
-Gewi&#46;sh is a self-hosted URL shortener with a dashboard for managing domains and redirects, plus a public redirect server for resolving short links.
+SlugShrink is a self-hosted URL shortener with a dashboard for managing domains and redirects, plus a public redirect server for resolving short links.
 
 ## Tech stack
 
@@ -10,7 +10,7 @@ Gewi&#46;sh is a self-hosted URL shortener with a dashboard for managing domains
 
 ## Auth modes
 
-Gewi&#46;sh supports several different modes for authenticating users. They can be configured in the frontend.
+SlugShrink supports several different modes for authenticating users. They can be configured in the frontend.
 
 - Authless: No login; all requests are treated as admin.
 - Basic: Password login with a JWT cookie (`auth_token`) signed by `JWT_SECRET`. Tokens expire after 1 hour.

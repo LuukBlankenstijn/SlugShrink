@@ -1,7 +1,7 @@
 services:
   app:
-    image: ghcr.io/luukblankenstijn/gewi.sh:latest
-    container_name: gewish-app
+    image: ghcr.io/luukblankenstijn/slugshrink:latest
+    container_name: slugshrink-app
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -11,7 +11,7 @@ services:
       - DB_PORT=5432
       - DB_USER=admin
       - DB_PASSWORD=secret
-      - DB_NAME=gewish_db
+      - DB_NAME=slugshrink_db
       - DB_SSLMODE=disable
     depends_on:
       db:
@@ -19,17 +19,17 @@ services:
 
   db:
     image: postgres:17-alpine
-    container_name: gewish-db
+    container_name: slugshrink-db
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=gewish_db
+      - POSTGRES_DB=slugshrink_db
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d gewish_db"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d slugshrink_db"]
       interval: 5s
       timeout: 5s
       retries: 5

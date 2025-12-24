@@ -3,9 +3,9 @@ package app
 import (
 	"context"
 
-	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
-	gormrepo "github.com/LuukBlankenstijn/gewish/internal/repo/gorm"
-	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
+	apiv1 "github.com/LuukBlankenstijn/slugshrink/gen/api/v1"
+	gormrepo "github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm"
+	"github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm/models"
 	"github.com/google/uuid"
 )
 

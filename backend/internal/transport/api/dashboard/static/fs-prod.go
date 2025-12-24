@@ -6,10 +6,10 @@ import (
 	"io/fs"
 	"net/http"
 
-	"github.com/LuukBlankenstijn/gewish"
+	"github.com/LuukBlankenstijn/slugshrink"
 )
 
 func getFrontendFileSystem() http.FileSystem {
-	distFS, _ := fs.Sub(gewish.FrontendAssets, "frontend/build")
+	distFS, _ := fs.Sub(slugshrink.FrontendAssets, "frontend/build")
 	return http.FS(distFS)
 }

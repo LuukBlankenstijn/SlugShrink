@@ -6,10 +6,10 @@ import (
 	"connectrpc.com/connect"
 	"connectrpc.com/grpcreflect"
 	"connectrpc.com/validate"
-	"github.com/LuukBlankenstijn/gewish/gen/api/v1/apiv1connect"
-	"github.com/LuukBlankenstijn/gewish/internal/app"
-	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/interceptors"
-	"github.com/LuukBlankenstijn/gewish/internal/transport/api/dashboard/static"
+	"github.com/LuukBlankenstijn/slugshrink/gen/api/v1/apiv1connect"
+	"github.com/LuukBlankenstijn/slugshrink/internal/app"
+	"github.com/LuukBlankenstijn/slugshrink/internal/transport/api/dashboard/interceptors"
+	"github.com/LuukBlankenstijn/slugshrink/internal/transport/api/dashboard/static"
 )
 
 type DashboardApi struct {

@@ -17,7 +17,7 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/LuukBlankenstijn/gewish/gen
+      value: github.com/LuukBlankenstijn/slugshrink/gen
   disable:
     - file_option: go_package
       module: buf.build/bufbuild/protovalidate

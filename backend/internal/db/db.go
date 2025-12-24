@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/LuukBlankenstijn/gewish/internal/logging"
-	"github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
-	"github.com/LuukBlankenstijn/gewish/internal/utils"
+	"github.com/LuukBlankenstijn/slugshrink/internal/logging"
+	"github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm/models"
+	"github.com/LuukBlankenstijn/slugshrink/internal/utils"
 	"github.com/glebarez/sqlite"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"

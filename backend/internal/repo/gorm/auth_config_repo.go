@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
-	models "github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
+	"github.com/LuukBlankenstijn/slugshrink/internal/authconfig"
+	models "github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm/models"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )

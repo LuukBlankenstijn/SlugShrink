@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	models "github.com/LuukBlankenstijn/gewish/internal/repo/gorm/models"
+	models "github.com/LuukBlankenstijn/slugshrink/internal/repo/gorm/models"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"

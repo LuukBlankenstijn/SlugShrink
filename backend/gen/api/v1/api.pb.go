@@ -42,9 +42,9 @@ const file_api_v1_api_proto_rawDesc = "" +
 	"\rGetAuthStatus\x12\x16.google.protobuf.Empty\x1a\x12.api.v1.AuthStatus\"\x04\x88\xb5\x18\x01\x12=\n" +
 	"\x05Login\x12\x16.api.v1.BasicAuthLogin\x1a\x16.google.protobuf.Empty\"\x04\x88\xb5\x18\x01\x12?\n" +
 	"\rSetAuthConfig\x12\x0f.api.v1.SetAuth\x1a\x16.google.protobuf.Empty\"\x05\x92\xb5\x18\x01\x03\x12?\n" +
-	"\rGetAuthConfig\x12\x16.google.protobuf.Empty\x1a\x0f.api.v1.GetAuth\"\x05\x92\xb5\x18\x01\x03B\x84\x01\n" +
+	"\rGetAuthConfig\x12\x16.google.protobuf.Empty\x1a\x0f.api.v1.GetAuth\"\x05\x92\xb5\x18\x01\x03B\x88\x01\n" +
 	"\n" +
-	"com.api.v1B\bApiProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
+	"com.api.v1B\bApiProtoP\x01Z7github.com/LuukBlankenstijn/slugshrink/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var file_api_v1_api_proto_goTypes = []any{
 	(*RedirectRequest)(nil),       // 0: api.v1.RedirectRequest

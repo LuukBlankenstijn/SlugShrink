@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/LuukBlankenstijn/gewish/internal/utils"
+	"github.com/LuukBlankenstijn/slugshrink/internal/utils"
 )
 
 var logger = newLogger()

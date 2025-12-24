@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
+	v1 "github.com/LuukBlankenstijn/slugshrink/gen/api/v1"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"

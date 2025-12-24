@@ -1,6 +1,6 @@
 //go:build prod
 
-package gewish
+package slugshrink
 
 import "embed"
 

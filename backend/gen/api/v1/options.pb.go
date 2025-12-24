@@ -69,9 +69,9 @@ const file_api_v1_options_proto_rawDesc = "" +
 	"\x14api/v1/options.proto\x12\x06api.v1\x1a\x11api/v1/auth.proto\x1a google/protobuf/descriptor.proto:=\n" +
 	"\tskip_auth\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\bR\bskipAuth:Z\n" +
 	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x03(\x0e2\x16.api.v1.UserPermissionR\vpermissions:E\n" +
-	"\x0eis_redirect_id\x12\x1d.google.protobuf.FieldOptions\x18\xe1\xd4\x03 \x01(\bR\fisRedirectIdB\x88\x01\n" +
+	"\x0eis_redirect_id\x12\x1d.google.protobuf.FieldOptions\x18\xe1\xd4\x03 \x01(\bR\fisRedirectIdB\x8c\x01\n" +
 	"\n" +
-	"com.api.v1B\fOptionsProtoP\x01Z3github.com/LuukBlankenstijn/gewish/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
+	"com.api.v1B\fOptionsProtoP\x01Z7github.com/LuukBlankenstijn/slugshrink/gen/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
 var file_api_v1_options_proto_goTypes = []any{
 	(*descriptorpb.MethodOptions)(nil), // 0: google.protobuf.MethodOptions

@@ -9,8 +9,8 @@ import (
 	"connectrpc.com/connect"
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
-	"github.com/LuukBlankenstijn/gewish/internal/authconfig"
+	apiv1 "github.com/LuukBlankenstijn/slugshrink/gen/api/v1"
+	"github.com/LuukBlankenstijn/slugshrink/internal/authconfig"
 )
 
 func (s *DashboardApi) GetAuthStatus(ctx context.Context, _ *emptypb.Empty) (*apiv1.AuthStatus, error) {

@@ -3,7 +3,7 @@ package dashboard
 import (
 	"context"
 
-	apiv1 "github.com/LuukBlankenstijn/gewish/gen/api/v1"
+	apiv1 "github.com/LuukBlankenstijn/slugshrink/gen/api/v1"
 	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/emptypb"
 )

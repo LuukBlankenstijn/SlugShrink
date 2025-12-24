@@ -7,8 +7,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/LuukBlankenstijn/gewish/internal/app"
-	"github.com/LuukBlankenstijn/gewish/internal/logging"
+	"github.com/LuukBlankenstijn/slugshrink/internal/app"
+	"github.com/LuukBlankenstijn/slugshrink/internal/logging"
 	"gorm.io/gorm"
 )
 

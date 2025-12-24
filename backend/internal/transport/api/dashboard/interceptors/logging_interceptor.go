@@ -5,7 +5,7 @@ import (
 	"log/slog"
 
 	"connectrpc.com/connect"
-	"github.com/LuukBlankenstijn/gewish/internal/logging"
+	"github.com/LuukBlankenstijn/slugshrink/internal/logging"
 )
 
 func LoggingInterceptor() connect.Interceptor {

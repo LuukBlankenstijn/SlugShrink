@@ -44,7 +44,7 @@
 </script>
 
 <svelte:head>
-	<title>Redirects · gewi.sh</title>
+	<title>Redirects · SlugShrink</title>
 </svelte:head>
 
 <section
