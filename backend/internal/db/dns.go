@@ -30,7 +30,7 @@ func buildMysqlDSN() string {
 	name := utils.EnvOrPanic("DB_NAME")
 	sslEnabled := utils.EnvOrDefault("DB_SSLMODE", "false") == "true"
 
-	baseDSN := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+	baseDSN := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local&allowCleartextPasswords=true",
 		user, pass, host, port, name)
 
 	if sslEnabled {
