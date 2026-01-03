@@ -12,10 +12,14 @@ func buildPostgresDSN() string {
 	host := utils.EnvOrPanic("DB_HOST")
 	port := utils.EnvOrPanic("DB_PORT")
 	name := utils.EnvOrPanic("DB_NAME")
-	ssl := utils.EnvOrDefault("DB_SSLMODE", "disable")
+	sslEnabled := utils.EnvOrDefault("DB_SSLMODE", "false") == "true"
+	sslMode := "disable"
+	if sslEnabled {
+		sslMode = "require"
+	}
 
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		host, user, pass, name, port, ssl)
+		host, user, pass, name, port, sslMode)
 }
 
 func buildMysqlDSN() string {
@@ -24,9 +28,15 @@ func buildMysqlDSN() string {
 	host := utils.EnvOrPanic("DB_HOST")
 	port := utils.EnvOrPanic("DB_PORT")
 	name := utils.EnvOrPanic("DB_NAME")
+	sslEnabled := utils.EnvOrDefault("DB_SSLMODE", "false") == "true"
 
-	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+	baseDSN := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		user, pass, host, port, name)
+
+	if sslEnabled {
+		return fmt.Sprintf("%s&tls=true", baseDSN)
+	}
+	return baseDSN
 }
 
 func buildSqliteDSN() string {

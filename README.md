@@ -46,6 +46,6 @@ The dashboard is served on port 8080, and the server doing the actual redirects 
 | `DB_USER`     | required for `postgres`, `mysql`, `mariadb`               | Database user.                                          |
 | `DB_PASSWORD` | required for `postgres`, `mysql`, `mariadb`               | Database password.                                      |
 | `DB_NAME`     | required for `postgres`, `mysql`, `mariadb`               | Database name.                                          |
-| `DB_SSLMODE`  | `disable` (default)                                       | Postgres SSL mode (used when `DB_TYPE=postgres`).       |
+| `DB_SSLMODE`  | `false` (default)                                         | Enable ssl for the database connection.                 |
 | `JWT_SECRET`  | required for Basic auth                                   | Secret key used to sign login JWTs.                     |
 | `LOG_LEVEL`   | `info` (default), `debug`, `warn`, `error`                | Logging verbosity.                                      |
