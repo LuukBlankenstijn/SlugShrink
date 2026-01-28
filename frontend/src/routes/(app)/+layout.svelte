@@ -27,8 +27,8 @@
 		selectedDomain ? 'domains' : selectedRedirect ? 'redirects' : active()
 	);
 	const modalTitle = $derived(() => {
-		if (mode() === 'domains') return selectedDomain ? 'Edit domain' : 'New domain';
-		if (mode() === 'redirects') return selectedRedirect ? 'Edit redirect' : 'New redirect';
+		if (mode() === 'domains') return selectedDomain ? 'Domain' : 'New domain';
+		if (mode() === 'redirects') return selectedRedirect ? 'Redirect' : 'New redirect';
 		return '';
 	});
 	let { children }: { children: Snippet } = $props();
@@ -136,7 +136,7 @@
 			</div>
 		</header>
 		{#if active() !== 'settings'}
-			<Modal bind:open title={modalTitle()}>
+			<Modal bind:open title={modalTitle()} size={active() === 'redirects' ? 'lg' : 'md'}>
 				{#if active() === 'domains'}
 					<DomainForm current={selectedDomain ?? undefined} onClose={closeModal}></DomainForm>
 				{:else if active() === 'redirects'}

@@ -2,9 +2,7 @@
 	import { createQuery } from '@tanstack/svelte-query';
 	import { getContext } from 'svelte';
 	import { MODAL_CONTEXT, type ModalControls } from '$lib/modal-context';
-	import { authStatusQueryOptions } from '$lib/queries/authStatus';
 	import { redirectsQueryOptions } from '$lib/queryOptions';
-	import { UserPermission } from '../../../gen/api/v1/auth_pb';
 
 	let page = $state(1);
 	let pageSize = $state(10);
@@ -32,20 +30,6 @@
 	);
 	const { openRedirectModal } = getContext<ModalControls>(MODAL_CONTEXT);
 
-	const authStatus = createQuery(authStatusQueryOptions);
-
-	const canEdit = (creator?: string) => {
-		if (!authStatus.data) {
-			return false;
-		}
-		if (
-			authStatus.data.permission === UserPermission.PERMISSION_ADMIN ||
-			authStatus.data.permission === UserPermission.PERMISSION_SUPERUSER
-		) {
-			return true;
-		}
-		return authStatus.data.userId !== undefined && authStatus.data.userId === creator;
-	};
 </script>
 
 <svelte:head>
@@ -83,7 +67,7 @@
 					<th class="w-[15%] px-4 py-3">Domain</th>
 					<th class="w-[15%] px-4 py-3">Path</th>
 					<th class="px-4 py-3">Target</th>
-					<th class="w-20 px-4 py-3 whitespace-nowrap"></th>
+					<th class="w-24 px-4 py-3 whitespace-nowrap"></th>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-white/10">
@@ -173,10 +157,8 @@
 									type="button"
 									class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white transition focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none enabled:border-white/25 enabled:hover:bg-white/12 disabled:cursor-not-allowed disabled:opacity-50"
 									onclick={() => openRedirectModal(r)}
-									title={canEdit(r.creator) ? '' : 'You are not the owner of this redirect'}
-									disabled={!canEdit(r.creator)}
 								>
-									Edit
+									Details
 								</button>
 							</td>
 						</tr>

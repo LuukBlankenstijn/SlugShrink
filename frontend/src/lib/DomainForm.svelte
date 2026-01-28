@@ -18,10 +18,13 @@
 	let name = $state('');
 	let error = $state<string | null>(null);
 	let confirmDelete = $state(false);
+	const isExisting = $derived(() => Boolean(current));
+	let isViewMode = $state(Boolean(current));
 
 	$effect(() => {
 		domain = current?.domain ?? '';
 		name = current?.name ?? '';
+		isViewMode = Boolean(current);
 	});
 
 	const close = () => {
@@ -29,6 +32,14 @@
 		domain = '';
 		name = '';
 		confirmDelete = false;
+	};
+
+	const cancelEdit = () => {
+		if (!current) return;
+		domain = current.domain ?? '';
+		name = current.name ?? '';
+		error = null;
+		isViewMode = true;
 	};
 
 	const deleteDomain = createMutation(() => ({
@@ -58,27 +69,43 @@
 	class="space-y-4"
 	onsubmit={(e) => {
 		e.preventDefault();
+		if (isExisting() && isViewMode) {
+			isViewMode = false;
+			return;
+		}
 		saveDomain.mutate({ name, domain });
 	}}
 >
 	<label class="block">
 		<span class="text-sm text-slate-200">Name</span>
-		<input
-			class="mt-1 w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
-			bind:value={name}
-			placeholder="example"
-			autocomplete="off"
-		/>
+		{#if isViewMode}
+			<div class="mt-1 rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-200" title={name}>
+				<span class="block truncate">{name || '—'}</span>
+			</div>
+		{:else}
+			<input
+				class="mt-1 w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
+				bind:value={name}
+				placeholder="example"
+				autocomplete="off"
+			/>
+		{/if}
 	</label>
 
 	<label class="block">
 		<span class="text-sm text-slate-200">Domain</span>
-		<input
-			class="mt-1 w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
-			bind:value={domain}
-			placeholder="example.com"
-			autocomplete="off"
-		/>
+		{#if isViewMode}
+			<div class="mt-1 rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-200" title={domain}>
+				<span class="block truncate">{domain || '—'}</span>
+			</div>
+		{:else}
+			<input
+				class="mt-1 w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
+				bind:value={domain}
+				placeholder="example.com"
+				autocomplete="off"
+			/>
+		{/if}
 	</label>
 
 	{#if error}
@@ -92,21 +119,41 @@
 			' '
 		)}
 	>
-		<button
-			type="submit"
-			class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-			disabled={saveDomain.isPending}
-		>
-			{#if saveDomain.isPending}
-				Saving…
-			{:else if current}
-				Update
-			{:else}
-				Save
-			{/if}
-		</button>
+		<div class="flex items-center gap-3">
+			<button
+				type="submit"
+				class={[
+					'inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-semibold transition focus-visible:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60',
+					isViewMode
+						? 'border-white/10 bg-white/10 text-white hover:bg-white/15 focus-visible:ring-cyan-400/40'
+						: 'border-emerald-400/40 bg-emerald-500/20 text-emerald-50 hover:bg-emerald-500/30 focus-visible:ring-emerald-400/40'
+				].join(' ')}
+				disabled={saveDomain.isPending}
+			>
+				{#if saveDomain.isPending}
+					Saving…
+				{:else if isExisting() && isViewMode}
+					Edit
+				{:else}
+					Save
+				{/if}
+			</button>
 
-		{#if current}
+			{#if isExisting() && !isViewMode}
+				<button
+					type="button"
+					class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
+					onclick={(e) => {
+						e.preventDefault();
+						cancelEdit();
+					}}
+				>
+					Cancel
+				</button>
+			{/if}
+		</div>
+
+		{#if current && !isViewMode}
 			<div class="flex items-center gap-3">
 				<button
 					type="button"

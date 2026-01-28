@@ -4,10 +4,12 @@
 	let {
 		open = $bindable(),
 		title = 'Modal',
+		size = 'md',
 		children
 	} = $props<{
 		open: boolean;
 		title?: string;
+		size?: 'sm' | 'md' | 'lg' | 'xl';
 		children: Snippet;
 	}>();
 
@@ -46,17 +48,26 @@
 
 		<div class="absolute inset-0 flex items-center justify-center p-4">
 			<div
-				class="w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-slate-950 text-slate-100 shadow-2xl shadow-black/30"
+				class={[
+					'w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-950 text-slate-100 shadow-2xl shadow-black/30',
+					size === 'sm'
+						? 'max-w-md'
+						: size === 'lg'
+							? 'max-w-3xl'
+							: size === 'xl'
+								? 'max-w-5xl'
+								: 'max-w-xl'
+				].join(' ')}
 				role="dialog"
 				aria-modal="true"
 				aria-label={title}
 				tabindex="-1"
 			>
 				<div class="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
-					<div class="min-w-0">
-						<p class="truncate text-sm font-semibold">{title}</p>
+					<div class="w-fit min-w-0">
+						<p class="text-sm font-semibold">{title}</p>
 						<div
-							class="mt-2 h-px w-24 bg-linear-to-r from-cyan-400/60 via-blue-500/60 to-violet-500/60"
+							class="mt-2 h-px bg-linear-to-r from-cyan-400/60 via-blue-500/60 to-violet-500/60"
 						></div>
 					</div>
 
