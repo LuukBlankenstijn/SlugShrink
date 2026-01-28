@@ -75,15 +75,15 @@
 		</div>
 	</div>
 
-	<div class="overflow-x-auto">
-		<table class="min-w-full divide-y divide-white/10 text-sm">
+	<div class="overflow-hidden">
+		<table class="w-full table-fixed divide-y divide-white/10 text-sm">
 			<thead class="bg-white/3">
 				<tr class="text-left text-xs font-semibold tracking-wide text-slate-300 uppercase">
-					<th class="px-4 py-3">Status</th>
-					<th class="px-4 py-3">Domain</th>
-					<th class="px-4 py-3">Path</th>
+					<th class="w-[10%] px-4 py-3">Status</th>
+					<th class="w-[15%] px-4 py-3">Domain</th>
+					<th class="w-[15%] px-4 py-3">Path</th>
 					<th class="px-4 py-3">Target</th>
-					<th class="px-4 py-3"></th>
+					<th class="w-20 px-4 py-3 whitespace-nowrap"></th>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-white/10">
@@ -102,7 +102,7 @@
 							<td class="px-4 py-3">
 								<div class="h-5 w-52 rounded bg-white/10"></div>
 							</td>
-							<td class="px-4 py-3 text-right">
+							<td class="px-4 py-3 text-right whitespace-nowrap">
 								<div class="ml-auto h-8 w-16 rounded bg-white/10"></div>
 							</td>
 						</tr>
@@ -129,16 +129,16 @@
 								</span>
 							</td>
 							<td class="px-4 py-3">
-								<span class="inline-flex max-w-[16rem] items-center gap-2">
+								<span class="inline-flex max-w-full items-center gap-2">
 									<span class="h-2 w-2 rounded-full bg-cyan-400/80"></span>
-									<span class="truncate text-slate-200" title={r.domain}>
+									<span class="block max-w-full truncate text-slate-200" title={r.domain}>
 										{r.domain}
 									</span>
 								</span>
 							</td>
 							<td class="px-4 py-3">
 								<span
-									class="inline-flex rounded-lg border border-white/10 bg-slate-950/30 px-2 py-1 font-mono text-xs text-slate-200"
+									class="inline-flex max-w-full truncate rounded-lg border border-white/10 bg-slate-950/30 px-2 py-1 font-mono text-xs text-slate-200"
 									title={r.path}
 								>
 									{r.path}
