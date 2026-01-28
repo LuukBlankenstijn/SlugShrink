@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
 	import { api } from './api.svelte';
-	import Modal from '$lib/Modal.svelte';
+	import RedirectFields from '$lib/redirect-form/RedirectFields.svelte';
+	import RedirectFormActions from '$lib/redirect-form/RedirectFormActions.svelte';
 	import { queryKeys } from '$lib/queryKeys';
+	import { authStatusQueryOptions } from '$lib/queries/authStatus';
 	import type { FullRedirect } from '../gen/api/v1/redirect_pb';
 	import { domainsQueryOptions } from '$lib/queryOptions';
 	import { deleteRedirectMutationOptions, saveRedirectMutationOptions } from '$lib/mutationOptions';
+	import { UserPermission } from '../gen/api/v1/auth_pb';
 
 	interface Props {
 		readonly onClose: () => void;
@@ -16,6 +19,7 @@
 
 	const qc = useQueryClient();
 	const domainsQuery = createQuery(() => domainsQueryOptions(api));
+	const authStatus = createQuery(authStatusQueryOptions);
 
 	const domains = $derived(() => domainsQuery.data?.data ?? []);
 
@@ -24,9 +28,21 @@
 	let targetUrl = $state('');
 	let active = $state(true);
 	let error = $state<string | null>(null);
-	let confirmDelete = $state(false);
 
-	const isEditing = $derived(() => Boolean(current));
+	const isExisting = $derived(() => Boolean(current));
+	let isViewMode = $state(Boolean(current));
+	const canEdit = $derived(() => {
+		if (!current || !authStatus.data) {
+			return false;
+		}
+		if (
+			authStatus.data.permission === UserPermission.PERMISSION_ADMIN ||
+			authStatus.data.permission === UserPermission.PERMISSION_SUPERUSER
+		) {
+			return true;
+		}
+		return authStatus.data.userId !== undefined && authStatus.data.userId === current.creator;
+	});
 
 	const close = () => {
 		onClose();
@@ -35,7 +51,18 @@
 		targetUrl = '';
 		active = true;
 		error = null;
-		confirmDelete = false;
+	};
+
+	const cancelEdit = () => {
+		if (!current) {
+			return;
+		}
+		domainId = current.domainId;
+		path = current.path;
+		targetUrl = current.targetUrl;
+		active = current.active;
+		error = null;
+		isViewMode = true;
 	};
 
 	$effect(() => {
@@ -44,11 +71,13 @@
 			path = current.path;
 			targetUrl = current.targetUrl;
 			active = current.active;
+			isViewMode = true;
 		} else {
 			domainId = '';
 			path = '';
 			targetUrl = '';
 			active = true;
+			isViewMode = false;
 		}
 		error = null;
 	});
@@ -83,55 +112,30 @@
 </script>
 
 <form
-	class="space-y-4"
+	class="space-y-5"
 	onsubmit={(e) => {
 		e.preventDefault();
+		if (isExisting() && isViewMode) {
+			if (!canEdit()) {
+				error = 'You do not have permission to edit this redirect.';
+				return;
+			}
+			isViewMode = false;
+			return;
+		}
 		saveRedirect.mutate({ domainId, path, targetUrl, active });
 	}}
 >
-	<label class="block space-y-1.5">
-		<span class="text-sm text-slate-200">Domain</span>
-		<select
-			class="w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20 disabled:opacity-60"
-			bind:value={domainId}
-			disabled={domainsQuery.isPending || domains().length === 0}
-		>
-			{#if domains().length === 0}
-				<option value="">No domains available</option>
-			{:else}
-				{#each domains() as domain (domain.id)}
-					<option value={domain.id}>{domain.domain}</option>
-				{/each}
-			{/if}
-		</select>
-	</label>
-
-	<label class="block space-y-1.5">
-		<span class="text-sm text-slate-200">Path</span>
-		<input
-			class="w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
-			bind:value={path}
-			placeholder="/promo"
-			autocomplete="off"
-		/>
-	</label>
-
-	<label class="block space-y-1.5">
-		<span class="text-sm text-slate-200">Target URL</span>
-		<input
-			class="w-full rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20"
-			bind:value={targetUrl}
-			placeholder="https://example.com/landing"
-			autocomplete="off"
-		/>
-	</label>
-
-	<label
-		class="flex w-fit items-center gap-2 rounded-xl border border-white/10 bg-slate-950/30 px-3 py-2 text-sm text-slate-200 select-none"
-	>
-		<input type="checkbox" class="h-4 w-4 accent-cyan-400" bind:checked={active} />
-		<span>Active</span>
-	</label>
+	<RedirectFields
+		bind:domainId
+		bind:path
+		bind:targetUrl
+		bind:active
+		isViewMode={isViewMode}
+		isExisting={isExisting()}
+		isDomainsPending={domainsQuery.isPending}
+		domains={domains()}
+	/>
 
 	{#if error}
 		<p class="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-100">
@@ -139,67 +143,15 @@
 		</p>
 	{/if}
 
-	<div
-		class={['mt-2 flex items-center gap-3', current ? 'justify-between' : 'justify-start'].join(
-			' '
-		)}
-	>
-		<button
-			type="submit"
-			class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-			disabled={saveRedirect.isPending || domains().length === 0}
-		>
-			{#if saveRedirect.isPending}
-				Saving…
-			{:else if isEditing()}
-				Update
-			{:else if domains().length === 0}
-				Add a domain first
-			{:else}
-				Save
-			{/if}
-		</button>
-
-		{#if current}
-			<div class="flex items-center gap-3">
-				<button
-					type="button"
-					onclick={(e) => {
-						e.preventDefault();
-						confirmDelete = true;
-					}}
-					class="inline-flex items-center justify-center rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-100 hover:bg-red-500/20 focus-visible:ring-2 focus-visible:ring-red-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-					disabled={deleteRedirect.isPending}
-				>
-					Delete
-				</button>
-
-				<Modal bind:open={confirmDelete} title="Delete redirect?">
-					<div class="space-y-4">
-						<p class="text-sm text-slate-200">
-							This will remove <span class="font-semibold">{current.domain}{current.path}</span> →
-							<span class="font-semibold">{current.targetUrl}</span>. You can’t undo this action.
-						</p>
-						<div class="flex items-center justify-end gap-3">
-							<button
-								type="button"
-								class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
-								onclick={() => (confirmDelete = false)}
-							>
-								Cancel
-							</button>
-							<button
-								type="button"
-								class="inline-flex items-center justify-center rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-100 hover:bg-red-500/20 focus-visible:ring-2 focus-visible:ring-red-400/40 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-								onclick={() => deleteRedirect.mutate({ id: current.id })}
-								disabled={deleteRedirect.isPending}
-							>
-								{deleteRedirect.isPending ? 'Deleting…' : 'Delete'}
-							</button>
-						</div>
-					</div>
-				</Modal>
-			</div>
-		{/if}
-	</div>
+	<RedirectFormActions
+		current={current}
+		isExisting={isExisting()}
+		isViewMode={isViewMode}
+		canEdit={canEdit()}
+		isSaving={saveRedirect.isPending}
+		canCreate={domains().length > 0}
+		isDeleting={deleteRedirect.isPending}
+		onCancel={cancelEdit}
+		onDelete={(id) => deleteRedirect.mutate({ id })}
+	/>
 </form>

@@ -40,39 +40,39 @@
 		</p>
 	</div>
 
-	<div class="overflow-x-auto">
-		<table class="min-w-full divide-y divide-white/10 text-sm">
+	<div class="overflow-hidden">
+		<table class="w-full table-fixed divide-y divide-white/10 text-sm">
 			<thead class="bg-white/3">
 				<tr class="text-left text-xs font-semibold tracking-wide text-slate-300 uppercase">
-					<th class="px-4 py-3">Name</th>
+					<th class="w-[10%] px-4 py-3">Name</th>
 					<th class="px-4 py-3">Domain</th>
-					<th class="px-4 py-3"></th>
+					<th class="w-28 px-4 py-3"></th>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-white/10">
 				{#each domains() as d (d.id)}
 					<tr class="group hover:bg-white/4">
 						<td class="px-4 py-3">
-							<span class="inline-flex max-w-[16rem] items-center gap-2">
-								<span class="truncate text-slate-200" title={d.name}>
+							<span class="inline-flex max-w-full items-center gap-2">
+								<span class="block max-w-full truncate text-slate-200" title={d.name}>
 									{d.name}
 								</span>
 							</span>
 						</td>
 						<td class="px-4 py-3">
-							<span class="inline-flex max-w-[16rem] items-center gap-2">
-								<span class="truncate text-slate-200" title={d.domain}>
+							<span class="inline-flex max-w-full items-center gap-2">
+								<span class="block max-w-full truncate text-slate-200" title={d.domain}>
 									{d.domain}
 								</span>
 							</span>
 						</td>
-						<td class="px-4 py-3 text-right">
+						<td class="px-4 py-3 text-right whitespace-nowrap">
 							<button
 								type="button"
 								class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white transition hover:border-white/25 hover:bg-white/12 focus-visible:ring-2 focus-visible:ring-cyan-400/40 focus-visible:outline-none"
 								onclick={() => openDomainModal(d)}
 							>
-								Edit
+								Details
 							</button>
 						</td>
 					</tr>
