@@ -82,7 +82,7 @@
 					</button>
 				</div>
 
-				<div class="px-5 py-4">
+				<div class="max-h-[80vh] overflow-y-auto px-5 py-4">
 					{@render children()}
 				</div>
 			</div>
