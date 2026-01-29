@@ -1,17 +1,32 @@
 <script lang="ts">
-	export let domainId = '';
-	export let path = '';
-	export let targetUrl = '';
-	export let active = true;
-	export let isViewMode = false;
-	export let isExisting = false;
-	export let isDomainsPending = false;
-	export let domains: { id: string; domain: string }[] = [];
+	import QRCode from './QRCode.svelte';
+
+	let {
+		domainId = '',
+		path = '',
+		targetUrl = '',
+		active = true,
+		isViewMode = false,
+		isExisting = false,
+		isDomainsPending = false,
+		domains = []
+	}: {
+		domainId?: string;
+		path?: string;
+		targetUrl?: string;
+		active?: boolean;
+		isViewMode?: boolean;
+		isExisting?: boolean;
+		isDomainsPending?: boolean;
+		domains?: { id: string; domain: string }[];
+	} = $props();
 
 	const fieldBase =
 		'w-full rounded-xl border px-3 py-2 text-slate-50 outline-none placeholder:text-slate-500 focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/20';
 
-	$: selectedDomain = domains.find((domain) => domain.id === domainId)?.domain ?? domainId;
+	const selectedDomain = $derived(
+		domains.find((domain) => domain.id === domainId)?.domain ?? domainId
+	);
 </script>
 
 {#if isExisting}
@@ -26,7 +41,8 @@
 						: 'border-slate-400/20 bg-white/5 text-slate-300'
 				].join(' ')}
 			>
-				<span class={['h-2 w-2 rounded-full', active ? 'bg-emerald-300' : 'bg-slate-400'].join(' ')}></span>
+				<span class={['h-2 w-2 rounded-full', active ? 'bg-emerald-300' : 'bg-slate-400'].join(' ')}
+				></span>
 				{active ? 'Active' : 'Paused'}
 			</div>
 		{:else}
@@ -97,3 +113,10 @@
 		/>
 	{/if}
 </label>
+
+{#if isViewMode}
+	<span class="text-sm text-slate-200">QR code</span>
+	<div class="rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-200" title="Click to copy">
+		<QRCode domain={selectedDomain} {path} />
+	</div>
+{/if}
