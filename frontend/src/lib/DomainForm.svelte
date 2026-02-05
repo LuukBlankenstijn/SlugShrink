@@ -19,6 +19,7 @@
 	let error = $state<string | null>(null);
 	let confirmDelete = $state(false);
 	const isExisting = $derived(() => Boolean(current));
+	// svelte-ignore state_referenced_locally
 	let isViewMode = $state(Boolean(current));
 
 	$effect(() => {
