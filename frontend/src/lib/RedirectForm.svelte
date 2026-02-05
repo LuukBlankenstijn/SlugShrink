@@ -30,6 +30,7 @@
 	let error = $state<string | null>(null);
 
 	const isExisting = $derived(() => Boolean(current));
+	// svelte-ignore state_referenced_locally
 	let isViewMode = $state(Boolean(current));
 	const canEdit = $derived(() => {
 		if (!current || !authStatus.data) {
@@ -131,7 +132,7 @@
 		bind:path
 		bind:targetUrl
 		bind:active
-		isViewMode={isViewMode}
+		{isViewMode}
 		isExisting={isExisting()}
 		isDomainsPending={domainsQuery.isPending}
 		domains={domains()}
@@ -144,9 +145,9 @@
 	{/if}
 
 	<RedirectFormActions
-		current={current}
+		{current}
 		isExisting={isExisting()}
-		isViewMode={isViewMode}
+		{isViewMode}
 		canEdit={canEdit()}
 		isSaving={saveRedirect.isPending}
 		canCreate={domains().length > 0}

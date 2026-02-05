@@ -2,10 +2,10 @@
 	import QRCode from './QRCode.svelte';
 
 	let {
-		domainId = '',
-		path = '',
-		targetUrl = '',
-		active = true,
+		domainId = $bindable(''),
+		path = $bindable(''),
+		targetUrl = $bindable(''),
+		active = $bindable(true),
 		isViewMode = false,
 		isExisting = false,
 		isDomainsPending = false,
