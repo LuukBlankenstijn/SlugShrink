@@ -77,9 +77,6 @@ func AuthorizationInterceptor(authConfigs app.AuthConfigs, redirects app.Redirec
 			}
 			// If role is insufficient but creator access is allowed, validate ownership.
 			if reqPerms.requireCreator {
-				if redirectID != nil && authState.UserId != nil {
-					slog.Debug("test", slog.String("redirect", redirectID.String()), slog.String("user", *authState.UserId))
-				}
 				if redirectID != nil && authState.UserId != nil && redirects.IsOwner(ctx, *redirectID, *authState.UserId) {
 					return next(ctx, req)
 				}
