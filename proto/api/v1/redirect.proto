@@ -6,7 +6,10 @@ import "api/v1/options.proto";
 import "buf/validate/validate.proto";
 
 message RedirectRequest {
-  string id = 1 [(buf.validate.field).string.uuid = true];
+  string id = 1 [
+    (buf.validate.field).string.uuid = true,
+    (api.v1.is_redirect_id) = true
+  ];
 }
 
 message RedirectsRequest {
