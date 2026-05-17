@@ -27,6 +27,16 @@
 	const selectedDomain = $derived(
 		domains.find((domain) => domain.id === domainId)?.domain ?? domainId
 	);
+
+	let copied = $state(false);
+	let copyTimeout: ReturnType<typeof setTimeout>;
+
+	function copyTargetUrl() {
+		navigator.clipboard.writeText(targetUrl);
+		copied = true;
+		clearTimeout(copyTimeout);
+		copyTimeout = setTimeout(() => (copied = false), 2000);
+	}
 </script>
 
 {#if isExisting}
@@ -101,8 +111,27 @@
 <label class="block space-y-1.5">
 	<span class="text-sm text-slate-200">Target URL</span>
 	{#if isViewMode}
-		<div class="rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-200" title={targetUrl}>
-			<span class="block truncate">{targetUrl || '—'}</span>
+		<div class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-sm text-slate-200" title={targetUrl}>
+			<span class="block flex-1 truncate">{targetUrl || '—'}</span>
+			{#if targetUrl}
+				<button
+					type="button"
+					class="shrink-0 cursor-pointer text-slate-400 transition-colors hover:text-white"
+					title={copied ? 'Copied!' : 'Copy target URL'}
+					onclick={copyTargetUrl}
+				>
+					{#if copied}
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="20 6 9 17 4 12"></polyline>
+						</svg>
+					{:else}
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+							<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+						</svg>
+					{/if}
+				</button>
+			{/if}
 		</div>
 	{:else}
 		<input
