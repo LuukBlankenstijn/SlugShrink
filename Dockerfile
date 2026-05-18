@@ -1,6 +1,7 @@
 FROM node:24-alpine AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
+COPY frontend/pnpm-*.yaml ./
 RUN corepack enable
 RUN pnpm install
 COPY frontend/ ./
